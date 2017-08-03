@@ -1,0 +1,11 @@
+<div style="text-align:center">
+  <h1>
+    {{title}}
+  </h1>
+</div>
+
+<ul>
+  <li *ngFor="let projet of projets" [routerLink]="['/detail', projet.id]">
+      <span>{{projet.id}}</span> {{projet.nom}}
+  </li>
+</ul>
