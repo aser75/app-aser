@@ -8,6 +8,7 @@ import { AccueilComponent }            from './accueil.component';
 import { ProjetComponent }             from './projet.component';
 import { ProjetDetailComponent }       from './projet-detail.component';
 import { ContactComponent }            from './contact.component';
+import { BgComponent }                 from './bg.component';
 
 // Service
 import { ProjetService }               from './projet.service';
@@ -27,6 +28,7 @@ import { AppRoutingModule }            from './app-routing.modules';
     ProjetComponent,
     ProjetDetailComponent,
     ContactComponent,
+    BgComponent,
   ],
   providers: [ProjetService],
   bootstrap: [AppComponent]

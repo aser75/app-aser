@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } 	from '@angular/core';
+import { Component, OnInit, OnDestroy } 	from '@angular/core';
 import { ActivatedRoute, ParamMap}	 	from '@angular/router';
 import { Location }						from '@angular/common'
 
@@ -14,7 +14,7 @@ import { ProjetService }				from './projet.service';
 	styleUrls        	: ['../assets/styl/view/projet-detail.component.styl'],
 })
 
-export class ProjetDetailComponent implements OnInit {
+export class ProjetDetailComponent implements OnInit, OnDestroy {
 	projet: Projet;
 
 	constructor(
@@ -24,9 +24,28 @@ export class ProjetDetailComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+    	
+		/*
+      	Promise Get projet
+    	*/
     	this.route.paramMap
       		.switchMap((params: ParamMap) => this.projetService.getProjet(+params.get('id')))
-      		.subscribe(projet => this.projet = projet);		
+      		.subscribe(projet => this.projet = projet);
+
+		/*
+      	Add Class Body
+    	*/
+		document.body.classList.add('projet_detail');    	
+
+	}
+
+	ngOnDestroy(): void {
+
+    	/*
+      	Remove Class Body
+    	*/
+    	document.body.classList.remove('projet_detail');		
+	
 	}
 
   	goBack(): void {

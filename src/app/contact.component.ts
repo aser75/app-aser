@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component ({
 	selector		: 'contact',
@@ -6,4 +6,23 @@ import { Component } from '@angular/core';
     styleUrls        : ['../assets/styl/view/contact.component.styl'],
 })
 
-export class ContactComponent {}
+export class ContactComponent implements OnInit, OnDestroy {
+	bgsvg:boolean;
+
+	ngOnInit(): void {
+
+		/*
+      	Add Class Body
+    	*/
+		document.body.classList.add('contact');
+	}
+
+	ngOnDestroy(): void {
+
+		/*
+		Remove Class Body
+  		*/
+		document.body.classList.remove('contact');
+	}
+
+}

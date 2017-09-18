@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,EventEmitter, Input, Output  } from '@angular/core';
 
 @Component({
     selector         : 'my-app',
@@ -8,4 +8,17 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Aser App';
+  bgsvg: boolean;
+  activeBurger: boolean = false;
+
+  actifBg(valeur: boolean) {
+    
+    this.bgsvg = valeur;
+    this.activeBurger = !this.activeBurger;
+    
+  }
+
+  toggleClass() {
+  	this.activeBurger = !this.activeBurger;
+  }
 }

@@ -1,0 +1,37 @@
+anime  		 = 0.2s ease
+anime04 	 = 0.4s ease
+
+/*
+** Animation logo
+*/
+
+.logo:hover
+	.circle
+		display block
+		width 100px
+		height 100px
+		z-index -1
+
+		border 1px solid white
+		border-radius 50%
+		
+		position absolute
+		top -10px
+		
+		-webkit-animation circleAnime 0.4s ease
+		-moz-animation circleAnime 0.4s ease
+		animation circleAnime 0.4s ease
+		opacity 0
+
+/*
+** Key frames
+*/
+
+@keyframes circleAnime
+	0%{opacity: 0.0;border 1px solid white}
+	30%{opacity: 0.8;border 5px solid white;}
+	100%{opacity: 0;transform: scale(1.5);border 1px solid white;}
+
+@keyframes menuAnime
+	0%{	background-color: white;}
+	100%{ background-color: bg;}

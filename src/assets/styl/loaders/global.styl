@@ -1,0 +1,54 @@
+*, *:before, *:after
+	-webkit-box-sizing border-box
+	-moz-box-sizing border-box
+	box-sizing border-box
+	margin 0
+	padding 0
+
+html
+	margin 0
+	padding 0
+
+	font-size 62.5%
+	line-height 1.15
+	
+	-ms-text-size-adjust 100%
+	-webkit-text-size-adjust 100%
+
+body
+	height 100vh
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	text-rendering optimizeLegibility
+
+	font-size 1.4rem
+	font-family 'Roboto', sans-serif
+	color courant
+
+	margin 0
+	padding 0
+
+	background transparent url('../images/bg-city.png') no-repeat center
+	background-size cover
+
+	.inner
+		overflow hidden
+		height 100%
+
+		.wrapper
+			height 100%
+			background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9))
+			background-size 600% 600%
+
+			animation background 10s ease infinite	
+
+			@keyframes background
+				0%{background-position:0% 50%}
+				50%{background-position:100% 50%}
+				100%{background-position:0% 50%}
+		
+			.wrapper__content
+				position relative
+				z-index 20
+				height calc(100% - 40px)
+

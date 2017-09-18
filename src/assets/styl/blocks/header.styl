@@ -1,0 +1,208 @@
+header
+	position static
+	z-index 30
+
+	padding 40px 80px
+
+	/*
+	**	Logo
+	*/
+
+	.logo
+		display block
+		width 121px
+		height 78px
+		position relative
+
+		&:hover
+			transform(scale(1.15))
+
+	/*
+	**	Menu
+	*/
+
+	.burger
+		display block
+		width 50px
+		height 50px
+		border 1px solid white
+		border-radius(50%)
+		cursor pointer
+		position relative
+
+
+		span
+			background-color white
+			display block
+			height 3px
+			width 32px
+			border-radius(10px)
+			position absolute
+			left 50%
+			top 50%
+			transform(translate(-50%, -50%))
+			transition(anime)
+
+			&:before
+				display block
+				content ''
+				width 32px
+				height 3px
+				background-color white
+				border-radius(10px)
+				transition(anime)
+				transform(translateY(-7px))
+
+				position absolute
+				left 0
+				top 0
+
+			&:after
+				display block
+				content ''
+				width 32px
+				height 3px
+				background-color white
+				border-radius(10px)
+				transition(anime)
+				transform(translateY(7px))
+
+				position absolute
+				left 0
+				top 0
+
+	.menu
+		position static
+
+		.menu__bg
+			position absolute
+			top 0
+			left 0
+			right 0
+			bottom 0
+			background-color rgba(0,0,0,0.2)
+			z-index -1
+			
+			opacity 0
+			transition(anime)
+			filter blur(5px)
+
+
+		.menu__link
+			position absolute
+			top 0
+			left 0
+			bottom 0
+			height 100%
+			background-color white
+			z-index 51
+			padding 40px 0
+
+			transform(translateX(-100%))
+			transition(anime)
+			border-top-right-radius 9px
+			border-bottom-right-radius 9px
+
+			.burger
+				border 1px solid titre
+				margin 0 auto
+				
+				span
+					background-color transparent
+					border-radius(10px)
+
+
+					&:before,
+					&:after
+						background-color titre
+						border-radius(10px)
+
+
+			.layout.vertical
+				position relative
+				top 50%
+				transform(translateY(-50%))
+
+				a
+					padding 10px 60px 10px 20px
+
+					.bt__icon
+						width 48px
+						height 48px
+						display inline-block
+						background-color white
+						border-radius(6px)
+						padding-top 14px
+						margin-right 20px
+						box-shadow 0px 0px 0px 0px rgba(0,0,0,0)
+						transition all 0.4s ease-in-out
+
+						svg
+							fill #616161
+							display block
+							margin 0 auto
+							transition anime
+
+					&:hover
+						.bt__icon
+							background-color bg
+							box-shadow shadow1
+							transform(scale(1.1))
+								
+
+
+				.active
+					animation menuAnime 0.2s ease
+					background-color bg
+
+					.bt__icon
+						background-color default-flash
+
+
+						svg
+							fill white
+
+					&:hover
+						.bt__icon
+							background-color default-flash
+							box-shadow none
+							transform(none)
+
+							svg
+								transform(none)
+
+	.active
+		.menu
+			display block
+			
+			.menu__bg,
+			.menu__link			
+				transform(translateX(0))
+
+			.menu__bg
+				filter blur(0)
+				opacity 1
+				z-index 50
+	
+		.burger
+			display block
+			width 50px
+			height 50px
+			border 1px solid white
+			border-radius(50%)
+			cursor pointer
+			position relative
+
+			span
+				background-color transparent
+				border none
+
+				&:before
+					transform(rotate(45deg))
+
+				&:after
+					transform(rotate(-45deg))
+
+
+
+
