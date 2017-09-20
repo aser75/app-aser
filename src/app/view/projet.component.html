@@ -4,8 +4,44 @@
   </h1>
 </div>
 
-<ul>
-  <li *ngFor="let projet of projets" [routerLink]="['/detail', projet.id]">
-      <span>{{projet.id}}</span> {{projet.nom}}
-  </li>
-</ul>
+<div class="content__inner">
+
+	<div class="container">
+
+		<ul>
+			<li *ngFor="let projet of projets" [routerLink]="['/detail', projet.id]">
+				<span>{{projet.id}}</span> {{projet.nom}}
+			</li>
+		</ul>
+
+		<div class="items layout vertical">
+
+			<div  
+				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index;" 
+				[routerLink]="['/detail', projet.id]" 
+				[class.odd]="odd"
+				class="item id-{{i}}">
+				
+				<div><img src="#" alt=""></div>
+				<div>
+	
+					<div class="layout horizontal justified">			
+						<h2>Lorem ipsum dolor sit amet</h2>
+	
+						<div class="type">
+							Lorem ipsum dolor sit amet
+						</div>
+					</div>
+				
+					<p class="apercu__description">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+</div>

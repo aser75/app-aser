@@ -1,5 +1,5 @@
 header
-	position static
+	position relative
 	z-index 30
 
 	padding 40px 80px
@@ -17,9 +17,9 @@ header
 		&:hover
 			transform(scale(1.15))
 
-	/*
-	**	Menu
-	*/
+/*
+**	Menu
+*/
 
 	.burger
 		display block
@@ -29,7 +29,6 @@ header
 		border-radius(50%)
 		cursor pointer
 		position relative
-
 
 		span
 			background-color white
@@ -71,8 +70,19 @@ header
 				left 0
 				top 0
 
+/**
+* Menu Fermer
+**/
+
 	.menu
-		position static
+		position fixed
+		top 0
+		left 0
+		right 0
+		bottom 0
+		transform(translateX(-100%))
+		transition(anime)
+		z-index 100
 
 		.menu__bg
 			position absolute
@@ -84,8 +94,7 @@ header
 			z-index -1
 			
 			opacity 0
-			transition(anime)
-			filter blur(5px)
+			filter blur(50px)
 
 
 		.menu__link
@@ -98,8 +107,6 @@ header
 			z-index 51
 			padding 40px 0
 
-			transform(translateX(-100%))
-			transition(anime)
 			border-top-right-radius 9px
 			border-bottom-right-radius 9px
 
@@ -120,7 +127,7 @@ header
 
 			.layout.vertical
 				position relative
-				top 50%
+				top 45%
 				transform(translateY(-50%))
 
 				a
@@ -171,9 +178,14 @@ header
 							svg
 								transform(none)
 
+/**
+* Menu Ouvert
+**/
 	.active
 		.menu
 			display block
+			z-index 100
+			transform(translateX(0))
 			
 			.menu__bg,
 			.menu__link			

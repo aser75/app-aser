@@ -15,8 +15,10 @@ html
 	-ms-text-size-adjust 100%
 	-webkit-text-size-adjust 100%
 
+	height 100%
+
 body
-	height 100vh
+	min-height 100vh
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
 	text-rendering optimizeLegibility
@@ -31,24 +33,37 @@ body
 	background transparent url('../images/bg-city.png') no-repeat center
 	background-size cover
 
-	.inner
-		overflow hidden
-		height 100%
 
-		.wrapper
-			height 100%
-			background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9))
-			background-size 600% 600%
+	.wrapper
+		min-height 100vh
+		background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9), rgba(231,53,113,0.9), rgba(209,95,114,0.9),rgba(251,192,45,0.9))
+		background-size 300% 300%
 
-			animation background 10s ease infinite	
-
-			@keyframes background
-				0%{background-position:0% 50%}
-				50%{background-position:100% 50%}
-				100%{background-position:0% 50%}
+		animation background 30s ease infinite	
 		
-			.wrapper__content
-				position relative
-				z-index 20
-				height calc(100% - 40px)
+		.wrapper__content
+			position relative
+			z-index 20
+			min-height calc(100vh - 228px)
 
+		.container
+			width 1200px
+			margin 0 auto
+
+
+body.accueil
+	.content__inner
+		background-color transparent !important
+
+body.projet
+	.wrapper__content
+		min-height calc(100vh - 268px)
+		
+		.content__inner
+			background-color bg
+			animation hackBg 1s ease
+			margin-top 5%
+
+body.contact
+	.wrapper__content
+		min-height calc(100vh - 268px)

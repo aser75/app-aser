@@ -7,18 +7,26 @@ import { Component,EventEmitter, Input, Output  } from '@angular/core';
 })
 
 export class AppComponent {
+  
+  /**
+  * Definition des variables
+  **/
   title = 'Aser App';
   bgsvg: boolean;
   activeBurger: boolean = false;
 
+
   actifBg(valeur: boolean) {
-    
+
     this.bgsvg = valeur;
     this.activeBurger = !this.activeBurger;
     
   }
 
   toggleClass() {
+
   	this.activeBurger = !this.activeBurger;
+
   }
+  
 }

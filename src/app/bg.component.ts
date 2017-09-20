@@ -16,10 +16,10 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
   relativePath: string = window.location.pathname;
 
   ngOnChanges(): void {
-    console.log(this.bgsvg);
-
+    
     if(!this.bgsvg) {
-      
+
+      // Svg Position bas
       let targetObject = document.getElementById('poly1');
 
       TweenMax.to(targetObject, 1, {
@@ -27,11 +27,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
           points: '0,100 50,100 100,100 100,100 0,100'
         },
         repeat: 0,
-        repeatDelay: 1
+        repeatDelay: 1,
+        onComplete: function() {
+          document.getElementById("footer").classList.remove("bgWhite")
+          document.getElementById("footer").classList.add("bgBlack");
+        }
       });
 
     } else {
 
+      // Svg Position Haut
       let targetObject = document.getElementById('poly1');
 
       TweenMax.to(targetObject, 1, {
@@ -39,7 +44,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
           points: '0,15 50,30 100,20 100,100 0,100'
         },
         repeat: 0,
-        repeatDelay: 1
+        repeatDelay: 1,
+        onComplete: function() {
+          document.getElementById("footer").classList.remove("bgBlack")
+          document.getElementById("footer").classList.add("bgWhite");
+        }
       });
 
     }

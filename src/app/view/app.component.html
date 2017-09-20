@@ -53,7 +53,7 @@
 			</nav>
 		</div>
 
-		<a href="/" class="logo">
+		<a routerLink="/" class="logo">
 
 			<div class="circle"></div>
 			<img src="assets/images/logo.png"
@@ -61,22 +61,23 @@
 				 alt="Logo Aser freelance">
 
 		</a>
+
 	</header>
 
 	<!--
 	Content
 	-->
 	<div class="wrapper__content">
-		<h1>{{title}}</h1>
 
 		<router-outlet></router-outlet>
+
 	</div>
 
 
 	<!--
 	Footer
 	-->
-	<footer>
+	<footer id="footer">
 		Tous droits réservés : Maxence PUPPETTO - Aser Web Développeur Front-end - <a href="#">Mentions Légales</a> - Bretagne / Lorient
 	</footer>
 

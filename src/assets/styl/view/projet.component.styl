@@ -1,0 +1,18 @@
+.items
+	.item
+		display block
+		width 66%
+		background-color white
+		border-radius 6px
+		border 1px solid white
+		margin 20px 0
+		
+
+	.item:nth-child(even)
+		-ms-align-self flex-end
+		-webkit-align-self flex-end
+		align-self flex-end
+
+@keyframes itemTranslate
+	0%{	transform: translateX(-50%);}
+	100%{ transform: translateX(0%);}
