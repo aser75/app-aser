@@ -1,6 +1,7 @@
 import { BrowserModule }               from '@angular/platform-browser';
 import { NgModule }                    from '@angular/core';
 import { FormsModule }                 from '@angular/forms';
+import { BrowserAnimationsModule }     from '@angular/platform-browser/animations';
 
 // Component
 import { AppComponent }                from './app.component';
@@ -21,6 +22,7 @@ import { AppRoutingModule }            from './app-routing.modules';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule
   ],  
   declarations: [
     AppComponent,

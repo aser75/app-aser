@@ -18,6 +18,7 @@
 
 			<div  
 				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index;" 
+				[@itemMove]="in"
 				[routerLink]="['/detail', projet.id]" 
 				[class.odd]="odd"
 				class="item id-{{i}}">
