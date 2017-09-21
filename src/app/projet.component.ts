@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Projet } from './projet';
 import { ProjetService } from './projet.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 
 @Component({
   selector           : 'app-root',
@@ -9,16 +9,16 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls          : ['../assets/styl/view/projet.component.styl'],
   providers          : [ProjetService],
   animations         : [
-    trigger('itemMove', [
-      
-      state('in', style({transform: 'translateX(0)'})),
-      transition('void => *', [
-        style({transform: 'translateX(-100%)'}),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({transform: 'translateX(100%)'}))
-      ])      
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(-200, [
+            animate('0.4s', style({ opacity: 1 }))
+          ])
+        ], {optional: true} )
+      ])
     ])
   ]
 })
@@ -26,7 +26,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 export class ProjetComponent implements OnInit, OnDestroy {
 
-  title 	= 'App Aser';
+  title 	= 'Projets';
   projets :  Projet[];
   selectedProjet: Projet;
 

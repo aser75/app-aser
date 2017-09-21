@@ -18,7 +18,7 @@
 					<div class="burger" (click)="toggleClass()"><span></span></div>
 				
 					<div class="layout vertical">
-		    			<a routerLink="/accueil" routerLinkActive="active" (click)="actifBg(false)" class="layout horizontal center">
+		    			<a routerLink="/accueil" routerLinkActive="active" (click)="actifBg('bas')" class="layout horizontal center">
 
 		    				<div class="bt__icon layout">
 		    					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20.4" id="cls-1">
@@ -28,7 +28,7 @@
 		    				Accueil
 
 		    			</a>
-		    			<a routerLink="/projet" routerLinkActive="active" (click)="actifBg(true)" class="layout horizontal center">
+		    			<a routerLink="/projet" routerLinkActive="active" (click)="actifBg('poly-1')" class="layout horizontal center">
 
 			    			<div class="bt__icon">
 			    				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="cls-2">
@@ -38,7 +38,7 @@
 		    				Works
 
 		    			</a>
-    					<a routerLink="/contact" routerLinkActive="active" (click)="actifBg(true)" class="layout horizontal center">
+    					<a routerLink="/contact" routerLinkActive="active" (click)="actifBg('poly-2')" class="layout horizontal center">
 
     						<div class="bt__icon">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16" id="cls-3">

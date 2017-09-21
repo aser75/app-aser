@@ -12,11 +12,11 @@ export class AppComponent {
   * Definition des variables
   **/
   title = 'Aser App';
-  bgsvg: boolean;
+  bgsvg: string;
   activeBurger: boolean = false;
 
 
-  actifBg(valeur: boolean) {
+  actifBg(valeur: string) {
 
     this.bgsvg = valeur;
     this.activeBurger = !this.activeBurger;

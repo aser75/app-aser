@@ -1,5 +1,10 @@
 export class Projet {
-	id: number;
-	nom: string;
-	descriptif: string;
+	public id	 		: number;
+	public nom 			: string;
+	public descriptif 	: string;
+	public media 		: ListObject[];
+}
+
+export class ListObject {
+	public apercuProjet : string;	
 }

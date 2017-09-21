@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div class="container center-align">
   <h1>
     {{title}}
   </h1>
@@ -8,23 +8,27 @@
 
 	<div class="container">
 
-		<ul>
+		<!--<ul>
 			<li *ngFor="let projet of projets" [routerLink]="['/detail', projet.id]">
 				<span>{{projet.id}}</span> {{projet.nom}}
 			</li>
 		</ul>
-
-		<div class="items layout vertical">
+	-->
+		<div class="items layout vertical" [@listAnimation]="projets?.length">
 
 			<div  
 				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index;" 
-				[@itemMove]="in"
 				[routerLink]="['/detail', projet.id]" 
 				[class.odd]="odd"
-				class="item id-{{i}}">
+				class="item id-{{i}} layout horizontal justified center-center">
 				
-				<div><img src="#" alt=""></div>
-				<div>
+				<div class="media"><img 
+					src="assets/images/exemple.jpg"
+				 	srcset="assets/images/exemple@2x.jpg 1.5x"
+				 	alt="">
+				</div>
+				
+				<div class="descriptif">
 	
 					<div class="layout horizontal justified">			
 						<h2>Lorem ipsum dolor sit amet</h2>
@@ -38,6 +42,8 @@
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
 					</p>
 				</div>
+
+				<div class="more"><img src="assets/images/more.svg" alt="Voir les détails"></div>
 			</div>
 
 		</div>
