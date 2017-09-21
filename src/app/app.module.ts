@@ -16,13 +16,15 @@ import { ProjetService }               from './projet.service';
 
 // Module
 import { AppRoutingModule }            from './app-routing.modules';
+import { HttpModule }    from '@angular/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule,
   ],  
   declarations: [
     AppComponent,
