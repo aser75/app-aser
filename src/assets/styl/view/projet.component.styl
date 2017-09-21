@@ -31,18 +31,36 @@
 
 		.more
 			position absolute
-			background-color red
 			border-radius 50%
+			background linear-gradient(45deg, #40c4ff, #0091ea)
 
 			top 50%
 			right -24px
 
-			transform translateY(-50%)
-			width 48px
-			height 48px
+
+			img
+				width 15px
+				height 15px
 
 
 	.item:nth-child(even)
 		-ms-align-self flex-end
 		-webkit-align-self flex-end
 		align-self flex-end
+		-ms-flex-direction row-reverse
+		-webkit-flex-direction row-reverse
+		flex-direction row-reverse
+		padding-left 40px
+		padding-right 0
+
+		.more
+			left -24px
+
+		.media
+			margin-left 40px
+			margin-right 0
+			border-top-left-radius 0
+			border-bottom-left-radius 0
+			border-top-right-radius 6px
+			border-bottom-right-radius 6px
+

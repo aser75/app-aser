@@ -1,5 +1,15 @@
-
-{ "id": "1", "name": "Windstorm" },
-{ "id": "2", "name": "Bombasto" },
-{ "id": "3", "name": "Magneta" },
-{ "id": "4", "name": "Tornado" }
+[
+  {"id": 1,"name": "Brad","window": {
+        "title": "Sample Konfabulator Widget",
+        "name": "main_window",
+    }},
+  {"id": 2, "name": "Jules","window": {
+        "title": "Sample Konfabulator Widget",
+        "name": "main_window",
+    }},
+  {"id": 3, "name": "Jeff",
+  	"window": {
+        "title": "Sample Konfabulator Widget",
+        "name": "main_window",
+    }}
+]

@@ -33,9 +33,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
   constructor (private projetService: ProjetService){}
 
 
-
-
-
   /*
     Service Projets
   */
@@ -47,9 +44,17 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    /*
+      Add Class Body
+    */
+    window.scrollTo(0, 0);
 
-    
+
+    /*
+      Add Projet Ressource
+    */ 
     this.getProjets();
+
 
     /*
       Add Class Body

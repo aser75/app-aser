@@ -16,7 +16,7 @@ import { ProjetService }               from './projet.service';
 
 // Module
 import { AppRoutingModule }            from './app-routing.modules';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule }              from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { HttpModule }    from '@angular/http';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
   ],  
   declarations: [
     AppComponent,
