@@ -18,7 +18,7 @@
 
 			<div  
 				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index;" 
-				[routerLink]="['/detail', projet.id]" 
+				[routerLink]="['/projet', projet.id]" 
 				[class.odd]="odd"
 				class="item id-{{i}} layout horizontal justified center-center">
 				

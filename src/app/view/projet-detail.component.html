@@ -1,6 +1,72 @@
-<div class="details" *ngIf="projet">
-  {{projet.name}} détails<br>
-  {{projet.id}}
-  <input [(ngModel)]="projet.nom" placeholder="nom"/>
+<div>
+<div class="hackBg"></div>
+
+<div class="details-hack">
+
+	<div class="details" *ngIf="projet">
+	
+		<div class="title layout horizontal">
+	
+			<a href="#" (click)="goBack()" class="back layout horizontal center-center">
+				<img src="assets/images/icon-back.svg" alt="Retour en arrière">
+			</a>
+	
+			<h1 class="self-center">{{projet.name}}</h1>
+	
+		</div>
+	
+		<img
+			src="assets/images/exemple-details.jpg"
+			srcset="assets/images/exemple-details@2x.jpg 1.5x"
+			alt="">
+	
+	
+		<div class="padding">
+	
+			<div class="layout horizontal justified">
+				<h2 class="self-center">Descriptif</h2>
+				<a href="#" class="lien">Voir le résultat</a>
+			</div>
+	
+			<div class="margin-bottom">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
+				</p>
+			</div>
+	
+			<h2>Outils</h2>
+	
+			<ul>
+				<li>Html 5</li>
+				<li>Javascript</li>
+				<li>Wordpress</li>		
+			</ul>
+	
+		</div>
+	
+	</div>
+
+	<div class="other">
+		<div class="inside">
+		
+			<div class="layout horizontal justified">
+	
+				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
+				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
+				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
+	
+			</div>
+	
+			<h3>Lorem ipsum dolor sit amet</h3>
+	
+		</div>
+	</div>
+
 </div>
-<button (click)="goBack()"> Back </button>
+</div>
+
+  <!-- {{projet.name}} détails<br>
+  {{projet.id}}
+
+  <input [(ngModel)]="projet.nom" placeholder="nom"/>
+	-->

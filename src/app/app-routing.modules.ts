@@ -9,9 +9,9 @@ import { ContactComponent }         from './contact.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/accueil', pathMatch: 'full' },
-	{ path: 'accueil', component: AccueilComponent },
-	{ path: 'projet', component: ProjetComponent },
-	{ path: 'detail/:id', component: ProjetDetailComponent},
+	{ path: 'accueil', component: AccueilComponent, data: { animation: 'home' } },
+	{ path: 'projet', component: ProjetComponent, data: { animation: 'projet' } },
+	{ path: 'projet/:id', component: ProjetDetailComponent,  data: { animation: 'details' } },
 	{ path: 'contact', component: ContactComponent},
 ];
 
