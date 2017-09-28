@@ -1,0 +1,50 @@
+
+
+<div>
+
+    <form [formGroup]="rForm">
+
+      <div class="layout horizontal justified">
+        <div class="form-group flex-1">
+          <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Nom" [(ngModel)]="nom" name="nom">
+        </div>
+
+        <div class="form-group flex-1">
+          <input type="tel" class="form-control" id="tel"  formControlName="tel" placeholder="Téléphone" [(ngModel)]="tel" name="tel">
+        </div>
+      </div>
+
+      <div class="layout horizontal justified">
+        <div class="form-group  flex-1">
+          <input type="email" class="form-control" id="email"  formControlName="email" placeholder="Email" [(ngModel)]="email" name="email">
+        </div>
+  
+        <div class="form-group flex-1">
+          <input type="text" class="form-control" id="entreprise" name="entreprise" formControlName="entreprise" placeholder="Entreprise" [(ngModel)]="entreprise" name="entreprise">
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        
+        <textarea name="message" id="message" rows="10" cols="50" formControlName="message" placeholder="Votre message" [(ngModel)]="message" name="message"></textarea>
+
+      </div>
+      
+      <div class="center-align">
+        <button type="submit" class="btn btn-success lien" [disabled]="!rForm.valid" (click)="sendMail()">Envoyer</button>
+      </div>
+
+      <div class="message-succes" *ngIf="succes">
+        Votre message a bien été envoyé !!
+      </div>
+
+      <div class="message-error" *ngIf="probleme">
+        Nous sommmes désolé une erreur est survenue sur le serveur,
+        Vous pouvez me joindre au 0618967781 :)
+      </div>
+      
+
+    </form>
+</div>
+

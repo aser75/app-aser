@@ -17,15 +17,33 @@
 		<div class="items layout vertical" [@listAnimation]="projets?.length">
 
 			<div  
-				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index;" 
+				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index; let even=even" 
 				[routerLink]="['/projet', projet.id]" 
 				[class.odd]="odd"
-				class="item id-{{i}} layout horizontal justified center-center">
+				[class.even]="even"
+				(mouseenter)="hoverSvg($event)"
+				(mouseleave)="outSvg($event)"
+				class="item layout horizontal justified center-center"
+				id="item-{{i}}">
 				
-				<div class="media"><img 
+				<div class="media">
+					<img 
 					src="assets/images/exemple.jpg"
 				 	srcset="assets/images/exemple@2x.jpg 1.5x"
 				 	alt="">
+
+				 	<div class="triangle" *ngIf="even">
+					 	<svg id="traingle__svg_even"  height="100%" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+							<svg:polygon id="polyTriangle" class="triangle__svg" points="75,0 100,0 100,100" style="fill:#FFFFFF;stroke:#FFFFFF;stroke-width:0" width="100%" height="100%" />
+						</svg>
+					</div>
+
+				 	<div class="triangle odd" *ngIf="odd">
+					 	<svg id="traingle__svg_odd"  height="100%" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+							<svg:polygon id="polyTriangle" class="triangle__svg" points="0,0 25,0 0,100" style="fill:#FFFFFF;stroke:#FFFFFF;stroke-width:0" width="100%" height="100%" />
+						</svg>
+					</div>
+
 				</div>
 				
 				<div class="descriptif">

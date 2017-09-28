@@ -16,9 +16,11 @@ html
 	-webkit-text-size-adjust 100%
 
 	height 100%
+	overflow auto
 
 body
 	min-height 100vh
+	height 100%
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
 	text-rendering optimizeLegibility
@@ -39,7 +41,6 @@ body
 		background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9), rgba(231,53,113,0.9), rgba(209,95,114,0.9),rgba(251,192,45,0.9))
 		background-size 300% 300%
 
-		animation background 30s ease infinite	
 		
 		.wrapper__content
 			position relative
@@ -52,6 +53,12 @@ body
 
 
 body.accueil
+	.wrapper
+		min-height 100vh
+		background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9), rgba(231,53,113,0.9), rgba(209,95,114,0.9),rgba(251,192,45,0.9))
+		background-size 300% 300%
+
+		animation background 30s ease infinite	
 	.content__inner
 		background-color transparent !important
 
@@ -61,7 +68,7 @@ body.projet
 		
 		.content__inner
 			background-color bg
-			animation hackBg 1s ease
+			animation hackBg 0.5s ease
 			margin-top 7%
 			padding-bottom 7%
 

@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, OnDestroy } 	from '@angular/core';
-import { ActivatedRoute, ParamMap}	 	from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, NavigationEnd}	 	from '@angular/router';
 import { Location }						from '@angular/common'
 
 // Service Projet
@@ -20,7 +20,8 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 	constructor(
 		private projetService: ProjetService,
 		private route: ActivatedRoute,
-		private location: Location
+		private location: Location,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -36,6 +37,14 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
       	Add Class Body
     	*/
 		document.body.classList.add('projet_detail');    	
+
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
+
 
 	}
 

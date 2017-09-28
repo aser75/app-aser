@@ -7,21 +7,44 @@ import { trigger, state, style, animate, transition, query, stagger, animateChil
     styleUrls           : ['../assets/styl/view/app.component.styl'],
     animations          : [
       trigger('routeAnimation', [
-transition('* <=> *', [
-    /* order */
-    /* 1 */ query(':enter, :leave', style({ position: 'fixed', width:'100%' })
-      , { optional: true }),
-    /* 2 */ group([  // block executes in parallel
-      query(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
-      ], { optional: true }),
-      query(':leave', [
-        style({ transform: 'translateX(0%)' }),
-        animate('0.5s ease-in-out', style({ transform: 'translateX(-100%)' }))
-      ], { optional: true }),
-    ])
-  ])
+        transition('projet <=> details', [
+        /* order */
+          /* 1 */
+          query(':enter .details-hack , :leave .details-hack', 
+            style({ transform: 'translateY(0%)' }),
+            { optional: true }),
+          
+          /* 2 */ group([  // block executes in parallel
+            query(':enter .details-hack', [
+              style({ transform: 'translateY(100%)', opacity: '0' }),
+              animate('0.5s ease-in-out', style({ transform: 'translateY(0%)', opacity: '1' }))
+            ], { optional: true }),
+          
+            query(':leave .details-hack', [
+              style({ transform: 'translateY(0%)', opacity: '1' }),
+              animate('0.5s ease-in-out', style({ transform: 'translateY(100%)', opacity: '0'  }))
+            ], { optional: true }),
+          ])
+        ]),
+        transition('* => contact', [
+        /* order */
+          /* 1 */
+          query(':enter #contact , :leave #contact', 
+            style({ transform: 'translateY(0%)' }),
+            { optional: true }),
+          
+          /* 2 */ group([  // block executes in parallel
+            query(':enter #contact', [
+              style({ transform: 'translateY(100%)', opacity: '0' }),
+              animate('0.5s ease-in-out', style({ transform: 'translateY(0%)',opacity: '1' }))
+            ], { optional: true }),
+          
+            query(':leave #contact', [
+              style({ transform: 'translateY(0%)', opacity: '1' }),
+              animate('0.5s ease-in-out', style({ transform: 'translateY(100%)', opacity: '0' }))
+            ], { optional: true }),
+          ])
+        ])
       ])
     ]
 })
@@ -36,7 +59,7 @@ export class AppComponent {
   activeBurger: boolean = false;
 
 
-prepRouteState(outlet: any) {
+  prepRouteState(outlet: any) {
     return outlet.activatedRouteData['animation'] || 'firstPage'; 
   }
 
@@ -44,6 +67,12 @@ prepRouteState(outlet: any) {
 
     this.bgsvg = valeur;
     this.activeBurger = !this.activeBurger;
+    
+  }
+
+  actifContactBg(valeur: string) {
+
+    this.bgsvg = valeur;
     
   }
 

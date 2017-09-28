@@ -7,11 +7,14 @@ input[type="date"],
 input[type="time"]
 	width 100%
 	background-color white
-	border-radius (0)
-	border 1px solid default-white
+	border-radius (4px)
+	border 1px solid type
 	height 40px
 	padding 0 20px
 	margin-bottom 20px
+	font-family 'Noto Sans', serif
+	font-size 1.4rem
+
 
 input[type="submit"]
 	background-color default-white
@@ -27,9 +30,10 @@ input[type="submit"]
 textarea
 	width 100%
 	background-color white
-	border-radius (0)
-	border 1px solid default-white
-	color default-white
+	border-radius (4px)
+	border 1px solid type
+	padding 10px 20px
+	margin-bottom 20px
 
 &::-webkit-input-placeholder
 	font-size 11px
@@ -50,3 +54,30 @@ textarea
 	font-size 11px
 	color default-white
 	opacity 1
+
+form
+	margin 40px 0
+
+	.form-group
+		margin 0 10px
+
+	.ng-invalid:not(form)
+		border-left 4px solid default-orange
+
+	input:focus,
+	textarea:focus
+		box-shadow 0px 0px 4px 0px rgba(0,0,0,0.2)
+		border none
+		background-color rgba(176,190,197,0.25)
+
+	.btn
+		border none
+		cursor pointer
+
+	button[disabled]:hover,
+	button[disabled]
+		background rgba(176,190,197,0.9)
+		box-shadow none
+		cursor inherit
+		transform scale(1)
+

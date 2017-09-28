@@ -15,6 +15,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       	Add Class Body
     	*/
 		document.body.classList.add('contact');
+	
 	}
 
 	ngOnDestroy(): void {

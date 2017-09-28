@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-	<bg [bgsvg]="bgsvg" ></bg>
+	<bg [bgsvg]="bgsvg"></bg>
 
 	<!--
 	Header
@@ -53,7 +53,7 @@
 			</nav>
 		</div>
 
-		<a routerLink="/" class="logo">
+		<a routerLink="/accueil" class="logo" (click)="actifContactBg('bas')">
 
 			<div class="circle"></div>
 			<img src="assets/images/logo.png"
