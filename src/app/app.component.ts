@@ -8,7 +8,7 @@ import { trigger, state, style, animate, transition, query, stagger, animateChil
     animations          : [
       trigger('routeAnimation', [
         transition('projet <=> details', [
-        /* order */
+        /* order des transitions */
           /* 1 */
           query(':enter .details-hack , :leave .details-hack', 
             style({ transform: 'translateY(0%)' }),
@@ -27,7 +27,7 @@ import { trigger, state, style, animate, transition, query, stagger, animateChil
           ])
         ]),
         transition('* => contact', [
-        /* order */
+        /* order des transitions */
           /* 1 */
           query(':enter #contact , :leave #contact', 
             style({ transform: 'translateY(0%)' }),
@@ -60,7 +60,9 @@ export class AppComponent {
 
 
   prepRouteState(outlet: any) {
+
     return outlet.activatedRouteData['animation'] || 'firstPage'; 
+  
   }
 
   actifBg(valeur: string) {

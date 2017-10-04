@@ -1,0 +1,53 @@
+.container
+	width 800px !important
+	position relative
+
+	h1
+		transform rotate(-15deg)
+		z-index 20
+		position absolute
+		top -90px
+		left 80px
+
+		span
+			text-align right	
+
+	> div
+		position relative
+		z-index 10
+
+		.shape_img
+			width 322px
+			height 322px
+			margin-right 25px
+	
+			display inline-block
+			position relative
+			
+			border-radius 50%
+			-webkit-shape-outside circle()
+			shape-outside circle()
+			float left
+	
+			.phone,
+			.pen,
+			.shadow
+				position absolute
+	
+			.phone
+				left -95px
+				top 40px
+				transform rotate(-50deg)
+	
+			.pen
+				left 0
+				top -15px
+				transform rotate(-30deg)
+
+			.shadow
+				bottom -30px
+	
+		p
+			color white
+			padding-top 55px
+

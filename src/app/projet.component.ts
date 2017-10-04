@@ -36,6 +36,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
   selectedProjet: Projet;
   target: string;
   targetPair: string;
+  test: any ;
 
   constructor (private projetService: ProjetService, private router: Router){}
 
@@ -93,10 +94,12 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     this.target       = event.target.id;
     this.targetPair   = event.target.className;
+    this.test         = event.target.classList
 
-    console.log(this.targetPair);
+    console.log(event.target.id);
 
-    if(this.targetPair == "item layout horizontal justified center-center ng-tns-c1-1 even") {
+    if(this.test.contains('even') ) {
+
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
@@ -107,7 +110,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
           },
         });
     } 
-    if (this.targetPair == "item layout horizontal justified center-center ng-tns-c1-1 odd") {
+    if ( this.test.contains('odd') ) {
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
@@ -124,7 +127,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     this.target = event.target.id;
 
-    if(this.targetPair == "item layout horizontal justified center-center ng-tns-c1-1 even") {
+    if( this.test.contains('even') ) {
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
@@ -138,7 +141,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
         });
     }
 
-    if(this.targetPair == "item layout horizontal justified center-center ng-tns-c1-1 odd"){
+    if( this.test.contains('odd') ){
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
