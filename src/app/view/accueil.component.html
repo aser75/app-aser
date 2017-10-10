@@ -1,30 +1,41 @@
 <div class="content__inner">
 
-	<div class="container">
+	<div class="container" [@bulleAnimation]>
 
 		<h1> Developpeur <span>Front-end</span> </h1>
 
 		<div class="">
 
-			<div [@bulleAnimation]="exp">
+			<div >
 
 				<div class="shape_img">
-					<img 	src="assets/images/bulle.png"
-							srcset="assets/images/bulle@2x.png"					
-							class="bulle">
 
-					<img 
-							src="assets/images/pen"
-							srcset="assets/images/pen@2x.png"
-							class="pen">
+					<div class="bulle">
+						<img  src="assets/images/bulle.png"
+							  srcset="assets/images/bulle@2x.png"					
+							  class="bulle__img"
+							  [@bunceAnimation]="state"
+							  (@bunceAnimation.done)="onEnd($event)">
+					</div>
 
-					<img 	src="assets/images/phone.png"
-							srcset="assets/images/phone@2x.png"
-					 		class="phone">
+					<div class="shape_icon">
+
+						<img   src="assets/images/pen"
+							   srcset="assets/images/pen@2x.png"
+							   class="pen" [@rotatePenAnimation]="etat">
+
+						<img 	src="assets/images/phone.png"
+								srcset="assets/images/phone@2x.png"
+					 			class="phone" 
+					 			[@rotatePhoneAnimation]="etat">
+					</div>
+
 
 					<img 	src="assets/images/shadow.png"
 							srcset="assets/images/shadow@2x.png"
-					 		class="shadow">
+					 		class="shadow"
+							  [@shadowAnimation]="state"
+							  (@shadowAnimation.done)="onEnd($event)">
 
 				</div>
 				

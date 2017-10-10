@@ -4,14 +4,14 @@ import { ActivatedRoute, ParamMap, Router, NavigationEnd}	 	from '@angular/route
 import { Location }						from '@angular/common'
 
 // Service Projet
-import { Projet } 						from './projet';
-import { ProjetService }				from './projet.service';
+import { Projet } 						from './service/projet';
+import { ProjetService }				from './service/projet.service';
 
 
 @Component ({
 	selector			: 'projet-detail',
   	templateUrl			: './view/projet-detail.component.html',
-	styleUrls        	: ['../assets/styl/view/projet-detail.component.styl'],
+    styleUrls        	: ['../assets/styl/view/projet-detail.component.styl'],
 })
 
 export class ProjetDetailComponent implements OnInit, OnDestroy {

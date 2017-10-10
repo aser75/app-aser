@@ -28,24 +28,40 @@
 			-webkit-shape-outside circle()
 			shape-outside circle()
 			float left
+
+			.bulle
+				perspective 800px
 	
-			.phone,
-			.pen,
 			.shadow
 				position absolute
-	
-			.phone
-				left -95px
-				top 40px
-				transform rotate(-50deg)
-	
-			.pen
-				left 0
-				top -15px
-				transform rotate(-30deg)
 
 			.shadow
+				left 0
 				bottom -30px
+
+		.shape_icon
+			position absolute
+			width 300px
+			height 300px
+
+			top 0
+			left -90px
+			perspective 300px
+
+			.phone,
+			.pen
+				transform-origin 100% 100%
+				position absolute
+
+			.phone
+				top 60%
+				left -70px
+				position absolute
+
+			.pen
+				top 55%
+				position absolute 
+				left -60px
 	
 		p
 			color white

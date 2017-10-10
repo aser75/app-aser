@@ -1,27 +1,40 @@
-import { Component, OnInit, OnDestroy, ElementRef, Input , OnChanges, SimpleChange } from '@angular/core';
-import { Location } from '@angular/common';
-
+import { Component, OnInit, OnDestroy, ElementRef, Input , OnChanges, SimpleChange }    from '@angular/core';
+import { Location }                                                                     from '@angular/common';
+import { Subscription }                                                                 from 'rxjs/Subscription';
+import { FondService }                                                                  from './service/fond.service';
 import "gsap";
 
 declare var TweenMax: any;
+
+
 
 @Component({
 	selector		: 'bg',
 	templateUrl		: './view/bg.component.html',
 })
 
+
+
 export class BgComponent implements OnInit, OnDestroy, OnChanges {
 
+
   @Input() bgsvg: string;
+
   relativePath: string = window.location.pathname;
+  message: any;
+  subscription: Subscription;
 
-  ngOnChanges(): void {
+
+  /**
+  ** Funtcion du slide du Svg
+  **/
+  mouvementBg( type: string ): void {
+
+    if(type == "bas") {
     
-    if(this.bgsvg == "bas") {
-
-      // Svg Position bas
       let targetObject = document.getElementById('poly1');
-
+  
+      // Svg Position Bas
       TweenMax.to(targetObject, 1, {
         attr: {
           points: '0,100 25,100 50,100 75,100 100,100 100,100 0,100'
@@ -31,10 +44,14 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         onComplete: function() {
           document.getElementById("footer").classList.remove("bgWhite")
           document.getElementById("footer").classList.add("bgBlack");
-        }
+        },
+        onStart: function() {
+          document.getElementById("bg__svg").classList.remove("shadow__svg");
+         },
       });
+    } 
 
-    } if (this.bgsvg == "poly-1") {
+    if (type == "poly-1") {
 
       // Svg Position Haut
       let targetObject = document.getElementById('poly1');
@@ -48,10 +65,13 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         onComplete: function() {
           document.getElementById("footer").classList.remove("bgBlack")
           document.getElementById("footer").classList.add("bgWhite");
+          document.getElementById("bg__svg").classList.add("shadow__svg");
         }
       });
 
-    } if (this.bgsvg == "poly-2") {
+    }
+
+    if (type == "poly-2") {
 
       // Svg Position Haut
       let targetObject = document.getElementById('poly1');
@@ -65,11 +85,31 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         onComplete: function() {
           document.getElementById("footer").classList.remove("bgBlack")
           document.getElementById("footer").classList.add("bgWhite");
+          document.getElementById("bg__svg").classList.add("shadow__svg");
         }
       });
-
     }
 
+  }
+
+
+  constructor(private messageService: FondService) {
+
+    // J'observe le type de fond du callBack component
+    this.subscription = this.messageService.getType().subscribe(message => { 
+
+      this.message = message;
+      this.mouvementBg(this.message.text);
+
+    });
+
+  }
+ 
+
+
+  ngOnChanges(): void {
+
+    this.mouvementBg(this.bgsvg);
 
   }
   
@@ -90,7 +130,10 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
           points: '0,15 25,22.5 50,30 75,22.5 100,15 100,100 0,100'
         },
         repeat: 0,
-        repeatDelay: 1
+        repeatDelay: 1,
+        onComplete: function() {
+          document.getElementById("bg__svg").classList.add("shadow__svg");
+        }
       });
 
     } if (this.relativePath == "/contact") {
@@ -102,18 +145,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
           points: '0,15 25,26.5 50,30 75,26.5 100,15 100,100 0,100'
         },
         repeat: 0,
-        repeatDelay: 1
+        repeatDelay: 1,
+        onComplete: function() {
+          document.getElementById("bg__svg").classList.add("shadow__svg");
+        }
       });     
 
     }
   }
 
-  ngOnDestroy(): void {
-
-    /*
-    Remove Class Body
-    */
+  ngOnDestroy(): void {}
 
 
-  }
 }

@@ -1,7 +1,7 @@
-import { BrowserModule }               from '@angular/platform-browser';
-import { NgModule }                    from '@angular/core';
-import { FormsModule, ReactiveFormsModule  }                 from '@angular/forms';
-import { BrowserAnimationsModule }     from '@angular/platform-browser/animations';
+import { BrowserModule }                       from '@angular/platform-browser';
+import { NgModule }                            from '@angular/core';
+import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
+import { BrowserAnimationsModule }             from '@angular/platform-browser/animations';
 
 
 // Component
@@ -12,9 +12,11 @@ import { ProjetDetailComponent }       from './projet-detail.component';
 import { ContactComponent }            from './contact.component';
 import { BgComponent }                 from './bg.component';
 import { FormComponent }               from './form.component';
+import { CallBackComponent }           from './call-back.component';
 
 // Service
-import { ProjetService }               from './projet.service';
+import { ProjetService }               from './service/projet.service';
+import { FondService }                 from './service/fond.service';
 
 // Module
 import { AppRoutingModule }            from './app-routing.modules';
@@ -25,11 +27,11 @@ import { HttpModule }                  from '@angular/http';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
     HttpModule,
+    AppRoutingModule,
   ],  
   declarations: [
     AppComponent,
@@ -39,8 +41,10 @@ import { HttpModule }                  from '@angular/http';
     ContactComponent,
     BgComponent,
     FormComponent,
+    CallBackComponent,
   ],
-  providers: [ProjetService],
-  bootstrap: [AppComponent]
+  providers: [ProjetService, FondService],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

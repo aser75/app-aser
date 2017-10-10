@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Projet } from './projet';
-import { ProjetService } from './projet.service';
+import { Projet } from './service/projet';
+import { ProjetService } from './service/projet.service';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -16,9 +16,10 @@ declare var TweenMax: any;
   animations         : [
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
-        
+ 
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+
         query(':enter', [
-          style({ opacity: 0 }),
           stagger(-200, [
             animate('0.4s', style({ opacity: 1 }))
           ])
@@ -36,7 +37,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
   selectedProjet: Projet;
   target: string;
   targetPair: string;
-  test: any ;
+  typeItem: any ;
 
   constructor (private projetService: ProjetService, private router: Router){}
 
@@ -94,11 +95,9 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     this.target       = event.target.id;
     this.targetPair   = event.target.className;
-    this.test         = event.target.classList
+    this.typeItem     = event.target.classList
 
-    console.log(event.target.id);
-
-    if(this.test.contains('even') ) {
+    if(this.typeItem.contains('even') ) {
 
 
       // Svg Position Nul
@@ -110,7 +109,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
           },
         });
     } 
-    if ( this.test.contains('odd') ) {
+    if ( this.typeItem.contains('odd') ) {
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
@@ -127,7 +126,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     this.target = event.target.id;
 
-    if( this.test.contains('even') ) {
+    if( this.typeItem.contains('even') ) {
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
@@ -141,7 +140,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
         });
     }
 
-    if( this.test.contains('odd') ){
+    if( this.typeItem.contains('odd') ){
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
