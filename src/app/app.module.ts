@@ -12,7 +12,7 @@ import { ProjetDetailComponent }       from './projet-detail.component';
 import { ContactComponent }            from './contact.component';
 import { BgComponent }                 from './bg.component';
 import { FormComponent }               from './form.component';
-import { CallBackComponent }           from './call-back.component';
+import { NavComponent }                from './nav.component';
 
 // Service
 import { ProjetService }               from './service/projet.service';
@@ -41,7 +41,7 @@ import { HttpModule }                  from '@angular/http';
     ContactComponent,
     BgComponent,
     FormComponent,
-    CallBackComponent,
+    NavComponent,
   ],
   providers: [ProjetService, FondService],
   bootstrap: [AppComponent],

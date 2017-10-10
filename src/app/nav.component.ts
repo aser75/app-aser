@@ -4,17 +4,21 @@ import { FondService } from './service/fond.service';
 
 
 @Component({
-	selector		: 'callback',
-	templateUrl		: './view/call-back.component.html',
-    styleUrls        	: ['../assets/styl/view/callBack.component.styl'],
+	selector		: 'nav-call',
+	templateUrl		: './view/nav.component.html',
+    styleUrls       : ['../assets/styl/view/nav.component.styl'],
 })
 
-export class CallBackComponent  {
+export class NavComponent implements OnInit  {
 
 	constructor(private fondService: FondService ){}
 
+	// J'emet le type de fond à mon servive
 	typeFond (valeur: string): void {
 		this.fondService.typeA(valeur);
 	}
+
+	ngOnInit (){}
+
 
 }
