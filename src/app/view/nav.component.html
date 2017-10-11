@@ -2,38 +2,30 @@
 
 	<div>
 
-		<div>
-			<a [routerLink]="['accueil']" routerLinkActive="active" (click)="typeFond('bas')">
-		   		<div class="bt__icon layout">
-		   			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20.4" id="cls-1">
-						<path class="cls-1" d="M9.6,20.4V13.2h4.8v7.2h6V10.8H24L12,0,0,10.8H3.6v9.6Z"/>
-					</svg>
-		   		</div>						
+			<a [routerLink]="['accueil']" routerLinkActive="active" (click)="typeFond('bas'); positRound($event)" class="bt_home">
+		   		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20.4" id="cls-1">
+					<path class="cls-1" d="M9.6,20.4V13.2h4.8v7.2h6V10.8H24L12,0,0,10.8H3.6v9.6Z"/>
+				</svg>					
 			</a>
-		</div>
+
 		<div class="pointille"></div>
 
-		<div>
-			<a [routerLink]="['projet']"  title="Projet" routerLinkActive="active" (click)="typeFond('poly-1')">
-		    	<div class="bt__icon">
-		   			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="cls-2">
-						<path class="cls-2" d="M0,14.25V18H3.75L14.81,6.94,11.06,3.19ZM17.71,4a1,1,0,0,0,0-1.41L15.37.29A1,1,0,0,0,14,.29L12.13,2.12l3.75,3.75Z"/>
-					</svg>
-	    		</div>
+			<a [routerLink]="['projet']"  title="Projet" routerLinkActive="active" (click)="typeFond('poly-1'); positRound($event)" class="bt_projet">
+	   			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="cls-2">
+					<path class="cls-2" d="M0,14.25V18H3.75L14.81,6.94,11.06,3.19ZM17.71,4a1,1,0,0,0,0-1.41L15.37.29A1,1,0,0,0,14,.29L12.13,2.12l3.75,3.75Z"/>
+				</svg>
 	    	</a>
-		</div>
 		
 		<div class="pointille"></div>
 
-		<div>
-			<a [routerLink]="['contact']"  title="Contact" routerLinkActive="active" (click)="typeFond('poly-2')">
-	    		<div class="bt__icon">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16" id="cls-3">
-						<path class="cls-3" d="M18,0H2A2,2,0,0,0,0,2V14a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V2A2,2,0,0,0,18,0Zm0,4L10,9,2,4V2l8,5,8-5Z"/>
-					</svg>   
-				</div>
+			<a [routerLink]="['contact']"  title="Contact" routerLinkActive="active" (click)="typeFond('poly-2'); positRound($event)" class="bt_contact">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16" id="cls-3">
+					<path class="cls-3" d="M18,0H2A2,2,0,0,0,0,2V14a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V2A2,2,0,0,0,18,0Zm0,4L10,9,2,4V2l8,5,8-5Z"/>
+				</svg>   
 			</a>
-		</div>
+
+
+		<div id="actifBt"></div>
 
 	</div>
 

@@ -2,7 +2,8 @@
 	position fixed
 	top 250px
 	right 32px
-	width 60px
+	width 55px
+	padding 20px 0
 	z-index 999
 
 	.pointille
@@ -14,7 +15,33 @@
 		background-position 0px 3px
 		background-size 1px 6px
 
-	.bt__icon
-		text-align center
+
+	a
+		display block
+		width 30px
+		height 30px
+		border-radius 50%
+		border 1px solid #40c4ff
+		position relative
+		margin 0 auto
+
 		svg
-			margin 0 auto
+			width 11px
+			position absolute
+			top 50%
+			left 50%
+			transform translate(-50%, -50%)
+			fill #ffffff	
+
+	#actifBt
+		position fixed
+		width 45px
+		height 45px
+		display block
+		transform translate(-18%, -18%)
+		border 1px solid rgba(255, 255, 255, 0.6)
+		border-radius 50%
+		z-index -1
+
+
+

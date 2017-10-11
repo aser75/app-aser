@@ -7,6 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import "gsap";
 
 declare var TweenMax: any;
+declare var TweenLite: any;
 
 @Component({
   selector           : 'app-root',
@@ -52,6 +53,10 @@ export class ProjetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    var fromShape = document.getElementById("end");
+    var endShape = document.getElementById("start");
+
+    TweenLite.to(fromShape, 1, {morphSVG:endShape});
 
     /*
       Scroll Top 
