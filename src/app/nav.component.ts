@@ -1,5 +1,6 @@
 import { Directive, Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { FondService } from './service/fond.service';
 
 
@@ -14,27 +15,45 @@ import { FondService } from './service/fond.service';
 
 export class NavComponent {
 
-	constructor(private fondService: FondService ){}
+	// Declaration des variables
+	route: string;
 
-	// J'emet le type de fond à mon servive
+	/*
+	** Detection des changements de routes
+	*/
+	constructor(private fondService: FondService,location: Location, router: Router ){
+    	router.events.subscribe((val) => {
+    
+			if(location.path() == '/accueil'){
+				document.getElementById("actifBt").style.top = '272px';
+				document.getElementById("actifBt").style.right = '26px';
+				document.getElementById("actifBt").style.transform = 'translate(-17%, -17%)';
+			}
+			if(location.path() == '/projet'){
+				document.getElementById("actifBt").style.top = '409px';
+				document.getElementById("actifBt").style.right = '26px';
+				document.getElementById("actifBt").style.transform = 'translate(-17%, -17%)';
+			}
+			if(location.path() == '/contact'){
+				document.getElementById("actifBt").style.top = '546px';
+				document.getElementById("actifBt").style.right = '26px';
+				document.getElementById("actifBt").style.transform = 'translate(-17%, -17%)';
+			}
+
+    	});		
+	}
+
+	/*
+	** J'emet le type de fond à mon servive
+	*/
 	typeFond (valeur: string): void {
 		this.fondService.typeA(valeur);
 	}
 
-	positRound(event){
-
-		var classTarget 	 = event.currentTarget.className;
-		let pos: any  		 = document.getElementById("callBack").getElementsByClassName( classTarget )[0];
-		let posiTop: any 	 = pos.getBoundingClientRect().top;
-		let posiLeft: any 	 = pos.getBoundingClientRect().left;
-
-		document.getElementById("actifBt").style.top = posiTop+'px';
-		document.getElementById("actifBt").style.left = posiLeft+'px';
-		document.getElementById("actifBt").style.transition = "0.2s ease-in-out";
-	}
-
+	/*
+	** Changement de taille de fenetre
+	*/
 	onResize(event) {
-
 		let container :any  	 	 = document.getElementById("callBack"); 
 		let pos : any				 = container.querySelector('.active'); 
 		let posiTop: any 	 		 = pos.getBoundingClientRect().top;
@@ -43,6 +62,8 @@ export class NavComponent {
 		document.getElementById("actifBt").style.transition = "none";
 		document.getElementById("actifBt").style.top = posiTop+'px';
 		document.getElementById("actifBt").style.left = posiLeft+'px';
+		document.getElementById("actifBt").style.transform = 'translate(-13%, -15.5%)';
+
 	}
 
 

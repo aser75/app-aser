@@ -6,42 +6,79 @@
 	padding 20px 0
 	z-index 999
 
+	&:after
+		position absolute
+		display block
+		content ''
+		border-radius 50%
+		border 1px solid rgba(255, 255, 255, 0.6)
+		width 6px
+		height 6px
+		bottom 5px
+		left 50%
+		transform translate(-50%)
+
+	&:before
+		position absolute
+		display block
+		content ''
+		border-radius 50%
+		border 1px solid rgba(255, 255, 255, 0.6)
+		width 6px
+		height 6px
+		top 5px
+		left 50%
+		transform translate(-50%)
+
 	.pointille
 		height 100px
 		width 1px
 		margin 0 auto
 
-		background-image linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0) 26.6666666667%)
+		background-image linear-gradient(to bottom, rgba(64, 196, 255, 1), rgba(64, 196, 255, 0) 26.6666666667%)
 		background-position 0px 3px
 		background-size 1px 6px
 
 
 	a
 		display block
-		width 30px
-		height 30px
+		width 37px
+		height 37px
 		border-radius 50%
 		border 1px solid #40c4ff
 		position relative
 		margin 0 auto
 
+		&:before
+			position absolute
+			content ''
+			top -1px
+			left -1px
+			width 37px
+			height 37px
+			border-radius 50%
+			border 1px solid #40c4ff
+			transition border-width 0.6s cubic-bezier(0.19, 1, 0.22, 1)
+
+		&:hover
+			&:before
+				border 18px solid #40c4ff
+				content ''
+
 		svg
-			width 11px
+			width 17px
 			position absolute
 			top 50%
 			left 50%
 			transform translate(-50%, -50%)
-			fill #ffffff	
+			fill #40c4ff	
 
 	#actifBt
 		position fixed
-		width 45px
-		height 45px
+		width 50px
+		height 50px
 		display block
-		transform translate(-18%, -18%)
-		border 1px solid rgba(255, 255, 255, 0.6)
+		transform translate(-17%, -17%)
+		border 2px solid rgba(64, 196, 255, 0.4)
 		border-radius 50%
 		z-index -1
-
-
-

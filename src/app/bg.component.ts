@@ -7,16 +7,13 @@ import "gsap";
 declare var TweenMax: any;
 
 
-
 @Component({
 	selector		: 'bg',
 	templateUrl		: './view/bg.component.html',
 })
 
 
-
 export class BgComponent implements OnInit, OnDestroy, OnChanges {
-
 
   @Input() bgsvg: string;
 
@@ -26,7 +23,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
 
 
   /**
-  ** Funtcion du slide du Svg
+  ** Function du slide du Svg
   **/
   mouvementBg( type: string ): void {
 
@@ -89,7 +86,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         }
       });
     }
-
   }
 
 
@@ -104,7 +100,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
     });
 
   }
- 
 
 
   ngOnChanges(): void {
@@ -112,7 +107,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
     this.mouvementBg(this.bgsvg);
 
   }
-  
 
   ngOnInit(): void {
     
@@ -121,7 +115,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
     Utilisation tweenMax
     */
 
-    if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact") {
+    if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)") {
 
       let targetObject = document.getElementById('poly1');
 

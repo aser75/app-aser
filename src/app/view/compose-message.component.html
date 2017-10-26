@@ -1,0 +1,39 @@
+<div class="pops_fond" (click)="cancel()"></div>
+
+<div id="pops">
+	
+	<div class="svg_fond">
+	
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" width="800" height="800" xml:space="preserve">
+ 
+        	<path id="line" fill="white" stroke="none" stroke-miterlimit="10" d="M800,438.4V415v-36.9v-42.6V313V30.7C800,13.7,786.3,0,769.3,0h-271h-13.7h-34.1h-18.9h-49.2
+  				h-36h-33.1H281H30.7C13.7,0,0,13.7,0,30.7v241v75v38.8v32.2v26.5v16.7v308.6C0,786.3,13.7,800,30.7,800h294h24.6h15.6h20.6h27h26.3
+  				h39H494h37h238.3c16.9,0,30.7-13.7,30.7-30.7V497.8v-12.6v-21.3V438.4z" fill-opacity="0"/>
+	
+        	<path id="bulle" fill="white" stroke="none" stroke-miterlimit="10" d="M360.2,685.4c-0.2,5.5,4.8,9.2,6.7,9.2c3.4,0,6.5-3.1,6.7-9.9c0.2-6.8-5.7-12.1-9-22.4
+				C364.8,666.1,360.2,685.4,360.2,685.4z M468.1,101.5c3.7-2,3.5-8.8-2.6-5c-6.1,3.7-13.8,21.5-13.8,21.5
+				C454.3,115.1,464.4,103.5,468.1,101.5z M505,120.4c2.1,0,3.7-1.7,3.7-3.7c0-2.1-1.7-3.7-3.7-3.7c-2.1,0-3.7,1.7-3.7,3.7
+				C501.3,118.7,503,120.4,505,120.4z M325.3,121.9c2.1,0,3.7-1.7,3.7-3.7c0-2.1-1.7-3.7-3.7-3.7c-2.1,0-3.7,1.7-3.7,3.7
+				C321.6,120.2,323.2,121.9,325.3,121.9z M126,482.6c-2.7,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S128.7,482.6,126,482.6z M670.5,331.5
+				c-2.5,0-4.5,2-4.5,4.5c0,2.5,2,4.5,4.5,4.5c2.5,0,4.5-2,4.5-4.5C675,333.5,673,331.5,670.5,331.5z M661.1,454.4
+				c-2.7,0-4.9,2.2-4.9,4.9c0,2.7,2.2,4.9,4.9,4.9c2.7,0,4.9-2.2,4.9-4.9C666,456.6,663.8,454.4,661.1,454.4z M642.9,313.4V161.5
+				c0-10.5-8.5-19-19-19H521.4c0.2-0.7,0.3-1.3,0.3-2c0-4.7-3.8-8.6-8.6-8.6c-4.7,0-8.6,3.8-8.6,8.6c0,0.7,0.1,1.4,0.3,2h-5.3h-24.9h-24.9H339H318h-20.9H167.2c-10.5,0-19,8.5-19,19v328.2c-7.4,0.7-13.2,7-13.2,14.6c0,2.8,0.8,5.3,2.1,7.5c-3.8,4.2-6.2,9.7-6.2,15.9c0,10.8,7.3,19.9,17.3,22.6v67.9c0,10.5,8.5,19,19,19h456.7c10.5,0,19-8.5,19-19V349.7v-18.2V313.4z" fill-opacity="0"/>        
+
+    	</svg>
+	</div>
+
+	<div [@showAnimation]>
+	<h3>Contact Crisis Center</h3>
+
+	<div *ngIf="details">{{ details }}</div>
+
+	<div (click)="closePopup()">Fermer</div>
+
+	<div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. In imperdiet nisi tellus, quis bibendum magna aliquet id. Proin felis magna, fringilla nec scelerisque efficitur, aliquet ac nulla. Aenean ut odio ac velit pharetra efficitur. Donec sed ante purus. In eget erat nulla. Sed sed ultricies nisl. Vestibulum at erat leo.
+
+		Cras feugiat diam tellus, sit amet suscipit leo mattis malesuada. Aliquam scelerisque nibh lectus, vel congue erat interdum nec. Ut leo mi, eleifend eget massa quis, vulputate feugiat lacus. Nam tellus erat, posuere non posuere pellentesque, efficitur porta leo. Vestibulum egestas porta risus. Sed dictum fringilla sodales. Sed venenatis, augue molestie suscipit facilisis, eros dolor facilisis arcu, a aliquam diam sem eget est. Quisque ut odio nec dui imperdiet tincidunt at vitae turpis. Ut vitae efficitur lorem, sollicitudin sagittis tellus. Suspendisse eu neque facilisis, mattis metus vitae, elementum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In rhoncus, nisi eu consequat auctor, odio est rhoncus justo, ut tincidunt ante est vitae ante.
+	</div>
+</div>
+</div>
+

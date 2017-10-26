@@ -7,7 +7,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import "gsap";
 
 declare var TweenMax: any;
-declare var TweenLite: any;
+declare var KUTE: any;
+
 
 @Component({
   selector           : 'app-root',
@@ -44,7 +45,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
 
   /*
-    Service Projets
+  **  Service Projets
   */
   getProjets(): void {
 
@@ -52,50 +53,47 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
   }
 
+  /*
+  **  Init de la view
+  */
   ngOnInit(): void {
-    var fromShape = document.getElementById("end");
-    var endShape = document.getElementById("start");
 
-    TweenLite.to(fromShape, 1, {morphSVG:endShape});
+    // Scroll Top 
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0);
+    });
 
-    /*
-      Scroll Top 
-    */
-        this.router.events.subscribe((evt) => {
-            if (!(evt instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0);
-        });
 
-    /*
-      Add Projet Ressource
-    */ 
+    // Add Projet Ressource
     this.getProjets();
 
-
-    /*
-      Add Class Body
-    */
+    // Add Class Body
     document.body.classList.add('projet');
 
   }
 
+  /*
+  **  Destruction de la view
+  */
   ngOnDestroy(): void {
-
-    /*
-      Remove Class Body
-    */
+    // Remove Class Body
     document.body.classList.remove('projet');
   }
 
+  /*
+  **  Selection de la view
+  */
   onSelect(projet: Projet): void {
-  
   	this.selectedProjet = projet;
-  
   }
 
 
+  /*
+  **  Gestion du Svg de la liste des projets
+  */
   hoverSvg(event: any){
 
     this.target       = event.target.id;
@@ -150,13 +148,13 @@ export class ProjetComponent implements OnInit, OnDestroy {
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
 
-        TweenMax.to(targetObject, 0.2, {
-          attr: {
-            points: '0,0 25,0 0,100'
-          },
-          repeat: 0,
-          repeatDelay: 1,
-        });
+      TweenMax.to(targetObject, 0.2, {
+        attr: {
+          points: '0,0 25,0 0,100'
+        },
+        repeat: 0,
+        repeatDelay: 1,
+      });
 
     }
   }

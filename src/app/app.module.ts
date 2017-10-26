@@ -13,6 +13,10 @@ import { ContactComponent }            from './contact.component';
 import { BgComponent }                 from './bg.component';
 import { FormComponent }               from './form.component';
 import { NavComponent }                from './nav.component';
+import { NavPrimaryComponent }         from './nav-primary.component';
+import { LogoComponent }               from './logo.component';
+import { ComposeMessageComponent }          from './compose-message.component';
+
 
 // Service
 import { ProjetService }               from './service/projet.service';
@@ -42,6 +46,9 @@ import { HttpModule }                  from '@angular/http';
     BgComponent,
     FormComponent,
     NavComponent,
+    NavPrimaryComponent,
+    LogoComponent,
+    ComposeMessageComponent
   ],
   providers: [ProjetService, FondService],
   bootstrap: [AppComponent],

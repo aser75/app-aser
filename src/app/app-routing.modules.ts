@@ -1,11 +1,12 @@
-import { NgModule }					from '@angular/core';
-import { RouterModule, Routes }		from '@angular/router';
+import { NgModule }							from '@angular/core';
+import { RouterModule, Routes }				from '@angular/router';
 
 // Component
-import { AccueilComponent }			from './accueil.component';
-import { ProjetComponent }			from './projet.component';
-import { ProjetDetailComponent } 	from './projet-detail.component';
-import { ContactComponent }         from './contact.component';
+import { AccueilComponent }					from './accueil.component';
+import { ProjetComponent }					from './projet.component';
+import { ProjetDetailComponent } 			from './projet-detail.component';
+import { ContactComponent }         		from './contact.component';
+import { ComposeMessageComponent }          from './compose-message.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
 	{ path: 'projet', component: ProjetComponent, data: { animation: 'projet' } },
 	{ path: 'projet/:id', component: ProjetDetailComponent,  data: { animation: 'details' } },
 	{ path: 'contact', component: ContactComponent, data: { animation: 'contact' }},
+	{ path: 'compose', component: ComposeMessageComponent, outlet: 'popup' }
 ];
 
 @NgModule({

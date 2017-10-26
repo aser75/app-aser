@@ -1,5 +1,8 @@
-import { Component, OnInit, OnDestroy, } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, query, stagger, animateChild, group,keyframes } from '@angular/animations';
+
+import { FondService } from './service/fond.service';
+
 
 @Component({
 	  selector		: 'accueil',
@@ -81,6 +84,19 @@ export class AccueilComponent implements OnInit, OnDestroy {
   */
   state = 'in';
   etat  = 'zeroDegres';
+
+
+  /*
+  ** Detection des changements de routes
+  */
+  constructor(private fondService: FondService ){}
+
+  /*
+  ** J'emet le type de fond à mon servive
+  */
+  typeFond (valeur: string): void {
+    this.fondService.typeA(valeur);
+  }
 
   ngOnInit(): void {
 
