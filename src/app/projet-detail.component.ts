@@ -9,8 +9,8 @@ import { ProjetService }				from './service/projet.service';
 
 
 @Component ({
-	selector			: 'projet-detail',
-  	templateUrl			: './view/projet-detail.component.html',
+	  selector			    : 'projet-detail',
+  	templateUrl			  : './view/projet-detail.component.html',
     styleUrls        	: ['../assets/styl/view/projet-detail.component.styl'],
 })
 
@@ -27,15 +27,15 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
     	
 		/*
-      	Promise Get projet
-    	*/
-    	this.route.paramMap
-      		.switchMap((params: ParamMap) => this.projetService.getProjet(+params.get('id')))
-      		.subscribe(projet => this.projet = projet);
+     	Promise Get projet
+    */
+    this.route.paramMap
+     		.switchMap((params: ParamMap) => this.projetService.getProjet(+params.get('id')))
+     		.subscribe(projet => this.projet = projet);
 
 		/*
-      	Add Class Body
-    	*/
+      Add Class Body
+    */
 		document.body.classList.add('projet_detail');    	
 
         this.router.events.subscribe((evt) => {
@@ -49,10 +49,10 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 
-    	/*
-      	Remove Class Body
-    	*/
-    	document.body.classList.remove('projet_detail');		
+    /*
+      Remove Class Body
+    */
+    document.body.classList.remove('projet_detail');		
 	
 	}
 
