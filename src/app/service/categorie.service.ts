@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
-import { Projet } from './projet';
+import { Categorie } from './categorie';
 
 @Injectable()
-export class ProjetService {
+export class CategorieService {
 
-	private projetsUrl = 'http://localhost/apiproject/api/v1/projets';
+	private categorieUrl = 'http://localhost/apiproject/api/v1/categories';
 	
 	constructor (private http: Http) {}
 
-	getProjets(): Promise<Projet[]> {
-		return this.http.get(this.projetsUrl)
+	getCategorie(): Promise<Categorie[]> {
+		return this.http.get(this.categorieUrl)
 				.toPromise()
-				.then( response => response.json().data as Projet[] )
+				.then( response => response.json().data as Categorie[] )
 				.catch( this.handleError );
 	}
 
@@ -25,9 +24,4 @@ export class ProjetService {
   		return Promise.reject(error.message || error);
 	
 	}
-
-	getProjet(id: number): Promise<Projet> {
-    	return this.getProjets()
-            .then(projets => projets.find(projet => projet.id === id));
-  	}
 }

@@ -20,7 +20,13 @@ import { ComposeMessageComponent }             from './compose-message.component
 
 // Service
 import { ProjetService }                       from './service/projet.service';
+import { CategorieService }                    from './service/categorie.service';
 import { FondService }                         from './service/fond.service';
+
+
+//Pipe
+import {TruncatePipe}                          from './pipe/truncate.pipe';
+import {CategoryPipe}                          from './pipe/category.pipe';
 
 // Module
 import { AppRoutingModule }                    from './app-routing.modules';
@@ -48,9 +54,11 @@ import { HttpModule }                          from '@angular/http';
     NavComponent,
     NavPrimaryComponent,
     LogoComponent,
-    ComposeMessageComponent
+    ComposeMessageComponent,
+    TruncatePipe,
+    CategoryPipe
   ],
-  providers: [ProjetService, FondService],
+  providers: [ProjetService, FondService, CategorieService],
   bootstrap: [AppComponent],
 
 })

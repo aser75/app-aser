@@ -8,25 +8,28 @@
 
 	<div class="container">
 
-		<!--
 		<ul>
-			<li *ngFor="let projet of projets" [routerLink]="['/detail', projet.id]">
-				<span>{{projet.id}}</span> {{projet.nom}}
+			<li *ngFor="let categorie of categories" (click)="updateProductCategory(categorie.categorie_titre)">
+				{{categorie.categorie_titre}}
 			</li>
 		</ul>
-		-->
 
 		<div class="items layout vertical" [@listAnimation]="projets?.length">
 
 			<div  
-				*ngFor="let projet of projets; let i = index; let odd = odd; let test = index; let even=even" 
-				[routerLink]="['/projet', projet.id]" 
-				[class.odd]="odd"
-				[class.even]="even"
-				(mouseenter)="hoverSvg($event)"
-				(mouseleave)="outSvg($event)"
-				class="item layout horizontal justified center-center"
-				id="item-{{i}}">
+				*ngFor="let projet of projets | category:productcategory; 
+						let i = index;
+						let odd = odd;
+						let even=even" 
+
+						[routerLink]="['/projet', projet.id]" 
+						[class.odd]="odd"
+						[class.even]="even"
+						(mouseenter)="hoverSvg($event)"
+						(mouseleave)="outSvg($event)"
+
+						class="item layout horizontal justified center-center"
+						id="item-{{i}}">
 				
 				<div class="media">
 					<img 
@@ -51,15 +54,18 @@
 				<div class="descriptif">
 	
 					<div class="layout horizontal justified">			
-						<h2>{{projet.name}}</h2>
+						<h2>{{projet.nom}}</h2>
 	
-						<div class="type">
-							Lorem ipsum dolor sit amet
+						<div class="type" *ngIf="projet.categories.length > 0">
+							<span *ngFor="let cat of projet.categories; let last=last;">
+								{{cat.categorie_titre}} <span *ngIf="projet.categories.length > 1 && !last"> / </span>
+							</span>
+
 						</div>
 					</div>
 				
-					<p class="apercu__description">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
+					<p class="apercu__description" [innerHTML]="projet.descriptif | truncate:200 ">
+						
 					</p>
 				</div>
 

@@ -1,8 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
+/*
+** Service
+*/
 import { Projet } from './service/projet';
 import { ProjetService } from './service/projet.service';
+import { Categorie } from './service/categorie';
+import { CategorieService } from './service/categorie.service';
+
+/*
+** Animation
+*/
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Router, NavigationEnd } from '@angular/router';
+
+/*
+** Pipe
+*/
+import { TruncatePipe } from './pipe/truncate.pipe';
 
 import "gsap";
 
@@ -14,10 +29,10 @@ declare var KUTE: any;
   selector           : 'app-root',
   templateUrl        : './view/projet.component.html',
   styleUrls          : ['../assets/styl/view/projet.component.styl'],
-  providers          : [ProjetService],
+  providers          : [ProjetService, CategorieService],
   animations         : [
     trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
+      transition('* => *', [
  
         query(':enter', style({ opacity: 0 }), { optional: true }),
 
@@ -26,6 +41,7 @@ declare var KUTE: any;
             animate('0.4s', style({ opacity: 1 }))
           ])
         ], {optional: true} )
+
       ])
     ])
   ]
@@ -35,22 +51,37 @@ declare var KUTE: any;
 export class ProjetComponent implements OnInit, OnDestroy {
 
   title 	= 'Projets';
+  
   projets :  Projet[];
+  categories : Categorie[];
+  result = [];
+
   selectedProjet: Projet;
   target: string;
   targetPair: string;
-  typeItem: any ;
+  typeItem: any;
+  productcategory: string;
 
-  constructor (private projetService: ProjetService, private router: Router){}
-
+  /*
+  **  Constructor
+  */
+  constructor (
+    private projetService: ProjetService,
+    private categorieService: CategorieService,
+    private router: Router){}
 
   /*
   **  Service Projets
   */
   getProjets(): void {
-
     this.projetService.getProjets().then(projets => this.projets = projets);
+  }
 
+  /*
+  **  Service Categories
+  */
+  getCategories(): void {
+    this.categorieService.getCategorie().then(categories => this.categories = categories);    
   }
 
   /*
@@ -66,9 +97,11 @@ export class ProjetComponent implements OnInit, OnDestroy {
         window.scrollTo(0, 0);
     });
 
-
     // Add Projet Ressource
     this.getProjets();
+
+    // Add Categorie Ressource
+    this.getCategories();
 
     // Add Class Body
     document.body.classList.add('projet');
@@ -159,5 +192,12 @@ export class ProjetComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  /*
+  **  Click filter
+  */
+  updateProductCategory (stringCategory: string) {
+    this.productcategory = stringCategory;
+  }
 
 }
