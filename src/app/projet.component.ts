@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {MatSelectModule} from '@angular/material/select';
 
 /*
 ** Service
@@ -61,6 +62,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   targetPair: string;
   typeItem: any;
   productcategory: string;
+  multiSelectValue: string[] = ['reactjs', 'angular'];
+
 
   /*
   **  Constructor
@@ -105,7 +108,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     // Add Class Body
     document.body.classList.add('projet');
-
   }
 
   /*
@@ -120,7 +122,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
   **  Selection de la view
   */
   onSelect(projet: Projet): void {
-  	this.selectedProjet = projet;
+    this.selectedProjet = projet;
   }
 
 
@@ -188,7 +190,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
         repeat: 0,
         repeatDelay: 1,
       });
-
     }
   }
 

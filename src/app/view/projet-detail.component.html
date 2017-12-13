@@ -10,15 +10,18 @@
 				<img src="assets/images/icon-back.svg" alt="Retour en arrière">
 			</a>
 	
-			<h1 class="self-center">{{projet.name}}</h1>
+			<h1 class="self-center">{{projet.nom}}</h1>
 	
 		</div>
-	
+		
+
+		<!--
+			Image Projet
+		-->
 		<img
-			src="assets/images/exemple-details.jpg"
-			srcset="assets/images/exemple-details@2x.jpg 1.5x"
+			src="{{projet.poster.path}}"
+			srcset="{{projet.poster.path}} 1.5x"
 			alt="">
-	
 	
 		<div class="padding">
 	

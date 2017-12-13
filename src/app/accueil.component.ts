@@ -16,20 +16,22 @@ import { FondService } from './service/fond.service';
       trigger('bulleAnimation', [
         transition('* => *', [
  
-          query(':enter h1', style({ opacity: 0,transform: 'translateY(20%) rotate(-15deg)' }), { optional: true }),
-          query(':enter .bulle', style({ transform: 'translateY(30%)', opacity: 0 }), { optional: true }),
-          query(':enter .shape_text', style({ opacity: 0 }), { optional: true }),
+          query('h1', style({ opacity: 0,transform: 'translateY(20%) rotate(-15deg)' }), { optional: true }),
+          query('.bulle', style({ transform: 'translateY(30%)', opacity: 0 }), { optional: true }),
+          query('.shape_text', style({ opacity: 0 }), { optional: true }),
+          query('.content__inner .bt.blanc', style({ opacity: 0 }), { optional: true }),
           query('.shape_icon', style({ transform: 'rotate(0deg)' }), { optional: true }),
-          query(':enter .shadow', style({ transform: 'scaleX(1.7) translateY(0%)', opacity: 0  }), { optional: true }),
+          query('.shadow', style({ transform: 'scaleX(1.7) translateY(0%)', opacity: 0  }), { optional: true }),
           
           group([
-            query(':enter h1', [ animate('1s 500ms ease-in-out', style({ opacity: 1, transform: 'translateY(0) rotate(-15deg)' }))], { optional: true }),
-            query(':enter .bulle', [animate('1s 500ms ease-in-out', style({ transform: 'translateY(0)', opacity: 1}))], { optional: true }),
-            query(':enter .shadow', [animate('1s 500ms ease-in-out', style({ transform: 'scaleX(1)', opacity: 1 }))], { optional: true }),
+            query('h1', [ animate('1s 500ms ease-in-out', style({ opacity: 1, transform: 'translateY(0) rotate(-15deg)' }))], { optional: true }),
+            query('.bulle', [animate('1s 500ms ease-in-out', style({ transform: 'translateY(0)', opacity: 1}))], { optional: true }),
+            query('.shadow', [animate('1s 500ms ease-in-out', style({ transform: 'scaleX(1)', opacity: 1 }))], { optional: true }),
           ]),
 
           group([
-            query(':enter .shape_text', [animate('0.5s ease-in-out', style({opacity: 1}))], { optional: true }),
+            query('.shape_text', [animate('0.5s ease-in-out', style({opacity: 1}))], { optional: true }),
+            query('.content__inner .bt.blanc', [animate('0.5s ease-in-out', style({opacity: 1}))], { optional: true }),
           ])
 
         ])
@@ -129,7 +131,6 @@ export class AccueilComponent implements OnInit, OnDestroy {
         this.state = 'out';
       }, 0);
     }
-  
   }
 
   ngOnDestroy(): void {

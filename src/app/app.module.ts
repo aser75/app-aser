@@ -2,6 +2,7 @@ import { BrowserModule }                       from '@angular/platform-browser';
 import { NgModule }                            from '@angular/core';
 import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { BrowserAnimationsModule }             from '@angular/platform-browser/animations';
+import { MatSelectModule }                     from '@angular/material';
 
 
 // Component
@@ -27,6 +28,7 @@ import { FondService }                         from './service/fond.service';
 //Pipe
 import {TruncatePipe}                          from './pipe/truncate.pipe';
 import {CategoryPipe}                          from './pipe/category.pipe';
+import {UrlPipe}                               from './pipe/url.pipe';
 
 // Module
 import { AppRoutingModule }                    from './app-routing.modules';
@@ -42,6 +44,7 @@ import { HttpModule }                          from '@angular/http';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
+    MatSelectModule
   ],  
   declarations: [
     AppComponent,
@@ -56,7 +59,8 @@ import { HttpModule }                          from '@angular/http';
     LogoComponent,
     ComposeMessageComponent,
     TruncatePipe,
-    CategoryPipe
+    CategoryPipe,
+    UrlPipe
   ],
   providers: [ProjetService, FondService, CategorieService],
   bootstrap: [AppComponent],
