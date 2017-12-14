@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 /*
 ** Service
@@ -15,13 +15,7 @@ import { CategorieService } from './service/categorie.service';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Router, NavigationEnd } from '@angular/router';
 
-/*
-** Pipe
-*/
-import { TruncatePipe } from './pipe/truncate.pipe';
-
 import "gsap";
-
 declare var TweenMax: any;
 declare var KUTE: any;
 
@@ -52,7 +46,6 @@ declare var KUTE: any;
 export class ProjetComponent implements OnInit, OnDestroy {
 
   title 	= 'Projets';
-  
   projets :  Projet[];
   categories : Categorie[];
   result = [];
@@ -136,7 +129,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
     this.typeItem     = event.target.classList
 
     if(this.typeItem.contains('even') ) {
-
 
       // Svg Position Nul
       let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];

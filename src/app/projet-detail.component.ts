@@ -15,7 +15,9 @@ import { ProjetService }				from './service/projet.service';
 })
 
 export class ProjetDetailComponent implements OnInit, OnDestroy {
-	projet: Projet;
+	
+  projet: Projet;
+  projets :  Projet[];
 
 	constructor(
 		private projetService: ProjetService,
@@ -24,8 +26,14 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 		private router: Router
 	) {}
 
+  /*
+  **  Service Projets
+  */
+  getProjets(): void {
+    this.projetService.getProjets().then(projets => this.projets = projets);
+  }
+
 	ngOnInit(): void {
-    	
 		/*
      	Promise Get projet
     */
@@ -38,12 +46,15 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
     */
 		document.body.classList.add('projet_detail');    	
 
-        this.router.events.subscribe((evt) => {
-            if (!(evt instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0);
-        });
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+
+    // Add Projet Ressource
+    this.getProjets();    
 
 	}
 
@@ -56,7 +67,8 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 	
 	}
 
-  	goBack(): void {
-    	this.location.back();
-  	}
+  goBack(): void {
+    this.location.back();
+  }
+
 }
