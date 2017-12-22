@@ -69,21 +69,24 @@ export class ProjetComponent implements OnInit, OnDestroy {
   /*
   **  Service Projets
   */
-  getProjets(): void {
+  getProjets(): void 
+  {
     this.projetService.getProjets().then(projets => this.projets = projets);
   }
 
   /*
   **  Service Categories
   */
-  getCategories(): void {
+  getCategories(): void 
+  {
     this.categorieService.getCategorie().then(categories => this.categories = categories);    
   }
 
   /*
   **  Init de la view
   */
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
 
     // Scroll Top 
     this.router.events.subscribe((evt) => {
@@ -106,7 +109,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   /*
   **  Destruction de la view
   */
-  ngOnDestroy(): void {
+  ngOnDestroy(): void 
+  {
     // Remove Class Body
     document.body.classList.remove('projet');
   }
@@ -114,7 +118,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   /*
   **  Selection de la view
   */
-  onSelect(projet: Projet): void {
+  onSelect(projet: Projet): void 
+  {
     this.selectedProjet = projet;
   }
 
@@ -122,7 +127,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   /*
   **  Gestion du Svg de la liste des projets
   */
-  hoverSvg(event: any){
+  hoverSvg(event: any)
+  {
 
     this.target       = event.target.id;
     this.targetPair   = event.target.className;
@@ -152,7 +158,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
     }
   }
 
-  outSvg(event: any) {
+  outSvg(event: any) 
+  {
 
     this.target = event.target.id;
 
@@ -189,7 +196,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   /*
   **  Click filter
   */
-  updateProductCategory (stringCategory: string) {
+  updateProductCategory (stringCategory?: string) 
+  {
     this.productcategory = stringCategory;
   }
 

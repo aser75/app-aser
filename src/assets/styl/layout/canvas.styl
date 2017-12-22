@@ -4,13 +4,22 @@
 
 	#bg__svg
 		position absolute
-
+		min-height 800px
+		max-height 1500px
+		
 	.shadow__svg
 		-webkit-filter drop-shadow( 0 -2px 2px hsla(0, 0%, 0%, 0.1))
 		filter drop-shadow(  0 -2px 2px hsla(0, 0%, 0%, 0.1))
 
 	#poly1
 		fill bg !important
+
+.accueil
+	.bg
+		#bg__svg
+			position absolute
+			min-height auto
+			max-height auto
 
 .triangle
 	position absolute
@@ -25,3 +34,11 @@
 .triangle.odd
 	right -2px
 	left auto
+
+.message-succes.green-message 
+	#line
+		fill #8da85e
+
+.message-succes.red-message
+	#line
+		fill default-flash

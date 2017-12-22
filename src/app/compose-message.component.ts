@@ -48,11 +48,11 @@ export class ComposeMessageComponent implements OnInit {
 
   ngOnInit():  void {
 
-    this.svg = document.getElementById("Layer_1");
+    this.svg = document.getElementById("Layer_pop");
     this.s   = Snap(this.svg);
 
-    var path        = Snap.select('#line');
-    var pathBulle   = Snap.select('#bulle');
+    var path        = Snap.select('#trait1');
+    var pathBulle   = Snap.select('#trait2');
 
     animatePath(); // start loop
 

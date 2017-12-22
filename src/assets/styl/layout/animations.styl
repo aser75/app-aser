@@ -55,7 +55,7 @@ anime04 	 = 0.4s ease
 */
 
 #actifBt
-	transition(0.2s ease-in-out)				
+	transition(0.4s ease-in)				
 
 /*
 ** Key frames
@@ -79,3 +79,10 @@ anime04 	 = 0.4s ease
 	0%{background-position:0% 50%}
 	50%{background-position:100% 50%}
 	100%{background-position:0% 50%}
+
+@keyframes rotation
+	0%{transform: rotate(0deg)}
+	25%{transform: rotate(4deg)}
+	50%{transform: rotate(0deg)}
+	75%{transform: rotate(-4deg)}
+	100%{transform: rotate(0deg)}

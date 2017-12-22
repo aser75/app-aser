@@ -2,7 +2,6 @@
 	height 60px
 	
 .items
-	
 	.item
 		position relative
 		width 800px
@@ -73,3 +72,80 @@
 			.triangle
 				left -1px
 				right auto
+
+
+@media (max-width: 800px)
+	.items
+		.item
+			width 100%
+			height auto
+			padding-right 50px
+
+			.more
+				right 0
+
+			&:nth-child(2n)
+				padding-left 50px
+
+				.media
+					margin-left 20px
+					border-top-left-radius 6px
+					border-bottom-left-radius 6px
+					border-top-right-radius 6px
+					border-bottom-right-radius 6px	
+
+				.more
+					left 0
+
+			.descriptif
+				width calc(100% - 248px)
+
+			.media
+				width 200px
+				height 150px
+				border-top-left-radius 6px
+				border-bottom-left-radius 6px
+				border-top-right-radius 6px
+				border-bottom-right-radius 6px	
+				margin-right 20px
+
+				.triangle
+					display none
+
+@media (max-width: 560px)
+	.items
+		.item
+			-ms-flex-direction column
+			-webkit-flex-direction column
+			flex-direction column
+			padding 20px
+
+			.descriptif
+				width 100%
+
+			.more
+				bottom -24px
+				right auto
+				top auto
+				transform translateX(-50%)
+				left 50%
+
+			&:nth-child(2n)
+				-ms-flex-direction column
+				-webkit-flex-direction column
+				flex-direction column
+				padding 20px
+
+				.media
+					border-top-left-radius 6px
+					border-bottom-left-radius 6px
+					border-top-right-radius 6px
+					border-bottom-right-radius 6px
+
+				.more
+					bottom -24px
+					right auto
+					top auto
+					transform translateX(-50%)
+					left 50%	
+

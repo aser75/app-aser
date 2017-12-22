@@ -26,8 +26,8 @@
 		<div class="padding">
 	
 			<div class="layout horizontal justified">
-				<h2 class="self-center">Descriptif</h2>
-				<a href="#" class="lien">Voir le résultat</a>
+				<h2 class="self-center no-margin">Descriptif</h2>
+				<a *ngIf="projet.link" href="{{projet.link}}" class="lien">Voir le résultat</a>
 			</div>
 	
 			<div class="margin-bottom">
@@ -39,9 +39,7 @@
 			<h2>Outils</h2>
 	
 			<ul>
-				<li>Html 5</li>
-				<li>Javascript</li>
-				<li>Wordpress</li>		
+				<li *ngFor="let listeCat of projet.categories" class="{{listeCat.slug}}">{{listeCat.categorie_titre}}</li>
 			</ul>
 	
 		</div>
@@ -53,7 +51,7 @@
 		
 			<div class="layout horizontal justified">
 
-				<a  *ngFor="let projetOther of projets | other:projet.id | slice:0:3 "
+				<a  *ngFor="let projetOther of projets | other:projet.id | slice:0:3"
 					[routerLink]="['/projet', projetOther.id]" 
 					class="item layout horizontal justified center-center"
 					id="item-{{i}}">
@@ -70,9 +68,3 @@
 	</div>
 
 </div>
-
-  <!-- {{projet.name}} détails<br>
-  {{projet.id}}
-
-  <input [(ngModel)]="projet.nom" placeholder="nom"/>
-	-->

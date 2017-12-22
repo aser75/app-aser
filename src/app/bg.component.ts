@@ -3,7 +3,6 @@ import { Location }                                                             
 import { Subscription }                                                                 from 'rxjs/Subscription';
 import { FondService }                                                                  from './service/fond.service';
 import "gsap";
-
 declare var TweenMax: any;
 
 
@@ -20,7 +19,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
   relativePath: string = window.location.pathname;
   message: any;
   subscription: Subscription;
-
 
   /**
   ** Function du slide du Svg
@@ -39,11 +37,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         repeat: 0,
         repeatDelay: 1,
         onComplete: function() {
-          document.getElementById("footer").classList.remove("bgWhite")
+          // Remove
+          document.getElementById("footer").classList.remove("bgWhite");
+          // Add
           document.getElementById("footer").classList.add("bgBlack");
         },
         onStart: function() {
+          // Remove
           document.getElementById("bg__svg").classList.remove("shadow__svg");
+          document.getElementById("viewProjet").classList.remove("completeProjet");
+          document.getElementById("viewContact").classList.remove("completeContact");
          },
       });
     } 
@@ -60,9 +63,13 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         repeat: 0,
         repeatDelay: 1,
         onComplete: function() {
-          document.getElementById("footer").classList.remove("bgBlack")
+          // remove 
+          document.getElementById("footer").classList.remove("bgBlack");
+          document.getElementById("viewContact").classList.remove("completeContact");
+          // Add
           document.getElementById("footer").classList.add("bgWhite");
           document.getElementById("bg__svg").classList.add("shadow__svg");
+          document.getElementById("viewProjet").classList.add("completeProjet");
         }
       });
 
@@ -79,18 +86,24 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         },
         repeat: 0,
         repeatDelay: 1,
+        onStart: function() {
+          // Remove
+          document.getElementById("viewProjet").classList.remove("completeProjet");
+        },
         onComplete: function() {
-          document.getElementById("footer").classList.remove("bgBlack")
+          //  Remove
+          document.getElementById("footer").classList.remove("bgBlack");
+          // Add
           document.getElementById("footer").classList.add("bgWhite");
           document.getElementById("bg__svg").classList.add("shadow__svg");
+          document.getElementById("viewContact").classList.add("completeContact");
         }
       });
     }
   }
 
-
-  constructor(private messageService: FondService) {
-
+  constructor(private messageService: FondService)
+  {
     // J'observe le type de fond du callBack component
     this.subscription = this.messageService.getType().subscribe(message => { 
 
@@ -98,14 +111,12 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
       this.mouvementBg(this.message.text);
 
     });
-
   }
 
 
-  ngOnChanges(): void {
-
+  ngOnChanges(): void
+  {
     this.mouvementBg(this.bgsvg);
-
   }
 
   ngOnInit(): void {
@@ -114,8 +125,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
     Animation BG
     Utilisation tweenMax
     */
-
-    if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)") {
+    console.log(this.relativePath);
+    if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)" && this.relativePath !== "/app-prod/accueil"  && this.relativePath !== "/app-prod/") {
 
       let targetObject = document.getElementById('poly1');
 
@@ -127,10 +138,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         repeatDelay: 1,
         onComplete: function() {
           document.getElementById("bg__svg").classList.add("shadow__svg");
+          document.getElementById("viewProjet").classList.add("completeProjet");
         }
       });
 
-    } if (this.relativePath == "/contact") {
+    } else if (this.relativePath == "/contact") {
 
       let targetObject = document.getElementById('poly1');
 
@@ -142,9 +154,10 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges {
         repeatDelay: 1,
         onComplete: function() {
           document.getElementById("bg__svg").classList.add("shadow__svg");
+          document.getElementById("viewContact").classList.add("completeContact");
+
         }
       });     
-
     }
   }
 

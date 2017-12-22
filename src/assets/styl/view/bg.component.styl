@@ -1,0 +1,348 @@
+.viewProjet
+	height 30%
+	position absolute
+	left 0
+	top 0
+	right 0
+	perspective 500px
+	perspective-origin top center
+	overflow hidden
+
+	.modelA
+		width 56px
+		height 126px
+		background transparent url('../images/header-projet/nuage-left-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 40%
+		left 30%
+		opacity 0
+		margin-top -120px
+		transform-origin center bottom
+		transition(1s ease-in-out)
+		transform rotate3d(1,0,1,-89deg) translate3d(24px,25px,100px)
+
+	.modelB
+		width 91px
+		height 117px
+		background transparent url('../images/header-projet/nuage-left-02.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 35%
+		left 34%
+		opacity 0
+		margin-top -85px
+		transform-origin center bottom
+		transition(1s ease-in-out 0.5s)
+		transform rotate3d(1,0,0.5,-89deg) translate3d(24px,25px,100px)		
+
+	.modelC
+		width 88px
+		height 148px
+		background transparent url('../images/header-projet/nuage-right-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 45%
+		left 58%
+		opacity 0
+		margin-top -120px
+		transform-origin center bottom
+		transition(1s ease-in-out 0.5s)
+		transform rotate3d(-1,0,1,89deg) translate3d(24px,50px,100px)	
+
+
+	.modelD	
+		width 51px
+		height 126px
+		background transparent url('../images/header-projet/nuage-right-02.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 40%
+		left 64%
+		opacity 0
+		margin-top -120px
+		transform-origin center bottom
+		transition(1s ease-in-out)
+		transform rotate3d(-1,0,1,89deg) translate3d(24px,50px,100px)
+
+	.modelE	
+		width 607px
+		height 187px
+		background transparent url('../images/header-projet/batiment-left.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 5%
+		left 50%
+		margin-left -640px
+		transform-origin center bottom
+		transition(0.6s ease-in-out 0.7s)
+		transform rotate3d(-1,0,0,-89deg)
+		opacity 0
+
+	.modelF	
+		width 607px
+		height 187px
+		background transparent url('../images/header-projet/batiment-right.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 5%
+		right 50%
+		margin-right -640px
+		transform-origin center bottom
+		transition(0.6s ease-in-out 0.7s)
+		transform rotate3d(1,0,0,89deg)
+		opacity 0
+
+.viewContact
+	height 30%
+	position absolute
+	left 0
+	top 0
+	right 0
+	perspective 500px
+	overflow hidden
+
+	.modelAContact
+		width 64px
+		height 128px
+		background transparent url('../images/header-contact/bird-left-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		top 0
+		left 30%
+		opacity 0
+		transform-origin center top
+		transition(1s ease-in-out)
+		transform rotate3d(1,-1,1,89deg)  translate3d(64px,0,100px) scale3d(1, 1, 2)
+
+	.modelBContact
+		width 63px
+		height 226px
+		background transparent url('../images/header-contact/eclair-right-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		top 0
+		left 62%
+		opacity 0
+		transform-origin center top
+		transition(1s ease-in-out 0.9s)
+		transform rotate3d(1,-1,1,-89deg)  translate3d(64px,0,100px) scale3d(1, 1, 2)
+		
+
+	.modelCContact
+		width 108px
+		height 167px
+		background transparent url('../images/header-contact/nuage-right-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		top 0
+		left 61%
+		opacity 0
+		transform-origin center top
+		transition(1s ease-in-out 0.5s)
+		transform rotate3d(1,-1,1,-89deg)  translate3d(108px,0,100px) scale3d(1, 1, 2)
+
+	.modelDContact
+		width 77px
+		height 157px
+		background transparent url('../images/header-contact/phone-right-01.png') no-repeat left center
+		background-size contain
+		position absolute
+		top 0
+		left 67%
+		opacity 0
+		transform-origin center top
+		transition(1s ease-in-out)
+		transform rotate3d(1,-1,1,-89deg)  translate3d(77px,0,100px) scale3d(1, 1, 2)
+
+
+	.modelEContact
+		width 452px
+		height 137px
+		background transparent url('../images/header-contact/batiment-left.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 11%
+		left 50%
+		margin-left -550px
+		transform-origin center bottom
+		transition(0.6s ease-in-out 0.7s)
+		transform rotate3d(-1,0,0,-89deg)
+		opacity 0
+
+	.modelFContact
+		width 452px
+		height 137px
+		background transparent url('../images/header-contact/batiment-right.png') no-repeat left center
+		background-size contain
+		position absolute
+		bottom 11%
+		right 50%
+		margin-right -550px
+		transform-origin center bottom
+		transition(0.6s ease-in-out 0.7s)
+		transform rotate3d(1,0,0,89deg)
+		opacity 0
+
+
+.accueil
+	.viewProjet,
+	.viewProjet.completeProjet,
+	.viewContact.completeContact,
+	.viewContact
+		.modelA,
+		.modelB,
+		.modelC,
+		.modelD,
+		.modelE,
+		.modelF,
+		.modelEContact,
+		.modelFContact,
+		.modelAContact,
+		.modelBContact,
+		.modelDContact,
+		.modelCContact
+			opacity 0
+			z-index -1
+			transition(none)
+
+.projet
+	.completeProjet
+		.modelA
+			transform rotate3d(1,0,1,0deg) translate3d(24px,25px,100px)
+			opacity 1
+
+		.modelB
+			transform rotate3d(1,0,1,0deg) translate3d(24px,25px,100px)
+			opacity 1	
+
+		.modelC,
+		.modelD		
+			transform rotate3d(-1,0,1,0deg) translate3d(24px,50px,100px)
+			opacity 1	
+
+		.modelE,
+		.modelF
+			transform rotate3d(0,0,0,0deg) translate3d(24px,50px,100px)
+			opacity 1
+	
+.contact
+	.viewProjet
+		.modelA,
+		.modelB
+			transform rotate3d(1,0,1,-89deg) translate3d(24px,25px,100px)
+			opacity 0
+
+		.modelC,
+		.modelD
+			transform rotate3d(-1,0,1,89deg) translate3d(24px,50px,100px)
+			opacity 0
+
+		.modelE,
+			transform rotate3d(1,0,0,-89deg)
+			opcity 0
+
+		.modelF
+			transform rotate3d(1,0,0,89deg)
+			opcity 0
+
+	.completeContact
+		.modelA,
+			transform rotate3d(1,0,1,-89deg) translate3d(24px,25px,100px)
+			opacity 1
+
+		.modelB
+			transform rotate3d(1,0,0.5,-89deg) translate3d(24px,25px,100px)
+			opacity 1
+
+		.modelC,
+		.modelD	
+			transform rotate3d(-1,0,1,89deg) translate3d(24px,50px,100px)
+			opacity 1
+
+		.modelE,
+			transform rotate3d(1,0,0,-89deg)
+			opcity 1
+
+		.modelF
+			transform rotate3d(1,0,0,89deg)
+			opcity 1
+
+		.modelAContact
+			transform rotate3d(1,1,0,0deg) translate3d(0,0,0px) scale3d(1, 1, 1)
+			opacity 1
+
+		.modelDContact,
+		.modelCContact
+			transform rotate3d(1,1,0,0deg) translate3d(0,0,0px) scale3d(1, 1, 1)
+			opacity 1
+
+		.modelBContact
+			transform rotate3d(1,1,0,0deg) translate3d(0,0,0px) scale3d(1, 1, 1)
+			opacity 1	
+
+		.modelEContact,
+		.modelFContact
+			transform rotate3d(0,0,0,0deg) translate3d(24px,50px,100px)
+			opacity 1
+
+@media (max-width: 750px)
+	.viewProjet
+		.modelA
+			left 20%
+
+		.modelB
+			left 23%
+
+
+@media (max-height: 740px)
+	.viewContact,
+	.viewProjet
+		height 230px
+
+	.viewProjet
+		.modelA
+			bottom 20%
+
+		.modelB
+			bottom 23%
+
+		.modelC
+			bottom 23%
+		
+		.modelD
+			bottom 20%
+
+@media (max-width: 550px)
+	.viewProjet
+		.modelA
+			left 50px
+
+		.modelB
+			left 75px
+
+		.modelC
+			right 25px
+
+		.modelD
+			right 55px
+
+		.modelF
+			right 0
+			margin-right -400px
+
+		.modelE
+			left 0
+			margin-left -450px
+
+@media (max-width: 460px)
+	.modelB
+		display none
+
+@media (max-width: 340px)
+	.viewProjet
+		.modelF
+			bottom 0
+
+		.modelE
+			bottom 0

@@ -4,13 +4,13 @@
 	
 	<div class="svg_fond">
 	
-		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" width="800" height="800" xml:space="preserve">
+		<svg version="1.1" id="Layer_pop" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" width="800" height="800" xml:space="preserve">
  
-        	<path id="line" fill="white" stroke="none" stroke-miterlimit="10" d="M800,438.4V415v-36.9v-42.6V313V30.7C800,13.7,786.3,0,769.3,0h-271h-13.7h-34.1h-18.9h-49.2
+        	<path id="trait1" fill="white" stroke="none" stroke-miterlimit="10" d="M800,438.4V415v-36.9v-42.6V313V30.7C800,13.7,786.3,0,769.3,0h-271h-13.7h-34.1h-18.9h-49.2
   				h-36h-33.1H281H30.7C13.7,0,0,13.7,0,30.7v241v75v38.8v32.2v26.5v16.7v308.6C0,786.3,13.7,800,30.7,800h294h24.6h15.6h20.6h27h26.3
   				h39H494h37h238.3c16.9,0,30.7-13.7,30.7-30.7V497.8v-12.6v-21.3V438.4z" fill-opacity="0"/>
 	
-        	<path id="bulle" fill="white" stroke="none" stroke-miterlimit="10" d="M360.2,685.4c-0.2,5.5,4.8,9.2,6.7,9.2c3.4,0,6.5-3.1,6.7-9.9c0.2-6.8-5.7-12.1-9-22.4
+        	<path id="trait2" fill="white" stroke="none" stroke-miterlimit="10" d="M360.2,685.4c-0.2,5.5,4.8,9.2,6.7,9.2c3.4,0,6.5-3.1,6.7-9.9c0.2-6.8-5.7-12.1-9-22.4
 				C364.8,666.1,360.2,685.4,360.2,685.4z M468.1,101.5c3.7-2,3.5-8.8-2.6-5c-6.1,3.7-13.8,21.5-13.8,21.5
 				C454.3,115.1,464.4,103.5,468.1,101.5z M505,120.4c2.1,0,3.7-1.7,3.7-3.7c0-2.1-1.7-3.7-3.7-3.7c-2.1,0-3.7,1.7-3.7,3.7
 				C501.3,118.7,503,120.4,505,120.4z M325.3,121.9c2.1,0,3.7-1.7,3.7-3.7c0-2.1-1.7-3.7-3.7-3.7c-2.1,0-3.7,1.7-3.7,3.7
@@ -23,16 +23,81 @@
 	</div>
 
 	<div [@showAnimation]>
-		<h3>Contact Crisis Center</h3>
+		
+		<div class="layout horizontal justified center-center margin-bottom">
+			<h3 class="no-margin">MENTIONS LEGALES</h3>
+			<div (click)="closePopup()" class="bt-close"><span class="close fat black"></span></div>
+		</div>
 
-		<div *ngIf="details">{{ details }}</div>
+		<div class="content-scroll">
 
-		<div (click)="closePopup()">Fermer</div>
+<p style="text-align:justify"><strong>1. Présentation du site :<br />
+ </strong><br />
+Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., nous portons à la connaissance des utilisateurs et visiteurs du site : <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> les informations suivantes :</p>
 
-		<div>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. In imperdiet nisi tellus, quis bibendum magna aliquet id. Proin felis magna, fringilla nec scelerisque efficitur, aliquet ac nulla. Aenean ut odio ac velit pharetra efficitur. Donec sed ante purus. In eget erat nulla. Sed sed ultricies nisl. Vestibulum at erat leo.
+<p style="text-align:justify"><strong>Informations légales : </strong></p>
 
-			Cras feugiat diam tellus, sit amet suscipit leo mattis malesuada. Aliquam scelerisque nibh lectus, vel congue erat interdum nec. Ut leo mi, eleifend eget massa quis, vulputate feugiat lacus. Nam tellus erat, posuere non posuere pellentesque, efficitur porta leo. Vestibulum egestas porta risus. Sed dictum fringilla sodales. Sed venenatis, augue molestie suscipit facilisis, eros dolor facilisis arcu, a aliquam diam sem eget est. Quisque ut odio nec dui imperdiet tincidunt at vitae turpis. Ut vitae efficitur lorem, sollicitudin sagittis tellus. Suspendisse eu neque facilisis, mattis metus vitae, elementum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In rhoncus, nisi eu consequat auctor, odio est rhoncus justo, ut tincidunt ante est vitae ante.
+<p style="text-align:justify">Statut du propriétaire : <strong>societe</strong><br />
+Préfixe : <strong>Auto-entrepreneur</strong><br />
+Nom de la Société :<strong> Maxence Puppetto</strong><br />
+Adresse : <strong>3 rue saint exupery 566600 Lanester</strong><br />
+Tél  : <strong>0618967781</strong><br />
+Au Capital de :<strong> - €</strong><br />
+SIRET :  <strong>52781907200010   </strong>R.C.S. :<strong> -</strong><br />
+Numéro TVA intracommunautaire : <strong>-</strong><br />
+Adresse de courrier électronique : <strong>maxence.puppetto@gmail.com</strong> <br />
+ <br />
+Le Créateur du site est : <strong>Maxebce Puppetto</strong><br />
+Le Responsable de la  publication est : <strong>Maxebce Puppetto</strong><br />
+Contactez le responsable de la publication : <strong>maxence.puppetto@gmail.com</strong><br />
+Le responsable de la publication est une <strong>personne physique</strong><br />
+<br />
+Le Webmaster est  : <strong>Maxence Puppetto</strong><br />
+Contactez le Webmaster : <strong><a href="mailto:maxence.puppetto@gmail.com?subject=Contact ï¿½ partir des mentions lï¿½gales via le site www.aser.fr">maxence.puppetto@gmail.com</a></strong><br />
+L’hebergeur du site est : <strong>OVh contact@ovh.com 59100 Roubaix</strong><br />
+<u><strong>CREDITS :</strong></u> les mentions légales ont étés générées par <strong><a href="https://www.generer-mentions-legales.com">mentions legales</a></strong><br />
+ </p>
+
+<p style="text-align:justify"><strong>2. Description des services fournis :</strong><br />
+<br />
+Le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> a pour objet de fournir une information concernant l’ensemble des activités de la société.<br />
+Le proprietaire du site s’efforce de fournir sur le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> des informations aussi précises que possible. Toutefois, il ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu’elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.<br />
+Tous les informations proposées sur le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> sont données à titre indicatif, sont non exhaustives, et sont susceptibles d’évoluer. Elles sont données sous réserve de modifications ayant été apportées depuis leur mise en ligne.<br />
+ </p>
+
+<p style="text-align:justify"><strong>3. Propriété intellectuelle et contrefaçons :</strong></p>
+
+<p style="text-align:justify"><br />
+Le proprietaire du site est propriétaire des droits de propriété intellectuelle ou détient les droits d’usage sur tous les éléments accessibles sur le site, notamment les textes, images, graphismes, logo, icônes, sons, logiciels…<br />
+Toute reproduction, représentation, modification, publication, adaptation totale ou partielle des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable à l'email : <a href="mailto:maxence.puppetto@gmail.com?subject=Contact ï¿½ partir des mentions lï¿½gales via le site www.aser.fr"><strong>maxence.puppetto@gmail.com</strong></a> .<br />
+Toute exploitation non autorisée du site ou de l’un quelconque de ces éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du Code de Propriété Intellectuelle.<br />
+ </p>
+
+<p style="text-align:justify"><strong>4. Liens hypertextes et cookies :</strong><br />
+<br />
+Le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> contient un certain nombre de liens hypertextes vers d’autres sites (partenaires, informations …) mis en place avec l’autorisation de le proprietaire du site . Cependant, le proprietaire du site n’a pas la possibilité de vérifier le contenu des sites ainsi visités  et décline donc toute responsabilité de ce fait quand aux risques éventuels de contenus illicites.<br />
+<br />
+L’utilisateur est informé que lors de ses visites sur le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a>, un ou des cookies sont susceptible de s’installer automatiquement sur son ordinateur. Un cookie est un fichier de petite taille, qui ne permet pas l’identification de l’utilisateur, mais qui enregistre des informations relatives à la navigation d’un ordinateur sur un site. Les données ainsi obtenues visent à faciliter la navigation ultérieure sur le site, et ont également vocation à permettre diverses mesures de fréquentation.<br />
+<br />
+Le paramétrage du logiciel de navigation permet d’informer de la présence de cookie et éventuellement, de refuser de la manière décrite à l’adresse suivante : www.cnil.fr<br />
+Le refus d’installation d’un cookie peut entraîner l’impossibilité d’accéder à certains services. L’utilisateur peut toutefois configurer son ordinateur de la manière suivante, pour refuser l’installation des cookies :<br />
+Sous Internet Explorer : onglet outil / options internet. Cliquez sur Confidentialité et choisissez Bloquer tous les cookies. Validez sur Ok.<br />
+Sous Netscape : onglet édition / préférences. Cliquez sur Avancées et choisissez Désactiver les cookies. Validez sur Ok.<br />
+ </p>
+
+<p style="text-align:justify"><strong>5. Protection des biens et des personnes - gestion des données personnelles :</strong><br />
+<br />
+Utilisateur : Internaute se connectant, utilisant le site susnommé : <a href="http://www.aser.fr" target="_blank">www.aser.fr</a><br />
+En France, les données personnelles sont notamment protégées par la loi n° 78-87 du 6 janvier 1978, la loi n° 2004-801 du 6 août 2004, l'article L. 226-13 du Code pénal et la Directive Européenne du 24 octobre 1995.</p>
+
+<p style="text-align:justify">Sur le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a>, le proprietaire du site ne collecte des informations personnelles relatives à l'utilisateur que pour le besoin de certains services proposés par le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a>. L'utilisateur fournit ces informations en toute connaissance de cause, notamment lorsqu'il procède par lui-même à leur saisie. Il est alors précisé à l'utilisateur du site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> l’obligation ou non de fournir ces informations.<br />
+Conformément aux dispositions des articles 38 et suivants de la loi 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, tout utilisateur dispose d’un droit d’accès, de rectification, de suppression et d’opposition aux données personnelles le concernant. Pour l’exercer, adressez votre demande à <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> par email : email du webmaster ou  en effectuant sa demande écrite et signée, accompagnée d’une copie du titre d’identité avec signature du titulaire de la pièce, en précisant l’adresse à laquelle la réponse doit être envoyée.</p>
+
+<p style="text-align:justify">Aucune information personnelle de l'utilisateur du site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> n'est publiée à l'insu de l'utilisateur, échangée, transférée, cédée ou vendue sur un support quelconque à des tiers. Seule l'hypothèse du rachat du site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> à le proprietaire du site et de ses droits permettrait la transmission des dites informations à l'éventuel acquéreur qui serait à son tour tenu de la même obligation de conservation et de modification des données vis à vis de l'utilisateur du site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a>.<br />
+Le site <a href="http://www.aser.fr" target="_blank">www.aser.fr</a> est déclaré à la CNIL sous le numéro -.</p>
+
+<p style="text-align:justify">Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.</p>
+
 		</div>
 	</div>
 </div>

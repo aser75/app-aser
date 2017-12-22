@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output  } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit  } from '@angular/core';
 import { trigger, state, style, animate, transition, query, stagger, animateChild, group } from '@angular/animations';
+import 'rxjs/add/operator/pairwise';
+import 'rxjs/add/operator/filter';
+import { Router, RoutesRecognized } from '@angular/router';
 
 @Component({
   selector            : 'my-app',
@@ -42,7 +45,7 @@ import { trigger, state, style, animate, transition, query, stagger, animateChil
   ]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   
   /**
   * Definition des variables
@@ -50,14 +53,28 @@ export class AppComponent {
   title = 'Aser App';
   bgsvg: string;
 
+  constructor(private router: Router){}
 
-  prepRouteState(outlet: any) {
+  prepRouteState(outlet: any)
+  {
     return outlet.activatedRouteData['animation'] || 'firstPage'; 
   }
 
-  actifContactBg(valeur: string) {
+  actifContactBg(valeur: string)
+  {
     this.bgsvg = valeur;
   }
 
+  ngOnInit()
+  {
+    this.router.events
+      .filter((e: any) => e instanceof RoutesRecognized)
+      .pairwise()
+      .subscribe((e: any) => {
+        if(e[0].url === '/accueil') {
+          document.body.classList.add('previousAccueil');
+        }
+      });
+  }
   
 }

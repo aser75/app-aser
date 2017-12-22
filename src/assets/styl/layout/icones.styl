@@ -33,6 +33,102 @@
 		width 25px
 		height 25px
 
+.javascript
+	position relative
+	width 200px
+	padding-left 55px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/javascript.jpg') no-repeat left top
+		background-size 35px 35px
+		display block
+		width 35px
+		height 35px
+		position absolute
+		left 15px 
+		top -2px
+
+.css-html
+	position relative
+	width 200px
+	padding-left 90px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/html-css.png') no-repeat left top
+		background-size 70px 35px
+		display block
+		width 70px
+		height 35px
+		position absolute
+		left 15px 
+		top -2px
+
+.php
+	position relative
+	width 200px
+	padding-left 55px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/php.png') no-repeat left top
+		background-size 35px 35px
+		display block
+		width 35px
+		height 35px
+		position absolute
+		left 15px 
+		top 0px
+
+.angular
+	position relative
+	width 200px
+	padding-left 55px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/angular.png') no-repeat left top
+		background-size 35px 35px
+		display block
+		width 35px
+		height 35px
+		position absolute
+		left 15px 
+		top 0px
+
+.wordpress
+	position relative
+	width 200px
+	padding-left 55px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/wordpress.png') no-repeat left top
+		background-size 35px 35px
+		display block
+		width 35px
+		height 35px
+		position absolute
+		left 15px 
+		top 0px
+
+.october-cms
+	position relative
+	width 200px
+	padding-left 55px
+
+	&:after
+		content''
+		background transparent url('../images/icones-categories/october.png') no-repeat left top
+		background-size 35px 35px
+		display block
+		width 35px
+		height 35px
+		position absolute
+		left 15px 
+		top 0px
+
 .pen
 	width 300px
 	display block
@@ -40,3 +136,34 @@
 .phone
 	width 300px
 	display block
+
+.close
+	position absolute
+	top 50%
+	left 50%
+	transform translate(-50%, -50%)
+	display inline-block
+	width 30px
+	height 30px
+	overflow hidden
+	transition(all 0.2s ease)
+
+
+	&::before,
+	&::after
+		content ''
+		position absolute
+		height 2px
+		width 100%
+		top 50%
+		left 0
+		margin-top -1px
+		background default-orange
+		border-radius 5px 0
+		transition(all 0.4s ease)
+
+	&::before
+		transform rotate(45deg)
+
+	&::after
+		transform rotate(-45deg)
