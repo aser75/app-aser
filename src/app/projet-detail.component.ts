@@ -1,12 +1,12 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, OnDestroy } 	from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationEnd}	 	from '@angular/router';
-import { Location }						from '@angular/common'
+import { environment } from '../environments/environment';
+import { Location }						from '@angular/common';
 
 // Service Projet
 import { Projet } 						from './service/projet';
 import { ProjetService }				from './service/projet.service';
-
 
 @Component ({
 	  selector			    : 'projet-detail',
@@ -24,7 +24,9 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private location: Location,
 		private router: Router
-	) {}
+	) {
+        console.log(environment.apiUrl);
+  }
 
   /*
   **  Service Projets
@@ -41,34 +43,34 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
      		.switchMap((params: ParamMap) => this.projetService.getProjet(+params.get('id')))
      		.subscribe(projet => this.projet = projet);
 
-		/*
-      Add Class Body
-    */
-		document.body.classList.add('projet_detail');    	
-
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
+  		/*
+        Add Class Body
+      */
+  		document.body.classList.add('projet_detail');    	
+      if (typeof window !== 'undefined') {
+        this.router.events.subscribe((evt) => {
+          if (!(evt instanceof NavigationEnd)) {
+            return;
+          }
+          window.scrollTo(0, 0);
+        });
       }
-      window.scrollTo(0, 0);
-    });
+
 
     // Add Projet Ressource
     this.getProjets();    
-
 	}
 
-	ngOnDestroy(): void {
-
+	ngOnDestroy(): void
+  {
     /*
-      Remove Class Body
+    Remove Class Body
     */
-    document.body.classList.remove('projet_detail');		
-	
+    document.body.classList.remove('projet_detail');
 	}
 
-  goBack(): void {
+  goBack(): void 
+  {
     this.location.back();
   }
-
 }

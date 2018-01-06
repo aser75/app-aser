@@ -21,12 +21,10 @@ import { ComposeMessageComponent }             from './compose-message.component
 //Directive
 import { LoaderComponent }                       from './directive/loader.component';
 
-
 // Service
 import { ProjetService }                       from './service/projet.service';
 import { CategorieService }                    from './service/categorie.service';
 import { FondService }                         from './service/fond.service';
-
 
 //Pipe
 import { TruncatePipe }                          from './pipe/truncate.pipe';
@@ -38,6 +36,7 @@ import { OtherPipe }                             from './pipe/other.pipe';
 import { AppRoutingModule }                    from './app-routing.modules';
 import { HttpClientModule }                    from '@angular/common/http';
 import { HttpModule }                          from '@angular/http';
+
 
 @NgModule({
   imports: [
@@ -72,4 +71,4 @@ import { HttpModule }                          from '@angular/http';
   bootstrap: [AppComponent],
 
 })
-export class AppModule { }
+export class AppModule {}

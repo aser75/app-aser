@@ -28,9 +28,7 @@ declare var KUTE: any;
   animations         : [
     trigger('listAnimation', [
       transition('* => *', [
- 
         query(':enter', style({ opacity: 0 }), { optional: true }),
-
         query(':enter', [
           stagger(-200, [
             animate('0.4s', style({ opacity: 1 }))
@@ -45,7 +43,7 @@ declare var KUTE: any;
 
 export class ProjetComponent implements OnInit, OnDestroy {
 
-  title 	= 'Projets';
+  title 	= 'Réalisations';
   projets :  Projet[];
   categories : Categorie[];
   result = [];
@@ -64,7 +62,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
   constructor (
     private projetService: ProjetService,
     private categorieService: CategorieService,
-    private router: Router){}
+    private router: Router) {}
 
   /*
   **  Service Projets
@@ -87,14 +85,15 @@ export class ProjetComponent implements OnInit, OnDestroy {
   */
   ngOnInit(): void 
   {
-
-    // Scroll Top 
-    this.router.events.subscribe((evt) => {
-        if (!(evt instanceof NavigationEnd)) {
+      // Scroll Top 
+      if (typeof window !== 'undefined') {
+        this.router.events.subscribe((evt) => {
+          if (!(evt instanceof NavigationEnd)) {
             return;
-        }
-        window.scrollTo(0, 0);
-    });
+          }
+          window.scrollTo(0, 0);
+        });
+    }
 
     // Add Projet Ressource
     this.getProjets();
@@ -104,6 +103,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
     // Add Class Body
     document.body.classList.add('projet');
+
   }
 
   /*
@@ -111,6 +111,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
   */
   ngOnDestroy(): void 
   {
+
     // Remove Class Body
     document.body.classList.remove('projet');
   }
@@ -134,64 +135,59 @@ export class ProjetComponent implements OnInit, OnDestroy {
     this.targetPair   = event.target.className;
     this.typeItem     = event.target.classList
 
-    if(this.typeItem.contains('even') ) {
+      if(this.typeItem.contains('even') ) {
+        // Svg Position Nul
+        let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
+  
+          TweenMax.to(targetObject, 0.2, {
+            attr: {
+              points: '100,0 100,0 100,100'
+            },
+          });
+      } 
+  
+      if ( this.typeItem.contains('odd') ) {
+        // Svg Position Nul
+        let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
+  
+          TweenMax.to(targetObject, 0.2, {
+            attr: {
+              points: '0,0 0,0 0,100'
+            },
+          });
+      }
 
-      // Svg Position Nul
-      let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
-
-        TweenMax.to(targetObject, 0.2, {
-          attr: {
-            points: '100,0 100,0 100,100'
-          },
-        });
-    } 
-    if ( this.typeItem.contains('odd') ) {
-
-      // Svg Position Nul
-      let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
-
-        TweenMax.to(targetObject, 0.2, {
-          attr: {
-            points: '0,0 0,0 0,100'
-          },
-        });
-    }
   }
 
   outSvg(event: any) 
   {
 
     this.target = event.target.id;
-
     if( this.typeItem.contains('even') ) {
-
-      // Svg Position Nul
-      let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
-
+        // Svg Position Nul
+        let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
+          TweenMax.to(targetObject, 0.2, {
+            attr: {
+              points: '75,0 100,0 100,100'
+            },
+            repeat: 0,
+            repeatDelay: 1,
+          });
+    }
+  
+    if( this.typeItem.contains('odd') ){
+        // Svg Position Nul
+        let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
         TweenMax.to(targetObject, 0.2, {
           attr: {
-            points: '75,0 100,0 100,100'
+            points: '0,0 25,0 0,100'
           },
           repeat: 0,
           repeatDelay: 1,
         });
     }
 
-    if( this.typeItem.contains('odd') ){
-
-      // Svg Position Nul
-      let targetObject = document.getElementById(this.target).getElementsByClassName( 'triangle__svg' )[0];
-
-      TweenMax.to(targetObject, 0.2, {
-        attr: {
-          points: '0,0 25,0 0,100'
-        },
-        repeat: 0,
-        repeatDelay: 1,
-      });
-    }
   }
-
 
   /*
   **  Click filter

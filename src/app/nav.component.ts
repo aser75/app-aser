@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FondService } from './service/fond.service';
 
-
 @Component({
 	selector		: 'nav-call',
 	templateUrl		: './view/nav.component.html',
@@ -18,28 +17,30 @@ export class NavComponent {
 	/*
 	** Detection des changements de routes
 	*/
-	constructor(private fondService: FondService,location: Location, router: Router ){
-    	router.events.subscribe((val) => {
-    
-			if(location.path() == '/accueil'){
-
-				document.getElementById("actifBt").style.top = '0';
-				document.getElementById("actifBt").style.transform = 'translate(-50%, -7px)';
-
-			}
-			if(location.path() == '/projet'){
-
-				document.getElementById("actifBt").style.top = '50%';
-				document.getElementById("actifBt").style.transform = 'translate(-50%, -50%)';
-
-			}
-			if(location.path() == '/contact'){
-
-				document.getElementById("actifBt").style.top = '100%';
-				document.getElementById("actifBt").style.transform = 'translate(-50%, -43px)';
-			}
-
-    	});		
+	constructor(
+		private fondService: FondService,
+		location: Location,
+		router: Router){
+		
+    		router.events.subscribe((val) => {
+				if(location.path() == '/accueil'){
+	
+					document.getElementById("actifBt").style.top = '0';
+					document.getElementById("actifBt").style.transform = 'translate(-50%, -7px)';
+	
+				}
+				if(location.path() == '/projet'){
+	
+					document.getElementById("actifBt").style.top = '50%';
+					document.getElementById("actifBt").style.transform = 'translate(-50%, -50%)';
+	
+				}
+				if(location.path() == '/contact'){
+	
+					document.getElementById("actifBt").style.top = '100%';
+					document.getElementById("actifBt").style.transform = 'translate(-50%, -43px)';
+				}
+    		});	
 	}
 
 	/*

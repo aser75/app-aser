@@ -7,6 +7,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 
 export class ContactComponent implements OnInit, OnDestroy {
+
 	bgsvg:boolean;
 
 	ngOnInit(): void
@@ -15,14 +16,16 @@ export class ContactComponent implements OnInit, OnDestroy {
       	Add Class Body
     	*/
 		document.body.classList.add('contact');
+
 	}
 
 	ngOnDestroy(): void
 	{
 		/*
 		Remove Class Body
-  		*/
+	  	*/
 		document.body.classList.remove('contact');
+
 	}
 
 }

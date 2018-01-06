@@ -2,7 +2,6 @@ import { Component, HostBinding, OnInit, ElementRef } from '@angular/core';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Router }                 from '@angular/router';
 import "gsap";
-
 declare var TweenMax: any;
 declare var Snap: any;
 declare var mina: any; 
@@ -36,7 +35,7 @@ export class ComposeMessageComponent implements OnInit {
   svg: any;
   s: any;
 
-  constructor(private router: Router) {}
+  constructor( private router: Router) {}
   
   cancel() {
     this.closePopup();
@@ -50,10 +49,9 @@ export class ComposeMessageComponent implements OnInit {
 
     this.svg = document.getElementById("Layer_pop");
     this.s   = Snap(this.svg);
-
     var path        = Snap.select('#trait1');
     var pathBulle   = Snap.select('#trait2');
-
+    
     animatePath(); // start loop
 
     function animatePath(){
