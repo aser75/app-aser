@@ -12,7 +12,6 @@ export class NavPrimaryComponent {
 	// Declaration des variables
 	activeBurger: boolean = false;
 	
-
 	constructor(private fondService: FondService ){}
 
 	/*

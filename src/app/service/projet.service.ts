@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
-
 import { Projet } from './projet';
 
 @Injectable()
 export class ProjetService {
 
-	private projetsUrl = 'http://localhost/apiproject/api/v1/projets';
+	private projetsUrl = environment.apiUrl;
 	
-	constructor (private http: Http) {}
+	constructor (private http: Http) {
+
+	}
 
 	getProjets(): Promise<Projet[]> {
 		return this.http.get(this.projetsUrl)

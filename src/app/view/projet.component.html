@@ -8,14 +8,21 @@
 
 	<div class="container">
 
-		<ul>
-			<li *ngFor="let categorie of categories" (click)="updateProductCategory(categorie.categorie_titre)">
-				{{categorie.categorie_titre}}
-			</li>
-		</ul>
+		<div class="select_container">
+			<mat-form-field>
+  				<mat-select placeholder="Catégorie">
+    				<mat-option value="" (click)="updateProductCategory()">Toute les catégories</mat-option>
+    				<mat-option *ngFor="let categorie of categories" value="{{categorie.categorie_titre}}" (click)="updateProductCategory(categorie.categorie_titre)">{{categorie.categorie_titre}}</mat-option>
+	  			</mat-select>
+			</mat-form-field>	
+		</div>
 
 		<div class="items layout vertical" [@listAnimation]="projets?.length">
-
+			
+			<div *ngIf="!projets?.length" class="loading_message">
+				<loader></loader>
+			</div>
+			
 			<div  
 				*ngFor="let projet of projets | category:productcategory; 
 						let i = index;
@@ -32,10 +39,12 @@
 						id="item-{{i}}">
 				
 				<div class="media">
+
 					<img 
-					src="assets/images/exemple.jpg"
-				 	srcset="assets/images/exemple@2x.jpg 1.5x"
-				 	alt="">
+						src="{{projet.miniature.path}}"
+				 		srcset="{{projet.miniature.path}} 1.5x"
+				 		alt=""
+				 		>
 
 				 	<div class="triangle" *ngIf="even">
 					 	<svg id="traingle__svg_even"  height="100%" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">

@@ -1,5 +1,135 @@
+@media (max-width: 1250px)
+	/**
+	* Commun
+	*/
+	body
+		.outside_wrapper
+			.bg
+				.viewProjet,
+				.viewContact
+					overflow hidden
+
 @media (max-width: 1200px)
 	body
 		.wrapper
 			.container
-				width 100%
+				max-width 100%
+
+
+@media (max-width: 999px)
+	#callBack
+		display none
+
+@media (max-width: 800px)
+	/**
+	* Commun
+	*/
+	header
+		padding 40px 20px
+
+	footer
+		height auto
+		line-height 1.8rem
+
+	/**
+	* Accueil
+	*/
+	.accueil
+		.wrapper
+			.wrapper__content
+				min-height 100%
+
+				.content__inner
+					position relative
+					transform none
+					top auto
+
+					> .container
+						padding-left 20px
+						padding-right 20px
+
+						h1
+							position inherit
+							top auto
+							left auto
+							margin 0 auto
+							width 380px
+							display block
+		footer
+			margin-top 30px
+			padding-left 20px
+			padding-right 20px
+
+	/**
+	* Projet
+	*/
+	.projet
+		.wrapper__content
+			.content__inner	
+				padding-left 20px
+				padding-right 20px
+
+	/**
+	* Contact
+	*/
+	.contact
+		.wrapper__content
+			padding-left 20px
+			padding-right 20px
+
+			#contact
+				.container
+					padding-left 15px
+					padding-right 15px
+
+				form
+					.layout.horizontal
+						-ms-flex-direction column
+						-webkit-flex-direction column
+						flex-direction column
+
+	/**
+	* PopUp
+	*/
+	#Layer_pop
+		display none
+
+	.pops_fond
+		position relative
+
+	#pops
+		width auto
+		height auto
+		left 0
+		right 0
+		padding 10px
+		margin 20px
+		transform none
+		background-color white
+		top auto
+		border-radius 6px
+
+
+
+@media (max-height: 610px)
+	.hackBg
+		height 80%
+
+@media (max-width: 500px)
+	/**
+	* Accueil
+	*/
+	.accueil
+		.outside_wrapper
+			overflow hidden
+
+		h1
+			font-size 5rem !important
+			width 100% !important
+			line-height 5rem
+
+			span
+				font-size 5rem !important
+
+		.shape_img
+			width 100% !important

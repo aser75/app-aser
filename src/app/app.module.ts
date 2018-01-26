@@ -2,6 +2,7 @@ import { BrowserModule }                       from '@angular/platform-browser';
 import { NgModule }                            from '@angular/core';
 import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { BrowserAnimationsModule }             from '@angular/platform-browser/animations';
+import { MatSelectModule }                     from '@angular/material';
 
 
 // Component
@@ -17,21 +18,25 @@ import { NavPrimaryComponent }                 from './nav-primary.component';
 import { LogoComponent }                       from './logo.component';
 import { ComposeMessageComponent }             from './compose-message.component';
 
+//Directive
+import { LoaderComponent }                       from './directive/loader.component';
 
 // Service
 import { ProjetService }                       from './service/projet.service';
 import { CategorieService }                    from './service/categorie.service';
 import { FondService }                         from './service/fond.service';
 
-
 //Pipe
-import {TruncatePipe}                          from './pipe/truncate.pipe';
-import {CategoryPipe}                          from './pipe/category.pipe';
+import { TruncatePipe }                          from './pipe/truncate.pipe';
+import { CategoryPipe }                          from './pipe/category.pipe';
+import { UrlPipe }                               from './pipe/url.pipe';
+import { OtherPipe }                             from './pipe/other.pipe';
 
 // Module
 import { AppRoutingModule }                    from './app-routing.modules';
 import { HttpClientModule }                    from '@angular/common/http';
 import { HttpModule }                          from '@angular/http';
+
 
 @NgModule({
   imports: [
@@ -42,6 +47,7 @@ import { HttpModule }                          from '@angular/http';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
+    MatSelectModule
   ],  
   declarations: [
     AppComponent,
@@ -56,10 +62,13 @@ import { HttpModule }                          from '@angular/http';
     LogoComponent,
     ComposeMessageComponent,
     TruncatePipe,
-    CategoryPipe
+    CategoryPipe,
+    UrlPipe,
+    LoaderComponent,
+    OtherPipe
   ],
   providers: [ProjetService, FondService, CategorieService],
   bootstrap: [AppComponent],
 
 })
-export class AppModule { }
+export class AppModule {}

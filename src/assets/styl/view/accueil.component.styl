@@ -20,6 +20,7 @@
 			width 322px
 			height 322px
 			margin-right 25px
+			overflow visible
 	
 			display inline-block
 			position relative
@@ -31,6 +32,8 @@
 
 			.bulle
 				perspective 800px
+				padding-bottom 40px
+				overflow visible
 	
 			.shadow
 				position absolute
@@ -38,6 +41,14 @@
 			.shadow
 				left 0
 				bottom -30px
+
+		.shape_text
+			h3
+				margin 0
+				padding 55px 0 10px 0
+				color white
+				text-transform none
+				font-size 1.5rem
 
 		.shape_icon
 			position absolute
@@ -65,10 +76,76 @@
 	
 		p
 			color white
-			padding-top 55px
 			text-align justify
+
+			a
+				text-decoration underline
 
 		.bt
 			float right
-			margin-top 15px
+			margin-top 35px
+			border none
 
+	.svg_bt
+		width 166px
+		height 196px
+		display block
+		float right
+		position relative
+		margin-top -50px
+
+		svg
+			transition(all 2s ease-in-out)
+
+		&:hover
+			transform scale(1.07)
+
+			svg
+				filter drop-shadow( 0px 3px 6px hsla(0, 0%, 0%, 0.3) )
+
+@media (max-width: 800px)
+	.container
+		> div
+			.bt,
+			.svg_bt
+				float none
+
+			.svg_bt
+				margin 0 auto
+
+			.bt
+				text-align center
+				margin-top -15px
+				display block
+
+
+			.shape_img
+				display block
+				float none
+				margin 0 auto
+
+@media (max-width: 475px)
+	h1
+		font-size 7rem
+
+		span
+			font-size 5.8rem
+	.container
+		> div
+			.shape_img
+				height auto
+		
+		.bulle__img
+			width 250px
+			margin 0 auto
+			display block
+
+		.pen
+			width 200px
+			top 40% !important
+			left 40px !important
+
+		.phone
+			width 200px
+			top 45% !important
+			left 39px !important

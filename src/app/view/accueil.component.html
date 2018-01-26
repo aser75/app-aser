@@ -10,6 +10,7 @@
 
 				<div class="shape_img">
 
+					<!-- 
 					<div class="bulle">
 						<img  src="assets/images/bulle.png"
 							  srcset="assets/images/bulle@2x.png"					
@@ -17,6 +18,70 @@
 							  [@bunceAnimation]="state"
 							  (@bunceAnimation.done)="onEnd($event)">
 					</div>
+					-->
+					<div class="perso">
+						<div class="contour-blanc">
+							<svg version="1.1" id="contour-blanc"  x="0px" y="0px" viewBox="0 0 240 335" style="enable-background:new 0 0 240 335;" xml:space="preserve">
+								<path class="st0" d="M217.4,157.2c0,0-3.4-7.5-10.3-8.2c-0.9-0.1-1.7-0.2-2.6-0.2l-0.8,0.2c-4.8-12.3-26.7-36.2-30.8-46.5
+								c-3.1-7.7-1.4-32.1-1.4-32.1l0.4,0.3c1.2,1.6,2.4,2.8,3.3,2.4c1.3-0.6,3.1-1.4,5-2.2c2.1-0.9,0.9-4.7-0.4-8.6
+								c2.8,2.1,6.9,4.5,7.9,3.2c0.9-1,2.2-2.6,3.5-4.2c1.5-1.8-1.3-4.6-4.1-7.6c3.5,0.7,8.1,1,8.5-0.6c0.3-1.3,0.8-3.3,1.3-5.3c0.6-2.3-3.2-3.6-7.1-5c3.4-0.9,7.8-2.6,7.4-4.3c-0.3-1.3-0.7-3.3-1.1-5.4c-0.5-2.3-4.4-1.8-8.5-1.4c2.7-2.4,5.8-5.8,4.8-7.1c-0.8-1.1-2.1-2.7-3.4-4.3c-1.4-1.8-4.8,0.3-8.3,2.5c1.4-3.3,2.7-7.7,1.2-8.5c-1.2-0.6-3.1-1.5-4.9-2.4c-2.1-1-4.1,2.4-6.4,5.9c-0.2-3.5-1-8.1-2.7-8.1h-5.5c-1.7,0-2.3,2.1-2.7,4.8c-1.3-2.3-2.9-4.2-4-3.7c-1.3,0.5-3.2,1.3-5.1,2c-2.2,0.9-1,4.7,0,8.7c-2.8-2.2-6.7-4.8-7.8-3.5c-0.9,1-2.3,2.5-3.7,4c-1.6,1.7,1.1,4.6,3.8,7.8c-3.5-0.8-8.1-1.3-8.6,0.3c-0.4,1.3-1,3.3-1.5,5.2c-0.7,2.2,3,3.7,6.9,5.3c-3.5,0.8-7.9,2.3-7.6,4c0.2,1.3,0.6,3.4,0.9,5.4c0.4,2.3,4.3,2,8.5,1.7c-2.7,2.2-6,5.6-5.1,6.9c0.8,1.1,2,2.8,3.2,4.4c1.4,1.9,4.8-0.1,8.4-2.2l-0.3,0.4c-22,30.6-67.8,47.2-93.4,70.1c-25.3,22.6-33,56.1-33,56.1l-1,0.4
+            					c-2.2,1-4,2-5,3c-2.4,2.4-4.7,6.8-3,13c1.5,5.8,15.1,32.2,17,34.1c1.5,1.5,8.8,2.9,8.8,2.9l8.7,13.7l-1.7,4.3l3,5l1.9-4.1l5.1,8.1c0,0-6.8,13.7-6.8,17.5s9.5,11.4,17,15.1c7.6,3.8,32.2,15.1,36,17c3.8,1.9,11.4,7.6,11.4,7.6l3.8-1.9c0,0,5.7-7.6,15.1-13.2s63.6-28.7,68.4-58.8c0.7-8.2-0.7-12.3-0.7-12.3l4.8-7.5c1.1-1.9,2.2-5.1,3.2-8.9l2.8-12.3c1.3-6.4,2.1-11.7,2.1-11.7s0,0,0,0c0.7-0.2,1.2-0.4,1.5-0.7C216,195.5,220.8,164.7,217.4,157.2z"/>
+							</svg>
+						</div>
+						
+						<div id="fond">
+  							<img src="assets/images/animation-perso/cadre-visage.png" id="cadre-visage" width="240">          
+							<img src="assets/images/animation-perso/fvisage.png" id="visage" width="240">
+							<img src="assets/images/animation-perso/cadre-bouche.png" id="cadre-bouche" width="240"> 
+							<img src="assets/images/animation-perso/fbouche.png" id="fbouche" width="240">
+							<img src="assets/images/animation-perso/cadre-oeil.png" id="cadre-oeil" width="240"> 
+							<img src="assets/images/animation-perso/foeil.png" id="foeil" width="240">
+							<img src="assets/images/animation-perso/cadre-cache.png" id="cadre-cache" width="240"> 
+							<img src="assets/images/animation-perso/fcache.png" id="fcache" width="240">
+							<img src="assets/images/animation-perso/cadre-bonnet.png" id="cadre-bonnet" width="240"> 
+							<img src="assets/images/animation-perso/fbonnet.png" id="fbonnet" width="240">
+							<img src="assets/images/animation-perso/cadre-stylo.png" id="cadre-stylo" width="240"> 
+							<img src="assets/images/animation-perso/fbic.png" id="fbic" width="240">
+						</div>
+						
+						<div id="contour">
+							<svg version="1.1" id="contour-simple"  x="0px" y="0px" viewBox="0 0 240 335" style="enable-background:new 0 0 240 335;" xml:space="preserve">
+								<path class="st0 etape5-a" d="M57.4,264.5c0,0-8.8,16.7-8.8,20.5s9.5,11.4,17,15.1s32.2,15.1,36,17s11.4,7.6,11.4,7.6l3.8-1.9c0,0,5.7-7.6,15.1-13.2s63.6-28.7,68.4-58.8c0.7-8.2-0.3-15-4.1-18.8"/>
+								<path class="st1 etape5-b" d="M83,232.1c-2.4,2.4,0.2,5.6,5,5c6.5-0.8,18.7-6.7,32.3-17c8.2-5.5,18.8-9.2,18.8-9.2"/>
+								<path class="st2 etape5-c" d="M88.9,236.8c0,0,12.5,18.5,16,20.5c3.4,2.1,16.4-0.7,20.5-4.8c4.1-4.1-1.8-34.5-1.8-34.5"/>
+								<path class="st2 etape5-d" d="M110.7,226.7c0,0,10.7,16.9,10.7,23.1c0,2.7,0,5-1.4,5.9"/>
+								<path class="st2 etape5-e" d="M103.5,237.8c0,3.2-2.4,5.8-5.5,5.8s-5.5-2.6-5.5-5.8c0-0.6,0.1-1.1,0.2-1.6c3.5-1.1,4.9-1.8,8.1-3.3C102.5,233.9,103.5,235.7,103.5,237.8z"/>
+								<path class="st2 etape5-f" d="M36.5,239.6c0,0,12,20.1,15.4,22.9c3.4,2.7,6.8,2.7,9.6,2.1s15-2.7,13-8.9s-10.2-24.3-10.2-24.3"/>
+								<line class="st2 etape5-g" x1="65.8" y1="234.6" x2="68.3" y2="230.8"/>
+								<line class="st2 etape5-h" x1="68.9" y1="241.7" x2="75.5" y2="229.6"/>
+								<polyline class="st2 etape5-i" points="46.7,255.7 45.1,258.4 48.5,263.1 49.9,260.3  "/>
+								<path class="st1 etape6-f" d="M188.7,229c1.4,1.4,10.3,8.2,13.7-3.4c3.4-11.6,1.4-26,0-29.4c-2.1-7.5-12.3-8.9-15,5.5"/>
+								<path class="st2 etape6-g" d="M191.4,205.7c0,0,2.7-8.9,6.2-8.2"/>
+								<path class="st2 etape6-h" d="M191.4,224.9c0,0,2.7,2.7,4.1,2.7c2.1,0,4.1-2.7,4.8-6.8"/>
+								<path class="st3 etape6-d" d="M159.9,203.7c0,0,9.6,9.6,11.6,16.4l8.9-2.1l2.8-16.1"/>
+								<polygon  class="st3 etape6-e" points="172.2,222.8 180.5,220.6 180.5,224.2 173.5,226.6  "/>
+								<path class="st1 etape6-i" d="M80.6,267.2c-2.7,2.1-5.5,10.3,2.1,8.9c4.1-0.7,4.8-2.7,6.2-3.4c1.4-0.7,2.7,0.7,4.1,0c1.4-0.7,2.7-5.5-1.4-6.2"/>
+          						<path  class="st1 etape6-j" d="M67.6,289.8c0,0,8.1,0.2,15-0.7c10.3-1.4,23.2-6.8,30.8-10.9c7.5-4.1,13-9.6,25.3-10.9"/>
+          						<path  class="st2 etape6-k" d="M72.2,289.8c0,0,16,15.7,20.1,16.4c4.1,0.7,13,0.7,19.8-6.2c2.1-2.1,2.7-22.6,2.7-22.6"/>
+          						<path  class="st1 etape6-l" d="M139.4,261.1c0,0,4.8,4.1,4.8,5.5c0,1.4-2.1,4.8-3.4,6.2"/>
+          						<path class="depart st0" d="M21.6,187.3c0,0,7.7-33.5,33-56.1c25.2-22.5,69.8-38.9,92.2-68.4"/>
+          						<path class="bonnet st0" d="M190,42.6c3.4-0.9,7.8-2.6,7.4-4.3c-0.3-1.3-0.7-3.3-1.1-5.4c-0.5-2.3-4.4-1.8-8.5-1.4c2.7-2.4,5.8-5.8,4.8-7.1c-0.8-1.1-2.1-2.7-3.4-4.3c-1.4-1.8-4.8,0.3-8.3,2.5c1.4-3.3,2.7-7.7,1.2-8.5c-1.2-0.6-3.1-1.5-4.9-2.4c-2.1-1-4.1,2.4-6.4,5.9c-0.2-3.5-1-8.1-2.7-8.1h-5.5c-1.7,0-2.3,2.1-2.7,4.8c-1.3-2.3-2.9-4.2-4-3.7c-1.3,0.5-3.2,1.3-5.1,2c-2.2,0.9-1,4.7,0,8.7c-2.8-2.2-6.7-4.8-7.8-3.5c-0.9,1-2.3,2.5-3.7,4c-1.6,1.7,1.1,4.6,3.8,7.8c-3.5-0.8-8.1-1.3-8.6,0.3
+          						c-0.4,1.3-1,3.3-1.5,5.2c-0.7,2.2,3,3.7,6.9,5.3c-3.5,0.8-7.9,2.3-7.6,4c0.2,1.3,0.6,3.4,0.9,5.4c0.4,2.3,4.3,2,8.5,1.7c-2.7,2.2-6,5.6-5.1,6.9c0.8,1.1,2,2.8,3.2,4.4c1.4,1.9,4.8-0.1,8.4-2.2c-1.5,3.2-3,7.6-1.5,8.4c1.2,0.6,3,1.6,4.8,2.6c2,1.1,4.2-2.2,6.6-5.6c0.1,3.5,0.7,8.2,2.3,8.2c1.4,0.1,3.4,0.1,5.5,0.2c2.3,0.1,2.8-3.8,3.5-7.9c1.6,3.2,4.2,7.1,5.7,6.4c1.3-0.6,3.1-1.4,5-2.2c2.1-0.9,0.9-4.7-0.4-8.6c2.8,2.1,6.9,4.5,7.9,3.2c0.9-1,2.2-2.6,3.5-4.2c1.5-1.8-1.3-4.6-4.1-7.6c3.5,0.7,8.1,1,8.5-0.6c0.3-1.3,0.8-3.3,1.3-5.3C197.6,45.4,193.9,44.1,190,42.6z"/>
+          						<path class="bonnet1 st0" d="M171.6,70.3c0,0-1.7,24.5,1.4,32.1c4.1,10.3,26,34.2,30.8,46.5"/>
+          						<path class="bonnet2 st0" d="M147.5,155.6c-1.4-0.7-4.4-1.3-6-1.1c-6.2,0.7-34.2,7.5-36.2,8.9c-2.1,1.4-3.4,5.5-3.4,6.8c0,0-4.1-4.8-9.6-4.1c-5.5,0.7-36,8.9-38.3,10.9c-2.4,2.1-4.8,7.5-4.8,9.6c0,0-4.8-6.8-9.6-5.5c-4.8,1.4-20.5,6.2-23.9,9.6c-2.4,2.4-4.7,6.8-3,13c1.5,5.8,15.1,32.2,17,34.1s9,3.1,15.1,0c0,0,6.4-2.6,8.5-4c2.1-1.4,2.1-7.5,2.1-7.5s2.7,5.5,5.5,5.5c2.7,0,32.8-4.1,43.1-10.9c0,0,1.6-1.2,2.1-6.2c0,0,2,3.2,6.8,2.7c6.8-0.7,31.5-7.5,39-12.3c0,0,2.1-2.1,2.1-5.5c0,0,2.1,3.4,6.2,4.1c4,0.7,21-0.6,26.9-2.6c0.1,0,0.3-0.1,0.4-0.1"/>
+								<path class="bonnet3 st0" d="M203,198.5c4.4,0.2,9.7,0.2,10.9-1c2.1-2.1,6.8-32.8,3.4-40.3c0,0-3.4-7.5-10.3-8.2c-6.8-0.7-15-0.7-16.4,1.4c-1.4,2.1-2.1,4.8-2.1,4.8s-3.4-5.5-6.8-5.5s-23.9,0.7-27.4,2.7c-1.1,0.7-2,1.8-2.5,2.7"/>
+					            <line class="line st0" x1="55.7" y1="226.6" x2="48.8" y2="186.2"/>
+					            <line class="line st0" x1="101.5" y1="169.8" x2="106.3" y2="215.6"/>
+					            <line class="line st0" x1="153.4" y1="199.2" x2="152.1" y2="169.1"/>
+					            <line class="line st0" x1="188.3" y1="154.8" x2="191.7" y2="191.7"/>
+								<path class="st3 etape6-a" d="M187.3,201.6l-31.5-23.9c0,0-10.3-23.9-11.6-26.7l25.3,14.4l22.6,26.7"/>
+								<path class="st3 etape6-b" d="M203.9,204.5l27.8,23.1c0,0,0,6.8-7.5,8.9l-20.5-17.8"/>
+								<polyline class="st3 etape6-c" points="155.8,177.7 161.3,178.4 161.3,174.9 165.4,174.9 165.4,170.8 169.5,170.8 169.5,165.4  "/>
+								<path  class="st3 etape6-m" d="M81.6,298.6c0,0,2.5-2.6,6.6-4c1.9-0.6,4.8,0,5.5,0.7"/>
+								<path  class="st3 etape6-n" d="M92.2,298c0,0,1.4-4.1,4.1-5.5s8.2-4.1,11.6-4.1c3.4,0,6.2,0.7,6.2,0.7"/>
+        					</svg>
+						</div>
+    				</div>
 
 					<div class="shape_icon">
 
@@ -40,12 +105,40 @@
 				</div>
 				
 				<div class="shape_text">
+					<h3>Bienvenue,</h3>
 					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac purus nec arcu tincidunt auctor. Aenean sapien urna, feugiat at est non, blandit accumsan orci. Nullam non quam non ipsum bibendum suscipit quis non magna. Proin egestas rhoncus venenatis. Aliquam ligula ligula, elementum pellentesque nulla in, varius commodo nulla. Vivamus at risus accumsan, vehicula tellus ac, pretium lectus. Vivamus ante lectus, iaculis sed dictum nec, fermentum nec eros. 
+					
+					Spécialisé dans l'intégration et le développement front-end en indépendant, passionné par les nouvelles téchnologies.<br>
+					Basé à Lanester en Bretagne, travaillant pour des startup & web agency, je suis disponible pour la réalisation/suivi de vos projets digitaux sur différent support (CMS / Framework / Emailing...)<br><br>
+					N'hésitez pas à me contacter pour plus de renseignement au <a href="tel:0618967781"> 06 18 96 77 81 </a> ou <a href="mailto:maxence.puppetto@gmail.com">maxence.puppetto@gmail.com</a> ;)
+
 					</p>
 				</div>
+				
+				<a class="svg_bt" routerLink="/projet" (click)="typeFond('poly-1')" (mouseenter)="scaleMethod()" (mouseleave)="outScaleMethod()">
+					<svg version="1.1" id="Layer_bt" x="0px" y="0px" viewBox="0 0 165.3 196" xml:space="preserve">
 
-				<a class="bt blanc" routerLink="/projet" (click)="typeFond('poly-1')">Découvrir le reste</a>
+ 						<path id="state1" fill="white" stroke="none" stroke-miterlimit="10" d="M85.6,100.9h-1.1h-0.2h-0.2H84h-0.5h-0.2h-0.7h-0.8h-0.4h-0.5h-1.3c-0.3,0-0.5,0.2-0.6,0.5l-0.7,3.6c-0.1,0.4,0.2,0.7,0.6,0.7h1.6c0,0,0,0,0,0h0.2h0h0.6h0.6h0.4h0.6h2.1c0.3,0,0.5-0.2,0.6-0.5l0.7-3.6C86.3,101.2,86,100.9,85.6,100.9z" fill-opacity="0"/>        
+
+    				</svg>
+    				<img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg" alt="" class="clip-polygon">
+    				<svg width="0" height="0">
+  						<defs>
+						    <clipPath id="myClip">
+						      <path d="M148.7,0H24.6C20,0,16,3.3,15.1,7.8L0.2,82.4c-0.6,2.9,0.2,5.8,2,8C4,92.7,6.8,94,9.7,94h124.1c4.6,0,8.6-3.3,9.5-7.8l14.9-74.6c0.6-2.9-0.2-5.8-2-8C154.4,1.3,151.6,0,148.7,0z"/>
+						    </clipPath>
+						</defs>
+					</svg>
+    				<svg width="0" height="0">
+  						<defs>
+						    <clipPath id="otherClip">
+						      <path d="M148.7,0H24.6C20,0,16,3.3,15.1,7.8L0.2,82.4c-0.6,2.9,0.2,5.8,2,8C4,92.7,6.8,94,9.7,94h124.1c4.6,0,8.6-3.3,9.5-7.8l14.9-74.6c0.6-2.9-0.2-5.8-2-8C154.4,1.3,151.6,0,148.7,0z"/>
+						    </clipPath>
+						</defs>
+					</svg>
+				</a>
+
+				<a class="bt blanc" routerLink="/projet" (click)="typeFond('poly-1')">Découvrir le reste >> </a> 
 
 			</div>
 		</div>

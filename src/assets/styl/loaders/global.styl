@@ -32,8 +32,9 @@ body
 	margin 0
 	padding 0
 
-	background transparent url('../images/bg-city.png') no-repeat center
-	background-size cover
+	.outside_wrapper
+		background transparent url('../images/bg-city.png') no-repeat center
+		background-size cover	
 
 
 	.wrapper
@@ -58,7 +59,7 @@ body.accueil
 		background linear-gradient(135deg, rgba(251,192,45,0.9), rgba(250,140,99,0.9), rgba(255,82,82,0.9), rgba(231,53,113,0.9), rgba(209,95,114,0.9),rgba(251,192,45,0.9))
 		background-size 300% 300%
 
-		animation background 30s ease infinite	
+		animation background 7s ease infinite	
 
 	.content__inner
 		background-color transparent !important
@@ -81,7 +82,7 @@ body.accueil
 		#actifBt
 			top 270px
 			right 29px
-			border 2px solid rgba(255, 255, 255, 0.5) !important
+			border 2px solid rgba(255, 255, 255, 1) !important
 
 body.projet
 	.wrapper__content
@@ -89,7 +90,7 @@ body.projet
 		
 		.content__inner
 			background-color bg
-			animation hackBg 0.5s ease
+			animation hackBg 0.8s ease
 			margin-top 7%
 			padding-bottom 7%
 
@@ -103,10 +104,6 @@ body.projet
 
 		&:before
 			border 1px solid rgba(64, 196, 255, 0.6)
-
-		#actifBt
-			top 400px
-			right 29px
 
 		a:hover
 			svg

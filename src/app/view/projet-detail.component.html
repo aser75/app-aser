@@ -3,28 +3,31 @@
 <div class="details-hack">
 
 	<div class="details" *ngIf="projet">
-	
+		
 		<div class="title layout horizontal">
 	
 			<a routerLink="/projet" class="back layout horizontal center-center">
 				<img src="assets/images/icon-back.svg" alt="Retour en arrière">
 			</a>
 	
-			<h1 class="self-center">{{projet.name}}</h1>
+			<h1 class="self-center">{{projet.nom}}</h1>
 	
 		</div>
-	
+		
+
+		<!--
+			Image Projet
+		-->
 		<img
-			src="assets/images/exemple-details.jpg"
-			srcset="assets/images/exemple-details@2x.jpg 1.5x"
+			src="{{projet.poster.path}}"
+			srcset="{{projet.poster.path}} 1.5x"
 			alt="">
-	
 	
 		<div class="padding">
 	
 			<div class="layout horizontal justified">
-				<h2 class="self-center">Descriptif</h2>
-				<a href="#" class="lien">Voir le résultat</a>
+				<h2 class="self-center no-margin">Descriptif</h2>
+				<a *ngIf="projet.link" href="{{projet.link}}" class="lien">Voir le résultat</a>
 			</div>
 	
 			<div class="margin-bottom">
@@ -36,9 +39,7 @@
 			<h2>Outils</h2>
 	
 			<ul>
-				<li>Html 5</li>
-				<li>Javascript</li>
-				<li>Wordpress</li>		
+				<li *ngFor="let listeCat of projet.categories" class="{{listeCat.slug}}">{{listeCat.categorie_titre}}</li>
 			</ul>
 	
 		</div>
@@ -49,22 +50,21 @@
 		<div class="inside">
 		
 			<div class="layout horizontal justified">
-	
-				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
-				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
-				<a href="#"><img src="assets/images/other.jpg" srcset="assets/images/other@2x.jpg 1.5x" alt=""></a>
+
+				<a  *ngFor="let projetOther of projets | other:projet.id | slice:0:3"
+					[routerLink]="['/projet', projetOther.id]" 
+					class="item layout horizontal justified center-center"
+					id="item-{{i}}">
+					<img src="{{projetOther.poster.path | url:projetOther.poster.disk_name:projetOther.poster.id:200}}"
+						srcset="{{projetOther.poster.path | url:projetOther.poster.disk_name:projetOther.poster.id:200}} 1.5x"
+				 		alt="" >
+				</a>
 	
 			</div>
 	
-			<h3>Lorem ipsum dolor sit amet</h3>
+			<h3>Les autres projets</h3>
 	
 		</div>
 	</div>
 
 </div>
-
-  <!-- {{projet.name}} détails<br>
-  {{projet.id}}
-
-  <input [(ngModel)]="projet.nom" placeholder="nom"/>
-	-->
