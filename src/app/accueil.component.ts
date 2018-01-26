@@ -17,20 +17,15 @@ declare var mina: any;
       */ 
       trigger('bulleAnimation', [
         transition('* => *', [
- 
           query('h1', style({ opacity: 0,transform: 'translateY(20%) rotate(-15deg)' }), { optional: true }),
-          query('.bulle', style({ transform: 'translateY(30%)', opacity: 0 }), { optional: true }),
           query('.shape_text', style({ opacity: 0 }), { optional: true }),
           query('.content__inner .bt.blanc', style({ opacity: 0 }), { optional: true }),
           query('.shape_icon', style({ transform: 'rotate(0deg)' }), { optional: true }),
           query('.shadow', style({ transform: 'scaleX(1.7) translateY(0%)', opacity: 0  }), { optional: true }),
-          
           group([
-            query('h1', [ animate('1s 500ms ease-in-out', style({ opacity: 1, transform: 'translateY(0) rotate(-15deg)' }))], { optional: true }),
-            query('.bulle', [animate('1s 500ms ease-in-out', style({ transform: 'translateY(0)', opacity: 1}))], { optional: true }),
-            query('.shadow', [animate('1s 500ms ease-in-out', style({ transform: 'scaleX(1)', opacity: 1 }))], { optional: true }),
+            query('h1', [ animate('0.5s ease-in-out', style({ opacity: 1, transform: 'translateY(0) rotate(-15deg)' }))], { optional: true }),
+            query('.shadow', [ animate('0.5s ease-in-out', style({ transform: 'scaleX(1)', opacity: 1 }))], { optional: true }),
           ]),
-
           group([
             query('.shape_text', [animate('0.5s ease-in-out', style({opacity: 1}))], { optional: true }),
             query('.content__inner .bt.blanc', [animate('0.5s ease-in-out', style({opacity: 1}))], { optional: true }),
@@ -41,23 +36,13 @@ declare var mina: any;
       trigger('rotatePhoneAnimation', [
         state('zeroDegres', style({transform: 'rotateZ(0deg) translate3d(0,0,0)', opacity: 0, })),
         state('trenteDegres', style({transform: 'rotateZ(30deg) translate3d(0,0,50px) ', opacity: 1, })),
-        transition('zeroDegres <=> trenteDegres', animate('0.5s 0.5s ease-in')),
+        transition('zeroDegres <=> trenteDegres', animate('0.5s ease-in')),
       ]),
 
       trigger('rotatePenAnimation', [
         state('zeroDegres', style({transform: 'rotateZ(0deg) translate3d(0,0,0)', opacity: 0, })),
         state('trenteDegres', style({transform: 'rotateZ(50deg) translate3d(0,0,50px) ', opacity: 1, })),
-        transition('zeroDegres <=> trenteDegres', animate('0.5s 0.7s ease-in')),
-      ]),
-
-      /*
-      ** Animation Bulle
-      */
-      trigger('bunceAnimation', [
-        state('in', style({transform: 'translate3d(0, 0, -30px)' })),
-        state('out', style({transform: 'translate3d(0, 15px, 0)' })),
-        transition('in => out', animate('1.5s 0.5s ease-in-out')),
-        transition('out => in', animate('1.5s  ease-out'))
+        transition('zeroDegres <=> trenteDegres', animate('0.5s ease-in')),
       ]),
 
       /*
@@ -66,8 +51,8 @@ declare var mina: any;
       trigger('shadowAnimation', [
         state('in', style({transform: 'scaleX( 1 ) scaleY( 1 )' })),
         state('out', style({transform: 'scaleX( 1.5 ) scaleY( 1.2 )' })),
-        transition('in => out', animate('1.5s 0.5s ease-in-out')),
-        transition('out => in', animate('1.5s  ease-out'))
+        transition('in => out', animate('1.5s ease-in-out')),
+        transition('out => in', animate('1.5s ease-out'))
       ]),
     ]
 })
@@ -112,6 +97,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
     ** Add Class Body
     */
   	document.body.classList.add('accueil');
+    document.body.classList.add('animate_state1');
 
 
     /*
@@ -131,7 +117,6 @@ export class AccueilComponent implements OnInit, OnDestroy {
     function animatePath(){
       path.animate({ d: "M151.7,53.2h-23.4c-0.3-2-2-3.5-4-3.5c-2.1,0-3.7,1.5-4,3.5H119c-0.3-4.9-4.3-8.8-9.3-8.8c-1.8,0-3.5,0.5-4.9,1.4c-2.9-5.5-8.6-9.3-15.3-9.3c-8.2,0-15.1,5.8-16.8,13.5c-2.2-1.8-4.9-2.8-7.9-2.8c-4.5,0-8.5,2.4-10.7,6H27.6c-6.1,0-11.3,4.3-12.4,10.2L0.3,138.1c-1.6,7.9,4.4,15.2,12.4,15.2h33.1c0,0.2-0.1,0.4-0.1,0.6c0,2.2,1.8,4.1,4.1,4.1c0.2,0,0.4,0,0.7-0.1c1.7,5,6.4,8.6,11.9,8.6c5.1,0,9.4-3,11.4-7.3c2.2,2,5.2,3.2,8.4,3.2c5.7,0,10.5-3.8,12.1-9h42.6c6.1,0,11.3-4.3,12.4-10.2l14.9-74.6C165.7,60.6,159.7,53.2,151.7,53.2z","fill-opacity": 1  }, 200, mina.easein);
     }
-
   }
 
   /*
@@ -169,7 +154,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
 
     function  animateRetour() {
       path.animate({ d: "M151.7,53.2h-23.4c-0.3-2-2-3.5-4-3.5c-2.1,0-3.7,1.5-4,3.5H119c-0.3-4.9-4.3-8.8-9.3-8.8c-1.8,0-3.5,0.5-4.9,1.4c-2.9-5.5-8.6-9.3-15.3-9.3c-8.2,0-15.1,5.8-16.8,13.5c-2.2-1.8-4.9-2.8-7.9-2.8c-4.5,0-8.5,2.4-10.7,6H27.6c-6.1,0-11.3,4.3-12.4,10.2L0.3,138.1c-1.6,7.9,4.4,15.2,12.4,15.2h33.1c0,0.2-0.1,0.4-0.1,0.6c0,2.2,1.8,4.1,4.1,4.1c0.2,0,0.4,0,0.7-0.1c1.7,5,6.4,8.6,11.9,8.6c5.1,0,9.4-3,11.4-7.3c2.2,2,5.2,3.2,8.4,3.2c5.7,0,10.5-3.8,12.1-9h42.6c6.1,0,11.3-4.3,12.4-10.2l14.9-74.6C165.7,60.6,159.7,53.2,151.7,53.2z","fill-opacity": 1  }, 200, mina.easeinout);      
-    }    
+    }  
   }
 
   ngOnDestroy(): void 
