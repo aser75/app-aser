@@ -23,20 +23,18 @@ export class NavComponent {
 		router: Router){
 		
     		router.events.subscribe((val) => {
-				if(location.path() == '/accueil'){
-	
+				if(location.path() == '/accueil' || location.path() == '')
+				{
 					document.getElementById("actifBt").style.top = '0';
 					document.getElementById("actifBt").style.transform = 'translate(-50%, -7px)';
-	
 				}
-				if(location.path() == '/projet'){
-	
+				if(location.path().indexOf("projet") > -1)
+				{
 					document.getElementById("actifBt").style.top = '50%';
 					document.getElementById("actifBt").style.transform = 'translate(-50%, -50%)';
-	
 				}
-				if(location.path() == '/contact'){
-	
+				if(location.path() == '/contact')
+				{
 					document.getElementById("actifBt").style.top = '100%';
 					document.getElementById("actifBt").style.transform = 'translate(-50%, -43px)';
 				}

@@ -18,7 +18,7 @@ import 'rxjs/add/operator/filter';
     ** Animation
     */ 
     trigger('routeAnimation', [
-      transition('projet <=> details', [
+      transition('* <=> details', [
 
         query(':enter .details-hack', style({ transform: 'translateY(100%)' }), { optional: true }),
         query(':leave .details-hack', style({ transform: 'translateY(100%)' }), { optional: true }),
