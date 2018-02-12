@@ -27,8 +27,8 @@ export class LoaderComponent  implements OnInit  {
     	**/
 	    if (isPlatformBrowser(this.platformId))
     	{
-			this.svg = document.getElementById("Layer_1");
-			this.s   = Snap(this.svg);
+			this.svg 		= document.getElementById("Layer_1");
+			this.s   		= Snap(this.svg);
 			var path        = Snap.select('#line');
 			statePetit(); // start loop
 		}

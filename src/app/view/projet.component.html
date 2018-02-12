@@ -16,14 +16,16 @@
 	  			</mat-select>
 			</mat-form-field>	
 		</div>
+		
+		<div *ngIf="projets; else loading"></div>
+		<div class="items layout vertical" [@listAnimation]="projets?.length" >
+			
+			<ng-template #loading>
+				<div class="loading_message"><loader></loader></div>
+			</ng-template>
+			
 
-		<div class="items layout vertical" [@listAnimation]="projets?.length">
-			
-			<div *ngIf="!projets?.length" class="loading_message">
-				<loader></loader>
-			</div>
-			
-			<div  
+			<div
 				*ngFor="let projet of projets | category:productcategory; 
 						let i = index;
 						let odd = odd;
