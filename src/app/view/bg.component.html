@@ -1,5 +1,6 @@
-<div class="bg">
+<div class="bg" >
 
+	
 	<div class="viewProjet" id="viewProjet">
 
 		<div class="modelE"></div>
@@ -20,11 +21,15 @@
 		<div class="modelAContact"></div>
 		<div class="modelBContact"></div>
 		<div class="modelCContact"></div>
-		<!-- <div class="modelDContact"></div> -->
 
 	</div>
+	
+	<canvas #canvas (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"></canvas>
 
 	<svg id="bg__svg" height="100%" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
 		<svg:polygon id="poly1" points="0,100 25,100 50,100 75,100 100,100 100,100 0,100" style="fill:lime;stroke:#F5F5F5;stroke-width:0" width="100%" height="100%" />
 	</svg>
+	
+	
+
 </div>
