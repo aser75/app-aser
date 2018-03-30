@@ -197,7 +197,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
         //var material = new THREE.MeshLambertMaterial ({skinning:true});
         scope.mesh = new THREE.SkinnedMesh(geometry,material);
         scope.mesh.name = 'batiment';
+        scope.mesh.position.set(-0.3, 0.3, 2.1);
+        scope.mesh.rotation.set(0, 0,0);
+        scope.mesh.scale.set(0.1,0.1, 0.1);
         scope.scene.add(scope.mesh);
+
     });
 
     scope.renderer = new THREE.WebGLRenderer({
@@ -250,8 +254,9 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     if(this.scene.getObjectByName('batiment')){
       //this.scene.getObjectByName('batiment').rotation.x += 0.01;
-      //this.scene.getObjectByName('batiment').rotation.y += 0.01;
+      this.scene.getObjectByName('batiment').rotation.y += 0.01;
     }
+
 
   }
 
