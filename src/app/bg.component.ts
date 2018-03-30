@@ -187,7 +187,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
 
-    objectLoader.load("assets/model/test4.json", 
+    objectLoader.load("assets/model/test5.json", 
     function (geometry, materials) {
         
        // materials.forEach(function (material) {

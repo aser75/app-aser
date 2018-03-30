@@ -40,8 +40,7 @@
         "colorSpecular":[0.5,0.5,0.5],
         "opacity":1,
         "DbgIndex":0,
-        "transparent":false,
-        "skinning": true
+        "transparent":false
     }],
     "metadata":{
         "generator":"io_three",
