@@ -172,24 +172,42 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   
   public init() {
     var scope = this;
-    scope.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-    scope.camera.position.z = 4;
 
+    // add camera
+    scope.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+    scope.camera.position.set(0.2, 0, 4);
+
+    // Creation scene
     scope.scene = new THREE.Scene();
     
-    var ambient = new THREE.AmbientLight( 0x444444 );
+    // Abmbiance Color
+    var ambient = new THREE.AmbientLight( 0x4393e5, 0.2 );
     scope.scene.add( ambient );
 
+    // Light
     var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-    directionalLight.position.set( 0, 1, 1 ).normalize();
+    directionalLight.position.set( 0, -70, 100 ).normalize();
     scope.scene.add( directionalLight );
 
+
+    var hemisphereLight = new THREE.HemisphereLight(0x67bff9,0x4393e4,0.2);
+    hemisphereLight.position.set(1, 1, 1).normalize();
+    scope.scene.add(hemisphereLight);
+
+
+    // Helpers
+    var axesHelper = new THREE.AxesHelper( 5 );
+    scope.scene.add( axesHelper );
+
+    var spotLightHelper = new THREE.SpotLightHelper( directionalLight );
+    scope.scene.add( spotLightHelper );
+
+
+    // Batiment 1
     var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
-
     objectLoader.load("assets/model/test5.json", 
     function (geometry, materials) {
-        
        // materials.forEach(function (material) {
        //         material.skinning = true;
        //});
@@ -201,7 +219,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
         scope.mesh.rotation.set(0, 0,0);
         scope.mesh.scale.set(0.1,0.1, 0.1);
         scope.scene.add(scope.mesh);
-
     });
 
     scope.renderer = new THREE.WebGLRenderer({
@@ -225,39 +242,55 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       //this.mesh.skeleton.bones[3].matrixAutoUpdate = true;
       //this.mesh.skeleton.bones[3].matrixWorldNeedsUpdate = true;
       //this.mesh.skeleton.bones[3].position.x += 0.0268739;
-
     }
-    
     this.renderer.render( this.scene, this.camera );
     this.animeTest();
   }
 
 
   /**
-  ** Action with Three
+  ** Events with Three
+  **/  
+  @HostListener('window:resize', ['$event'])
+  public onResize(event: Event) {
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = "100%";
+    this.camera.aspect = this.getAspectRatio();
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.render();
+  }
+
+  /**
+  ** Function with Three
   **/
-  public removeEntity() {
+  private getAspectRatio(): number {
+    let height = this.canvas.clientHeight;
+      if (height === 0) {
+        return 0;
+    }
+    return this.canvas.clientWidth / this.canvas.clientHeight;
+  }
+
+  private removeEntity() {
     var scope = this;
     var selectedObject = scope.scene.getObjectByName('batiment');
     selectedObject.visible = false;
     console.log("remove");
   }
 
-  public addEntity() {
+  private addEntity() {
     var scope = this;
     var selectedObject = scope.scene.getObjectByName('batiment');
     selectedObject.visible = true;
     console.log("add");
   }
 
-  public animeTest() {
-
+  private animeTest() {
     if(this.scene.getObjectByName('batiment')){
       //this.scene.getObjectByName('batiment').rotation.x += 0.01;
       this.scene.getObjectByName('batiment').rotation.y += 0.01;
     }
-
-
   }
 
 
