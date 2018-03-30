@@ -18,8 +18,8 @@ import "gsap";
 declare var TweenMax: any;
 
 @Component({
-	selector		: 'bg',
-	templateUrl		: './view/bg.component.html',
+  selector    : 'bg',
+  templateUrl    : './view/bg.component.html',
 })
 
 
@@ -29,6 +29,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   relativePath: string;
   message: any;
   subscription: Subscription;
+
+  helpset: any;
   mousePos:any;
   modelScene: any;
 
@@ -36,21 +38,22 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   /**
   ** Import three test
   **/
-    private renderer: THREE.WebGLRenderer;
-    private camera: THREE.PerspectiveCamera;
-    private cameraTarget: THREE.Vector3;
-    public scene: THREE.Scene;
+  private renderer: THREE.WebGLRenderer;
+  private camera: THREE.PerspectiveCamera;
+  private cameraTarget: THREE.Vector3;
+  public scene: THREE.Scene;
+  public mesh: THREE.Mesh;
 
-    public fieldOfView: number = 60;
-    public nearClippingPane: number = 1;
-    public farClippingPane: number = 1100;
+  public fieldOfView: number = 60;
+  public nearClippingPane: number = 1;
+  public farClippingPane: number = 1100;
 
-    public controls: THREE.OrbitControls;
+  public controls: THREE.OrbitControls;
 
-    @ViewChild('canvas')
-    private canvasRef: ElementRef;  
-    public rotationSpeedX: number = 0.005;
-    public rotationSpeedY: number = 0.01;
+  @ViewChild('canvas')
+  private canvasRef: ElementRef;  
+  public rotationSpeedX: number = 0.005;
+  public rotationSpeedY: number = 0.01;
   /**
    ** Fin Import three test
   **/
@@ -68,8 +71,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     /**
     ** Import three test
     **/   
-    this.render = this.render.bind(this);
-    this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
+    this.mousePos = {x:0, y:0};
   }
 
   /**
@@ -82,6 +84,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       // Svg Position Bas
       if(type == "bas") 
       {
+        //this.removeEntity();
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -107,6 +110,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       // Svg Position Haut
       if (type == "poly-1")
       {
+        this.addEntity();
+
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -129,6 +134,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       // Svg Position Haut
       if (type == "poly-2")
       {
+        this.addEntity();
+
         let targetObject = document.getElementById('poly1');
   
         TweenMax.to(targetObject, 1, {
@@ -160,133 +167,98 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   *** 
   ***/
   private get canvas(): HTMLCanvasElement {
-      return this.canvasRef.nativeElement;
+    return this.canvasRef.nativeElement;
+  }
+  
+  public init() {
+    var scope = this;
+    scope.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+    scope.camera.position.z = 4;
+
+    scope.scene = new THREE.Scene();
+    
+    var ambient = new THREE.AmbientLight( 0x444444 );
+    scope.scene.add( ambient );
+
+    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+    directionalLight.position.set( 0, 1, 1 ).normalize();
+    scope.scene.add( directionalLight );
+
+    var mesh = new THREE.Object3D();
+    var objectLoader = new THREE.JSONLoader();
+
+    objectLoader.load("assets/model/test4.json", 
+    function (geometry, materials) {
+        
+       // materials.forEach(function (material) {
+       //         material.skinning = true;
+       //});
+        var material = new THREE.MeshFaceMaterial(materials);
+        //var material = new THREE.MeshLambertMaterial ({skinning:true});
+        scope.mesh = new THREE.SkinnedMesh(geometry,material);
+        scope.mesh.name = 'batiment';
+        scope.scene.add(scope.mesh);
+    });
+
+    scope.renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        antialias: true,
+        alpha: true
+    });
+
+    scope.renderer.setPixelRatio( window.devicePixelRatio );
+    scope.renderer.setSize( window.innerWidth, window.innerHeight );
+    let component: BgComponent = this;
+
+    (function render() {
+        requestAnimationFrame(render);
+        component.render();
+    }());
   }
 
-    /**
-    ** Creation de la scene
-    **/
-    private createScene() {
-      this.scene = new THREE.Scene();
-      var loader = new THREE.ColladaLoader();
-      loader.load('assets/model/Batiment.dae', this.onModelLoadingCompleted);
+  public render() {
+    if(this.mesh) {
+      //this.mesh.skeleton.bones[3].matrixAutoUpdate = true;
+      //this.mesh.skeleton.bones[3].matrixWorldNeedsUpdate = true;
+      //this.mesh.skeleton.bones[3].position.x += 0.0268739;
+
+    }
+    
+    this.renderer.render( this.scene, this.camera );
+    this.animeTest();
+  }
+
+
+  /**
+  ** Action with Three
+  **/
+  public removeEntity() {
+    var scope = this;
+    var selectedObject = scope.scene.getObjectByName('batiment');
+    selectedObject.visible = false;
+    console.log("remove");
+  }
+
+  public addEntity() {
+    var scope = this;
+    var selectedObject = scope.scene.getObjectByName('batiment');
+    selectedObject.visible = true;
+    console.log("add");
+  }
+
+  public animeTest() {
+
+    if(this.scene.getObjectByName('batiment')){
+      //this.scene.getObjectByName('batiment').rotation.x += 0.01;
+      //this.scene.getObjectByName('batiment').rotation.y += 0.01;
     }
 
-    /*
-    * Parametre de l'import dae
-    */
-    public onModelLoadingCompleted(collada) {
-        this.modelScene = collada.scene;
-        this.modelScene.scale.set(5,5,5);
-        this.modelScene.position.y = 10;
-        this.scene.add(this.modelScene);
-        this.render();
-    }
-
-    /**
-    ** Creation de la lumiere de la scene
-    **/
-    private createLight() {
-        var light = new THREE.PointLight(0xffffff, 1, 1000);
-        light.position.set(0, 0, 100);
-        this.scene.add(light);
-
-        var light = new THREE.PointLight(0xffffff, 1, 1000);
-        light.position.set(0, 0, -100);
-        this.scene.add(light);
-    }
-
-    /**
-    ** Rendu de la scene
-    **/
-    public render()
-    {
-      this.updateCube();
-      this.renderer.render(this.scene, this.camera);
-    }
-
-    /**
-    ** Animation
-    **/
-    private updateCube()
-    {
-      if (this.modelScene) {
-      this.modelScene.rotation.x += this.rotationSpeedX;
-      this.modelScene.position.y = this.mousePos.y;
-      this.modelScene.position.x = this.mousePos.x;
-      this.modelScene.position.y = this.mousePos.y;
-    }
-    }
-
-    public normalize(v,vmin,vmax,tmin, tmax)
-    {
-      var nv = Math.max(Math.min(v,vmax), vmin);
-      var dv = vmax-vmin;
-      var pc = (nv-vmin)/dv;
-      var dt = tmax-tmin;
-      var tv = tmin + (pc*dt);
-      return tv;
-    }
-
-    private createCamera() {
-        let aspectRatio = this.getAspectRatio();
-        this.camera = new THREE.PerspectiveCamera(
-            this.fieldOfView,
-            aspectRatio,
-            this.nearClippingPane,
-            this.farClippingPane
-        );
-
-        // Set position and look at
-        this.camera.position.x = 10;
-        this.camera.position.y = 10;
-        this.camera.position.z = 100;
-    }
-
-    private getAspectRatio(): number {
-        let height = this.canvas.clientHeight;
-        if (height === 0) {
-            return 0;
-        }
-        return this.canvas.clientWidth / this.canvas.clientHeight;
-    }
-
-    private startRendering() {
-        this.renderer = new THREE.WebGLRenderer({
-            canvas: this.canvas,
-            antialias: true,
-            alpha: true
-        });
-        this.renderer.setPixelRatio(devicePixelRatio);
-        this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        this.renderer.setClearColor(0xffffff, 0);
-        this.renderer.autoClear = true;
-
-        let component: BgComponent = this;
-
-        (function render() {
-            requestAnimationFrame(render);
-//            component.updateCube();
-            component.render();
-        }());
-    }
-
-    public addControls() {
-        //this.controls = new THREE.OrbitControls(this.camera);
-        //this.controls.rotateSpeed = 1.0;
-        //this.controls.zoomSpeed = 1.2;
-        //this.controls.addEventListener('change', this.render);
-    }
-
+  }
 
 
   /***
   *** LIFECYCLE
   ***/
-
   ngOnInit(): void
   {
       /*
@@ -297,6 +269,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   
       if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)" && this.relativePath !== "/app-prod/accueil"  && this.relativePath !== "/app-prod/")
       {
+        this.init();
+
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -312,6 +286,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       }
       else if (this.relativePath == "/contact")
       {
+        this.init();
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -326,6 +301,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
           }
         });     
       }
+
   }
   
   ngOnChanges(): void
@@ -335,11 +311,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
   ngAfterViewInit(): void 
   {
-    this.createScene();
-    this.createLight();
-    this.createCamera();
-    this.startRendering();
-    this.addControls();
   }
 
   ngOnDestroy(): void 
@@ -347,39 +318,5 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
 
 
-  /***
-  ***
-  *** Events
-  *** 
-  ***/
-  @HostListener('document:mousemove', ['$event']) 
-  public onMouseMove(e) {
-
-    var tx = -1 + (e.clientX / this.renderer.domElement.clientWidth)*2;
-    var ty = -1 + (e.clientX / this.renderer.domElement.clientHeight)*2;
-    
-    this.mousePos = {x:tx, y:ty};
-
-  }
-
-  @HostListener('window:resize', ['$event'])
-  public onResize(event: Event) {
-    this.canvas.style.width = "100%";
-    this.canvas.style.height = "100%";
-    this.camera.aspect = this.getAspectRatio();
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-    this.render();
-  }
-
-  private findAllObjects(pred: THREE.Object3D[], parent: THREE.Object3D) {
-
-      if (parent.children.length > 0) {
-          parent.children.forEach((i) => {
-              pred.push(i);
-              this.findAllObjects(pred, i);                
-          });
-      }
-  }
 
 }
