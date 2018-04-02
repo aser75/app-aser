@@ -199,7 +199,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
 
-    objectLoader.load("assets/model/eva-animated.json", 
+    objectLoader.load("assets/model/test7.json", 
       this.onModelLoadingCompleted);
     
   }
@@ -214,12 +214,12 @@ materials.forEach(function (material) {
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
 
     scope.mesh.name   = 'batiment';
-    //scope.mesh.scale.set(0.4,0.4, 0.4);
+    scope.mesh.scale.set(0.4,0.4, 0.4);
     
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
-      var test = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ] ).play();
+      var test = mixer.clipAction( scope.mesh.geometry['animations'][ 2 ] ).play();
       test.setEffectiveWeight(1) ;
       test.enabled = true;
       scope.scene.add(scope.mesh);
@@ -248,13 +248,10 @@ materials.forEach(function (material) {
       requestAnimationFrame(render);
       if(clock) {
          var dt = clock.getDelta();
-         console.log(mixer);
          mixer.update(dt);
          self.renderer.render(self.scene, self.camera);
       }
-     
-
-
+    
     }());
   }
     
