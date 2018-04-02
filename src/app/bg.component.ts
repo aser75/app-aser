@@ -30,10 +30,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   message: any;
   subscription: Subscription;
 
-  helpset: any;
-  mousePos:any;
-  modelScene: any;
-
 
   /**
   ** Import three test
@@ -41,19 +37,15 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   private renderer: THREE.WebGLRenderer;
   private camera: THREE.PerspectiveCamera;
   private cameraTarget: THREE.Vector3;
-  public scene: THREE.Scene;
-  public mesh: THREE.Mesh;
-
-  public fieldOfView: number = 60;
-  public nearClippingPane: number = 1;
-  public farClippingPane: number = 1100;
-
-  public controls: THREE.OrbitControls;
-
+  private scene: THREE.Scene;
+  private mesh: THREE.Mesh;
   @ViewChild('canvas')
   private canvasRef: ElementRef;  
-  public rotationSpeedX: number = 0.005;
-  public rotationSpeedY: number = 0.01;
+  public clock;
+
+  mousePos:any;
+  test:any;
+
   /**
    ** Fin Import three test
   **/
@@ -66,12 +58,10 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     this.subscription = this.messageService.getType().subscribe(message => { 
       this.message = message;
       this.mouvementBg(this.message.text);
-    });
 
-    /**
-    ** Import three test
-    **/   
-    this.mousePos = {x:0, y:0};
+    });
+    this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
+    this.render = this.render.bind(this);
   }
 
   /**
@@ -167,11 +157,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   *** 
   ***/
   private get canvas(): HTMLCanvasElement {
+
     return this.canvasRef.nativeElement;
+
   }
   
   public init() {
+
     var scope = this;
+    var action;
+    
 
     // add camera
     scope.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
@@ -183,83 +178,88 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     // Abmbiance Color
     var ambient = new THREE.AmbientLight( 0x4393e5, 0.2 );
     scope.scene.add( ambient );
-
-    // Light
     var directionalLight = new THREE.DirectionalLight( 0xffeedd );
     directionalLight.position.set( 0, -70, 100 ).normalize();
     scope.scene.add( directionalLight );
-
-
     var hemisphereLight = new THREE.HemisphereLight(0x67bff9,0x4393e4,0.2);
     hemisphereLight.position.set(1, 1, 1).normalize();
     scope.scene.add(hemisphereLight);
+    // Fin Abmbiance Color
 
 
     // Helpers
     var axesHelper = new THREE.AxesHelper( 5 );
     scope.scene.add( axesHelper );
-
     var spotLightHelper = new THREE.SpotLightHelper( directionalLight );
     scope.scene.add( spotLightHelper );
+    // Fin des Helpers
 
 
     // Batiment 1
     var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
-    objectLoader.load("assets/model/test5.json", 
-    function (geometry, materials) {
-       // materials.forEach(function (material) {
-       //         material.skinning = true;
-       //});
-        var material = new THREE.MeshFaceMaterial(materials);
-        //var material = new THREE.MeshLambertMaterial ({skinning:true});
-        scope.mesh = new THREE.SkinnedMesh(geometry,material);
-        scope.mesh.name = 'batiment';
-        scope.mesh.position.set(-0.3, 0.3, 2.1);
-        scope.mesh.rotation.set(0, 0,0);
-        scope.mesh.scale.set(0.1,0.1, 0.1);
-        scope.scene.add(scope.mesh);
-    });
 
-    scope.renderer = new THREE.WebGLRenderer({
+    objectLoader.load("assets/model/eva-animated.json", 
+      this.onModelLoadingCompleted);
+    
+  }
+  
+  private onModelLoadingCompleted(geometry, materials) {
+    var scope = this;
+    var clock = new THREE.Clock();
+materials.forEach(function (material) {
+      material.skinning = true;
+    });
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
+    scope.mesh.name   = 'batiment';
+    //scope.mesh.scale.set(0.4,0.4, 0.4);
+    
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      var test = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ] ).play();
+      test.setEffectiveWeight(1) ;
+      test.enabled = true;
+      scope.scene.add(scope.mesh);
+    }
+
+
+    scope.render(mixer, clock);
+  }
+
+
+    
+
+  render(mixer, clock){
+   
+    let self: BgComponent = this;
+    
+    this.renderer = new THREE.WebGLRenderer({
         canvas: this.canvas,
         antialias: true,
         alpha: true
     });
+    this.renderer.setPixelRatio( window.devicePixelRatio );
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
 
-    scope.renderer.setPixelRatio( window.devicePixelRatio );
-    scope.renderer.setSize( window.innerWidth, window.innerHeight );
-    let component: BgComponent = this;
+    (function render(){
+      requestAnimationFrame(render);
+      if(clock) {
+         var dt = clock.getDelta();
+         console.log(mixer);
+         mixer.update(dt);
+         self.renderer.render(self.scene, self.camera);
+      }
+     
 
-    (function render() {
-        requestAnimationFrame(render);
-        component.render();
+
     }());
   }
+    
+  animate(){}
 
-  public render() {
-    if(this.mesh) {
-      //this.mesh.skeleton.bones[3].matrixAutoUpdate = true;
-      //this.mesh.skeleton.bones[3].matrixWorldNeedsUpdate = true;
-      //this.mesh.skeleton.bones[3].position.x += 0.0268739;
-    }
-    this.renderer.render( this.scene, this.camera );
-    this.animeTest();
-  }
-
-
-  /**
-  ** Events with Three
-  **/  
-  @HostListener('window:resize', ['$event'])
-  public onResize(event: Event) {
-    this.canvas.style.width = "100%";
-    this.canvas.style.height = "100%";
-    this.camera.aspect = this.getAspectRatio();
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-    this.render();
-  }
 
   /**
   ** Function with Three
@@ -286,12 +286,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     console.log("add");
   }
 
-  private animeTest() {
-    if(this.scene.getObjectByName('batiment')){
-      //this.scene.getObjectByName('batiment').rotation.x += 0.01;
-      this.scene.getObjectByName('batiment').rotation.y += 0.01;
-    }
-  }
+
+  /**
+  ** Events with Three
+  **/  
+
 
 
   /***
