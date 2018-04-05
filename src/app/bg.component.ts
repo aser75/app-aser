@@ -257,24 +257,27 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     (function render(){
-      requestAnimationFrame(render);
-      if(clock) {
-        var time = Number(self.mouse);
 
+        requestAnimationFrame(render);
+        if(clock) {
+          var time = Number(self.mouse);
           // Course Normal
           // var dt = clock.getDelta();
           // mixer.update(dt);
 
-        //var time          = Number(2.5);
-        var dt            = clock.getDelta();
-        var delta         = time - self.lastTime;
-        self.lastTime    = time;
-        mixer.update(delta);         
-        self.renderer.render(self.scene, self.camera);
-      }
+          //var time          = Number(2.5);
+          var dt            = clock.getDelta();
+          var delta         = time - self.lastTime;
+          self.lastTime    = time;
+          mixer.update(delta);         
+          self.renderer.render(self.scene, self.camera);
+        }
+
     }());
   }
-    
+  animate () {
+
+  }
 
   /**
   ** Function with Three
@@ -322,20 +325,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     let mousePour = (scope.mouse * 100)/scope.canvas.clientWidth;
     let timerPour = (10 * mousePour)/100;
     scope.mouse = timerPour;
-
-    this.render(scope.mouse);
-    if (e.clientX > 0 && e.clientX < moitierDocmuent ) {
-      // Batiment 1
-      this.i ++;
-      if (this.i == 1) {
-        //console.log(this.i+ ' insideleft ');
-      }
-    } else {
-      // Batiment 1
-      this.i = 0;
-      // Fin Batiment 1
-    }
-    //this.mousePos = {x:tx, y:ty};
   }
 
   private getObjectBatiment1 () {
