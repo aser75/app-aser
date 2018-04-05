@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/apiproject/api/v1/projets',
-  url:'http://predprodaser.ovh/'
+  url:'http://localhost/aser'
 };

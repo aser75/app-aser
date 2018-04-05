@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit,  ElementRef, Input, OnChan
 import { Location, isPlatformBrowser, isPlatformServer }                                              from '@angular/common';
 import { Subscription }                                                                               from 'rxjs/Subscription';
 import { FondService }                                                                                from './service/fond.service';
+import { NgForm }                                                                                       from '@angular/forms';
 
 /**
  ** Import three test
@@ -13,13 +14,15 @@ import "three/examples/js/loaders/ColladaLoader";
 /**
  ** Fin Import three test
 **/
-
 import "gsap";
 declare var TweenMax: any;
 
 @Component({
   selector    : 'bg',
   templateUrl    : './view/bg.component.html',
+  host: {
+    '(document:mousemove)': 'onMouseMove($event)'
+  }
 })
 
 
@@ -42,10 +45,9 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   @ViewChild('canvas')
   private canvasRef: ElementRef;  
   public clock;
-
-  mousePos:any;
-  test:any;
-
+  public lastTime;
+  mouse:any;
+  i:number;
   /**
    ** Fin Import three test
   **/
@@ -62,6 +64,9 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     });
     this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
     this.render = this.render.bind(this);
+    this.i = 0;
+    this.lastTime = 0;
+    this.mouse = 0;
   }
 
   /**
@@ -153,7 +158,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
   /***
   ***
-  *** Code Three
+  *** Webgl Three
   *** 
   ***/
   private get canvas(): HTMLCanvasElement {
@@ -162,11 +167,9 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
   }
   
-  public init() {
-
+  public init()
+  {
     var scope = this;
-    var action;
-    
 
     // add camera
     scope.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
@@ -186,7 +189,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.scene.add(hemisphereLight);
     // Fin Abmbiance Color
 
-
     // Helpers
     var axesHelper = new THREE.AxesHelper( 5 );
     scope.scene.add( axesHelper );
@@ -194,46 +196,55 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.scene.add( spotLightHelper );
     // Fin des Helpers
 
-
     // Batiment 1
     var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
-
-    objectLoader.load("assets/model/test7.json", 
-      this.onModelLoadingCompleted);
-    
+    objectLoader.load("assets/model/Batiment-1-A.json", this.onModelLoadingCompleted);
   }
   
   private onModelLoadingCompleted(geometry, materials) {
     var scope = this;
     var clock = new THREE.Clock();
-materials.forEach(function (material) {
+    
+    materials.forEach(function (material) {
       material.skinning = true;
     });
+
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
 
     scope.mesh.name   = 'batiment';
-    scope.mesh.scale.set(0.4,0.4, 0.4);
+    scope.mesh.position.set(-0.3, 0.3, 2.1);
+    scope.mesh.rotation.set(0, 0, 0);
+    scope.mesh.scale.set(0.1,0.1, 0.1);
+
     
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
-      var test = mixer.clipAction( scope.mesh.geometry['animations'][ 2 ] ).play();
-      test.setEffectiveWeight(1) ;
-      test.enabled = true;
+      //var idleClip = THREE.AnimationUtils.splitClip( clip, 'idle', 0, 60 );
+      var left = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ]);
+      var pause = mixer.clipAction( scope.mesh.geometry['animations'][ 1 ]);
+      var right = mixer.clipAction( scope.mesh.geometry['animations'][ 2 ]);
+
+      left.setEffectiveWeight(1).play();
+      pause.setEffectiveWeight(1).stop();
+      right.setEffectiveWeight(1).stop();
+
+      //left.setLoop( THREE.LoopOnce, 0 );
+      right.setLoop( THREE.LoopOnce, 0 );
+      //left.clampWhenFinished = true;
+      right.clampWhenFinished = true;
+      left.enabled = true;
+
       scope.scene.add(scope.mesh);
     }
-
 
     scope.render(mixer, clock);
   }
 
+  render(mixer?, clock?, mouseX?){
 
-    
-
-  render(mixer, clock){
-   
     let self: BgComponent = this;
     
     this.renderer = new THREE.WebGLRenderer({
@@ -241,22 +252,29 @@ materials.forEach(function (material) {
         antialias: true,
         alpha: true
     });
+
     this.renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     (function render(){
       requestAnimationFrame(render);
       if(clock) {
-         var dt = clock.getDelta();
-         mixer.update(dt);
-         self.renderer.render(self.scene, self.camera);
+        var time = Number(self.mouse);
+
+          // Course Normal
+          // var dt = clock.getDelta();
+          // mixer.update(dt);
+
+        //var time          = Number(2.5);
+        var dt            = clock.getDelta();
+        var delta         = time - self.lastTime;
+        self.lastTime    = time;
+        mixer.update(delta);         
+        self.renderer.render(self.scene, self.camera);
       }
-    
     }());
   }
     
-  animate(){}
-
 
   /**
   ** Function with Three
@@ -269,25 +287,74 @@ materials.forEach(function (material) {
     return this.canvas.clientWidth / this.canvas.clientHeight;
   }
 
-  private removeEntity() {
+  private removeEntity()
+  {
     var scope = this;
     var selectedObject = scope.scene.getObjectByName('batiment');
     selectedObject.visible = false;
-    console.log("remove");
   }
 
-  private addEntity() {
+  private addEntity()
+  {
     var scope = this;
     var selectedObject = scope.scene.getObjectByName('batiment');
     selectedObject.visible = true;
-    console.log("add");
   }
 
 
   /**
   ** Events with Three
   **/  
+  public onMouseMove(e) {
+    var scope = this;
+    var clock = new THREE.Clock();
+    var moitierDocmuent = this.canvas.clientWidth / 2;
 
+   
+    scope.mouse =  e.clientX;
+    // Largeur du document en PX;
+    // self.canvas.clientWidth;
+
+    // Position de souris en PX;
+    // self.mouse
+
+    // Position de souris en %
+    let mousePour = (scope.mouse * 100)/scope.canvas.clientWidth;
+    let timerPour = (10 * mousePour)/100;
+    scope.mouse = timerPour;
+
+    this.render(scope.mouse);
+    if (e.clientX > 0 && e.clientX < moitierDocmuent ) {
+      // Batiment 1
+      this.i ++;
+      if (this.i == 1) {
+        //console.log(this.i+ ' insideleft ');
+      }
+    } else {
+      // Batiment 1
+      this.i = 0;
+      // Fin Batiment 1
+    }
+    //this.mousePos = {x:tx, y:ty};
+  }
+
+  private getObjectBatiment1 () {
+    var scope = this;
+    var selectedObject = scope.scene.getObjectByName('batiment');
+    return  selectedObject;
+  }
+
+
+
+  @HostListener('window:resize', ['$event'])
+  public onResize(event: Event) {
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = "100%";
+    this.camera.aspect = this.getAspectRatio();
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.render();
+  }
 
 
   /***
@@ -303,6 +370,7 @@ materials.forEach(function (material) {
   
       if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)" && this.relativePath !== "/app-prod/accueil"  && this.relativePath !== "/app-prod/")
       {
+
         this.init();
 
         let targetObject = document.getElementById('poly1');
