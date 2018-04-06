@@ -47,7 +47,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   public clock;
   public lastTime;
   mouse:any;
-  i:number;
+  public vertices = [];
   /**
    ** Fin Import three test
   **/
@@ -63,8 +63,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     });
     this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
+    this.onModelLoadingCompletedA = this.onModelLoadingCompletedA.bind(this);
     this.render = this.render.bind(this);
-    this.i = 0;
     this.lastTime = 0;
     this.mouse = 0;
   }
@@ -129,7 +129,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       // Svg Position Haut
       if (type == "poly-2")
       {
-        this.addEntity();
+        
 
         let targetObject = document.getElementById('poly1');
   
@@ -161,10 +161,9 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   *** Webgl Three
   *** 
   ***/
-  private get canvas(): HTMLCanvasElement {
-
+  private get canvas(): HTMLCanvasElement
+  {
     return this.canvasRef.nativeElement;
-
   }
   
   public init()
@@ -196,15 +195,19 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.scene.add( spotLightHelper );
     // Fin des Helpers
 
-    // Batiment 1
-    var mesh = new THREE.Object3D();
     var objectLoader = new THREE.JSONLoader();
-    objectLoader.load("assets/model/Batiment-1-A.json", this.onModelLoadingCompleted);
+    var objectLoader1 = new THREE.JSONLoader();
+        // Batiment 2
+    objectLoader1.load("assets/model/Batiment-2-A.json", this.onModelLoadingCompleted);
+    // Batiment 1
+    objectLoader.load("assets/model/Batiment-1-succes.json", this.onModelLoadingCompletedA);
+
+
+
   }
   
   private onModelLoadingCompleted(geometry, materials) {
     var scope = this;
-    var clock = new THREE.Clock();
     
     materials.forEach(function (material) {
       material.skinning = true;
@@ -212,41 +215,61 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
-
-    scope.mesh.name   = 'batiment';
+   
     scope.mesh.position.set(-0.3, 0.3, 2.1);
     scope.mesh.rotation.set(0, 0, 0);
     scope.mesh.scale.set(0.1,0.1, 0.1);
+    scope.scene.add(scope.mesh);
 
-    
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
-      //var idleClip = THREE.AnimationUtils.splitClip( clip, 'idle', 0, 60 );
-      var left = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ]);
+      scope.vertices.push(mixer);
+      let left = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ]);
       var pause = mixer.clipAction( scope.mesh.geometry['animations'][ 1 ]);
-      var right = mixer.clipAction( scope.mesh.geometry['animations'][ 2 ]);
 
       left.setEffectiveWeight(1).play();
       pause.setEffectiveWeight(1).stop();
-      right.setEffectiveWeight(1).stop();
-
-      //left.setLoop( THREE.LoopOnce, 0 );
-      right.setLoop( THREE.LoopOnce, 0 );
-      //left.clampWhenFinished = true;
-      right.clampWhenFinished = true;
       left.enabled = true;
-
-      scope.scene.add(scope.mesh);
     }
 
-    scope.render(mixer, clock);
+    scope.render(scope.vertices);
   }
-
-  render(mixer?, clock?, mouseX?){
-
-    let self: BgComponent = this;
+  private onModelLoadingCompletedA(geometry, materials) {
+    var scope = this;
     
+    materials.forEach(function (material) {
+      material.skinning = true;
+    });
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+   
+    scope.mesh.position.set(0.3, 0.3, 2.1);
+    scope.mesh.rotation.set(0, 0, 0);
+    scope.mesh.scale.set(0.1,0.1, 0.1);
+    scope.scene.add(scope.mesh);
+
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.vertices.push(mixer);
+      let left = mixer.clipAction( scope.mesh.geometry['animations'][ 0 ]);
+      var pause = mixer.clipAction( scope.mesh.geometry['animations'][ 1 ]);
+
+      left.setEffectiveWeight(1).play();
+      pause.setEffectiveWeight(1).stop();
+      left.enabled = true;
+    }
+
+    scope.render(scope.vertices);
+  }
+  render(vertices?, mouseX?)
+  {
+    
+    let self: BgComponent = this;
+    let clock = new THREE.Clock();
+
     this.renderer = new THREE.WebGLRenderer({
         canvas: this.canvas,
         antialias: true,
@@ -257,27 +280,20 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     (function render(){
-
         requestAnimationFrame(render);
         if(clock) {
           var time = Number(self.mouse);
-          // Course Normal
-          // var dt = clock.getDelta();
-          // mixer.update(dt);
-
-          //var time          = Number(2.5);
           var dt            = clock.getDelta();
           var delta         = time - self.lastTime;
           self.lastTime    = time;
-          mixer.update(delta);         
+        for ( var i = 0; i < vertices.length; i++ ) {
+          vertices[i].update(delta);        
+        }
           self.renderer.render(self.scene, self.camera);
         }
-
     }());
   }
-  animate () {
 
-  }
 
   /**
   ** Function with Three
@@ -313,15 +329,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var clock = new THREE.Clock();
     var moitierDocmuent = this.canvas.clientWidth / 2;
 
-   
     scope.mouse =  e.clientX;
-    // Largeur du document en PX;
-    // self.canvas.clientWidth;
-
-    // Position de souris en PX;
-    // self.mouse
-
-    // Position de souris en %
     let mousePour = (scope.mouse * 100)/scope.canvas.clientWidth;
     let timerPour = (10 * mousePour)/100;
     scope.mouse = timerPour;
@@ -342,7 +350,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     this.camera.aspect = this.getAspectRatio();
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-    this.render();
   }
 
 
@@ -351,6 +358,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   ***/
   ngOnInit(): void
   {
+       this.init();
       /*
       Animation BG
       Utilisation tweenMax
@@ -359,9 +367,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   
       if (this.relativePath !== "/accueil" && this.relativePath !== "/" && this.relativePath !== "/contact" && this.relativePath !== "/accueil(popup:compose)" && this.relativePath !== "/app-prod/accueil"  && this.relativePath !== "/app-prod/")
       {
-
-        this.init();
-
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -377,7 +382,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       }
       else if (this.relativePath == "/contact")
       {
-        this.init();
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
