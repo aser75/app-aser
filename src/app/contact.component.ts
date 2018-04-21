@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FondService } from './service/fond.service';
 
 @Component ({
 	selector		: 'contact',
@@ -9,6 +10,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class ContactComponent implements OnInit, OnDestroy {
 
 	bgsvg:boolean;
+	constructor(private fondService: FondService){}
 
 	ngOnInit(): void
 	{
@@ -16,7 +18,10 @@ export class ContactComponent implements OnInit, OnDestroy {
       	Add Class Body
     	*/
 		document.body.classList.add('contact');
-
+		/*
+		** J'emet le type de fond à mon servive
+		*/
+		this.fondService.typeA("poly-2");
 	}
 
 	ngOnDestroy(): void

@@ -21,7 +21,6 @@ export class NavComponent {
 		private fondService: FondService,
 		location: Location,
 		router: Router){
-		
     		router.events.subscribe((val) => {
 				if(location.path() == '/accueil' || location.path() == '')
 				{
