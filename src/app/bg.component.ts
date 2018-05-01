@@ -21,7 +21,6 @@ declare var TweenMax: any;
 @Component({
   selector    : 'bg',
   templateUrl    : './view/bg.component.html',
-
 })
 
 
@@ -31,7 +30,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   relativePath: string;
   message: any;
   subscription: Subscription;
-
 
   /**
   ** Import three test
@@ -43,6 +41,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   private mesh: THREE.Mesh;
   @ViewChild('canvas')
   private canvasRef: ElementRef;  
+  public controls: THREE.OrbitControls;
   public clock;
   public lastTime;
   public mouse = 0;
@@ -72,14 +71,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       this.mouvementBg(this.message.text);
     });
 
-    this.onModelLoadingCompleted       = this.onModelLoadingCompleted.bind(this);
-    this.onModelLoadingCompletedA      = this.onModelLoadingCompletedA.bind(this);
+    this.onModelSideRightBatimentA      = this.onModelSideRightBatimentA.bind(this);
+    this.onModelSideRightBatimentB      = this.onModelSideRightBatimentB.bind(this);
     this.onModelSideLeftBatimentA      = this.onModelSideLeftBatimentA.bind(this);
+    this.onModelSideLeftBatimentB      = this.onModelSideLeftBatimentB.bind(this);
     this.onModelArbreA                 = this.onModelArbreA.bind(this);
+    this.onModelArbreD                 = this.onModelArbreD.bind(this);
     this.onModelampadaires             = this.onModelampadaires.bind(this);
-
-
-    
+    this.onModelampadairesSideLeft    = this. onModelampadairesSideLeft.bind(this);
+    this.onModeArbreB                 = this. onModeArbreB.bind(this);
+    this.onModeArbreC                 = this. onModeArbreC.bind(this);
     this.render                        = this.render.bind(this);
     this.lastTime                      = 0;
     this.clientX                       = 0;
@@ -97,7 +98,17 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
       if(type == "bas") 
       {
-        //this.removeAll();
+
+        if (!this.scene) {
+          console.log("la scene n'existe pas");
+        }
+        else {
+          console.log("la scene existe")
+          while(this.scene.children.length > 0){ 
+            this.scene.remove(this.scene.children[0]); 
+          }
+        }
+
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -152,6 +163,10 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
         /*
         * Condition si scene existe deja
         */
+        if (!this.scene) {
+          this.init();
+        }
+
         let targetObject = document.getElementById('poly1');
         TweenMax.to(targetObject, 1, {
           attr: {
@@ -189,38 +204,76 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   public init()
   {
     var scope = this;
-
-    // add camera
-    scope.camera = new THREE.PerspectiveCamera( 45, scope.width / scope.height, 1, 2000 );
-    scope.camera.position.set(0.2, 0, 4);
-
-    // Creation scene
     scope.scene = new THREE.Scene();
+
+    /*
+    ** Camera
+    */
+    scope.camera = new THREE.PerspectiveCamera( 45, scope.width / scope.height, 1, 2000 );
+    scope.camera.position.set(0, 0, 4);
+    scope.camera.lookAt( scope.scene.position );
     
-    // Abmbiance Color
-    var ambient = new THREE.AmbientLight( 0x4393e5, 0.2 );
+    /*
+    ** Ambiance Light
+    */
+    var ambient = new THREE.HemisphereLight( 0xeebc4d, 0xffffff, 0.6 );
     scope.scene.add( ambient );
-    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-    directionalLight.position.set( 0, -70, 100 ).normalize();
-    scope.scene.add( directionalLight );
-    var hemisphereLight = new THREE.HemisphereLight(0x67bff9,0x4393e4,0.2);
-    hemisphereLight.position.set(1, 1, 1).normalize();
-    scope.scene.add(hemisphereLight);
-    // Fin Abmbiance Color
 
-    // Helpers
-    var axesHelper = new THREE.AxesHelper( 5 );
-    scope.scene.add( axesHelper );
-    var spotLightHelper = new THREE.SpotLightHelper( directionalLight );
-    scope.scene.add( spotLightHelper );
-    // Fin des Helpers
-     
-    var sphere = new THREE.SphereBufferGeometry( 0.01, 0.01, 0.01 , 0, 1.5,2);
-    var light4 = new THREE.PointLight( 0xffaa00, 1.5, 50 );
-    light4.position.set( 0.755, 0.865, 0 );
-    light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
-    scope.scene.add( light4 );
+    /*
+    ** Dircetion Light
+    */
+    var light = new THREE.DirectionalLight(0xebf3ff,1);
+    light.position.set(0, 1.2, 0.4);
+    light.castShadow = true;
+    light.shadowMapWidth = 4048; // default is 512
+    light.shadowMapHeight = 4048; // default is 512
+    light.shadow.camera.near = 50;
+    light.shadow.bias = 0.00009;
+    var d = 390;
+    light.shadow.camera.top = d * 1.5;
+    light.shadow.camera.bottom = -d;
+    light.shadow.camera.far = 2500;
+    scope.scene.add(light);
 
+    /*
+    ** Light Front
+    */
+    var lightFront = new THREE.PointLight(0xffffff, 1, 1 );
+    lightFront.position.set(0, 1, 1);
+    this.scene.add(lightFront);
+
+
+    /*
+    ** Light Lampadaire Right
+    */
+    var spotlightRight = new THREE.SpotLight(0xfaf5e3);
+    spotlightRight.position.set(0.755, 0.865, 0 );
+    spotlightRight.intensity = 0.5;
+    scope.scene.add(spotlightRight);
+    var lightTargetRight = new THREE.Object3D();
+    lightTargetRight.position.set(0.755, 0.5, 0 );
+    scope.scene.add(lightTargetRight);
+    spotlightRight.target = lightTargetRight;
+    var sphereRight = new THREE.SphereBufferGeometry(  0.01, 0.01, 0.01 , 0, 1.5, 2 );
+    spotlightRight.add( new THREE.Mesh( sphereRight, new THREE.MeshBasicMaterial( { color: 0xffFFFF } ) ) );
+
+    /*
+    ** Light Lampadaire Left
+    */
+    var spotlightLeft = new THREE.SpotLight(0xfaf5e3);
+    spotlightLeft.position.set(-0.755, 0.865, 0);
+    spotlightLeft.intensity = 0.6;
+    scope.scene.add(spotlightLeft);
+    var lightTarget = new THREE.Object3D();
+    lightTarget.position.set(-0.755, 0.5, 0);
+    scope.scene.add(lightTarget);
+    spotlightLeft.target = lightTarget;
+    var sphereLeft = new THREE.SphereBufferGeometry( 0.01, 15, 15, 0, 6.3, 1, 2.4 );
+    spotlightLeft.add( new THREE.Mesh( sphereLeft, new THREE.MeshBasicMaterial( { color: 0xffFFFF } ) ) );
+
+    /*
+    ** Loading manager
+    */    
     var manager = new THREE.LoadingManager();
     manager.onLoad = function() {
       scope.loader = true;
@@ -228,53 +281,92 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var objectLoader = new THREE.JSONLoader(manager);
   
-
-    // Side Right 
-    //Arbre A    
+    /*
+    *** Side Right 
+    */
     objectLoader.load("assets/model/arbre-type1.json", this.onModelArbreA);
-    // Batiment 1
-    objectLoader.load("assets/model/Batiment-1.json", this.onModelLoadingCompleted);
-    // Batiment 2
-    objectLoader.load("assets/model/Batiment-2.json", this.onModelLoadingCompletedA);
-    // Lampadaire
+    objectLoader.load("assets/model/Batiment-1.json", this.onModelSideRightBatimentA);
+    objectLoader.load("assets/model/Batiment-2.json", this.onModelSideRightBatimentB);
     objectLoader.load("assets/model/lampadaire.json", this.onModelampadaires);
+    objectLoader.load("assets/model/arbre-type2.json", this.onModeArbreC);
 
-    // Side Left
-    // Batiment 1
+    /*
+    *** Side Left
+    */
     objectLoader.load("assets/model/Batiment-4.json", this.onModelSideLeftBatimentA);
+    objectLoader.load("assets/model/Batiment-5.json", this.onModelSideLeftBatimentB);
+    objectLoader.load("assets/model/lampadaire-1.json", this.onModelampadairesSideLeft);
+    objectLoader.load("assets/model/arbre-type2.json", this.onModeArbreB);
+    objectLoader.load("assets/model/arbre-type1.json", this.onModelArbreD);
   }
 
-  private onModelSideLeftBatimentA(geometry, materials) {
+  private onModelSideLeftBatimentB(geometry, materials) {
     var scope = this;
     
-    materials.forEach(function (material) {
-      material.skinning = true;
-    });
+    for ( var i = 0; i < materials.length; i ++ ) {
+          var m = materials[ i ];
+          m.skinning = true;
+    }
 
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
-   
-    scope.mesh.position.set(-1.15, 0.3, -0.5);
-    scope.mesh.rotation.set(0, 0, 0);
+
+    scope.mesh.position.set(-1.05, 0.3, -1.4);
     scope.mesh.scale.set(0.20,0.20, 0.20);
-    scope.mesh.name = "batiment1Left";
+    scope.mesh.name = "batiment4";
     scope.scene.add(scope.mesh);
+
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
 
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
       let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
-      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
-
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];  
       let left = mixer.clipAction( leftAnimation );
       let pause = mixer.clipAction( pauseAnimation );
-
       scope.actions.push (left );      
-
       left.clampWhenFinished = true;
       pause.clampWhenFinished = true;
-      
+      scope.activeAction = scope.actions[1];
+      left.play();
+    }
+
+    scope.render(scope.mixers);
+  }
+
+  private onModelSideLeftBatimentA(geometry, materials) {
+    var scope = this;
+    
+    for ( var i = 0; i < materials.length; i ++ ) {
+          var m = materials[ i ];
+          m.skinning = true;
+    }
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
+    scope.mesh.position.set(-1.25, 0.3, -0.5);
+    scope.mesh.scale.set(0.20,0.20, 0.20);
+    scope.mesh.name = "batiment3";
+    scope.scene.add(scope.mesh);
+
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
+
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.mixers.push(mixer);
+      let leftAnimation     = scope.mesh.geometry['animations'][ 1 ];
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 2 ];  
+      let left = mixer.clipAction( leftAnimation );
+      let pause = mixer.clipAction( pauseAnimation );
+      scope.actions.push (left );      
+      left.clampWhenFinished = true;
+      pause.clampWhenFinished = true;
       scope.activeAction = scope.actions[1];
       left.play();
     }
@@ -293,10 +385,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
    
     scope.mesh.position.set(0.86, 0.3, 0);
-    scope.mesh.rotation.set(0, 0, 0);
     scope.mesh.scale.set(0.6,0.6, 0.6);
-    scope.mesh.name = "Lampadaire";
+    scope.mesh.name = "LampadaireRight";
     scope.scene.add(scope.mesh);
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
 
     if (scope.mesh.geometry['animations'])
     {
@@ -304,15 +397,11 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       scope.mixers.push(mixer);
       let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
       let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
-
       let left = mixer.clipAction( leftAnimation );
       let pause = mixer.clipAction( pauseAnimation );
-
       scope.actions.push (left );    
-
       left.clampWhenFinished = true;
       pause.clampWhenFinished = true;
-
       scope.activeAction = scope.actions[0];
       left.play();
     }
@@ -320,6 +409,107 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.render(scope.mixers);
   }
 
+  private onModelampadairesSideLeft(geometry, materials) {
+    var scope = this;
+    
+    materials.forEach(function (material) {
+      material.skinning = true;
+    });
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
+    scope.mesh.position.set(-0.86, 0.3, 0);
+    scope.mesh.scale.set(0.6,0.6, 0.6);
+    scope.mesh.name = "LampadaireLeft";
+    scope.scene.add(scope.mesh);
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
+
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.mixers.push(mixer);
+      let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
+      let left = mixer.clipAction( leftAnimation );
+      let pause = mixer.clipAction( pauseAnimation );
+      scope.actions.push (left );    
+      left.clampWhenFinished = true;
+      pause.clampWhenFinished = true;
+      scope.activeAction = scope.actions[0];
+      left.play();
+    }
+
+    scope.render(scope.mixers);
+  }
+
+  private onModeArbreC(geometry, materials) {
+    var scope = this;
+    
+    materials.forEach(function (material) {
+      material.skinning = true;
+    });
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
+    scope.mesh.position.set(1.75, 0.3, 0);
+    scope.mesh.scale.set(0.42,0.42,0.42);
+    scope.mesh.name = "arbre1";
+    scope.scene.add(scope.mesh);
+
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.mixers.push(mixer);
+      let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
+      let left = mixer.clipAction( leftAnimation );
+      let pause = mixer.clipAction( pauseAnimation );
+      scope.actions.push (left );    
+      left.clampWhenFinished = true;
+      pause.clampWhenFinished = true;
+      scope.activeAction = scope.actions[0];
+      left.play();
+    }
+    scope.render(scope.mixers);
+  }
+
+  private onModeArbreB(geometry, materials) {
+    var scope = this;
+    
+    materials.forEach(function (material) {
+      material.skinning = true;
+    });
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
+    scope.mesh.position.set(-1.2, 0.3, 0.3);
+    scope.mesh.scale.set(0.42,0.42, 0.42);
+    scope.mesh.name = "arbre2";
+    scope.scene.add(scope.mesh);
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.mixers.push(mixer);
+      let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
+      let left = mixer.clipAction( leftAnimation );
+      let pause = mixer.clipAction( pauseAnimation );
+      scope.actions.push (left );    
+      left.clampWhenFinished = true;
+      pause.clampWhenFinished = true;
+      scope.activeAction = scope.actions[0];
+      left.play();
+    }
+    scope.render(scope.mixers);
+  }
 
   private onModelArbreA(geometry, materials) {
     var scope = this;
@@ -330,28 +520,25 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
-   
+
     scope.mesh.position.set(0.85, 0.3, -0.8);
-    scope.mesh.rotation.set(0, 0, 0);
     scope.mesh.scale.set(0.22,0.22, 0.22);
-    scope.mesh.name = "ArbreA";
+    scope.mesh.name = "arbre3";
     scope.scene.add(scope.mesh);
 
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
       let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
       let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
-
       let left = mixer.clipAction( leftAnimation );
       let pause = mixer.clipAction( pauseAnimation );
-
       scope.actions.push (left );    
-
       left.clampWhenFinished = true;
       pause.clampWhenFinished = true;
-
       scope.activeAction = scope.actions[0];
       left.play();
     }
@@ -359,7 +546,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     scope.render(scope.mixers);
   }
 
-  private onModelLoadingCompleted(geometry, materials) {
+  private onModelArbreD(geometry, materials) {
     var scope = this;
     
     materials.forEach(function (material) {
@@ -368,36 +555,67 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
-   
+
+    scope.mesh.position.set(-1.6, 0.3, -0.2);
+    scope.mesh.scale.set(0.22,0.22, 0.22);
+    scope.mesh.name = "arbre4";
+    scope.scene.add(scope.mesh);
+
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
+    if (scope.mesh.geometry['animations'])
+    {
+      var mixer = new THREE.AnimationMixer(scope.mesh);
+      scope.mixers.push(mixer);
+      let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
+      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
+      let left = mixer.clipAction( leftAnimation );
+      let pause = mixer.clipAction( pauseAnimation );
+      scope.actions.push (left );    
+      left.clampWhenFinished = true;
+      pause.clampWhenFinished = true;
+      scope.activeAction = scope.actions[0];
+      left.play();
+    }
+
+    scope.render(scope.mixers);
+  }
+
+  private onModelSideRightBatimentA(geometry, materials) {
+    var scope = this;
+    
+    materials.forEach(function (material) {
+      material.skinning = true;
+    });
+
+    var material      = new THREE.MeshFaceMaterial(materials);
+    scope.mesh        = new THREE.SkinnedMesh(geometry,material);
+
     scope.mesh.position.set(1.35, 0.3, 0);
-    scope.mesh.rotation.set(0, 0, 0);
     scope.mesh.scale.set(0.22,0.22, 0.22);
-    scope.mesh.name = "batiment1Left";
+    scope.mesh.name = "batiment1";
     scope.scene.add(scope.mesh);
 
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
       let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
       let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
-
       let left = mixer.clipAction( leftAnimation );
       let pause = mixer.clipAction( pauseAnimation );
-
       scope.actions.push (left );    
-
       left.clampWhenFinished = true;
       pause.clampWhenFinished = true;
-
       scope.activeAction = scope.actions[0];
       left.play();
     }
-
     scope.render(scope.mixers);
   }
 
-  private onModelLoadingCompletedA(geometry, materials) {
+  private onModelSideRightBatimentB(geometry, materials) {
     var scope = this;
     
     materials.forEach(function (material) {
@@ -406,28 +624,25 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var material      = new THREE.MeshFaceMaterial(materials);
     scope.mesh        = new THREE.SkinnedMesh(geometry,material);
-   
+
     scope.mesh.position.set(1.15, 0.3, -0.5);
-    scope.mesh.rotation.set(0, 0, 0);
     scope.mesh.scale.set(0.22,0.22, 0.22);
-    scope.mesh.name = "batiment1Right";
+    scope.mesh.name = "batiment2";
     scope.scene.add(scope.mesh);
 
+    scope.mesh.castShadow = true;
+    scope.mesh.receiveShadow = true;
     if (scope.mesh.geometry['animations'])
     {
       var mixer = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
       let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
       let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];      
-
       let left = mixer.clipAction( leftAnimation );
       let pause = mixer.clipAction( pauseAnimation );
-
       scope.actions.push (left );      
-
       left.clampWhenFinished = true;
       pause.clampWhenFinished = true;
-      
       scope.activeAction = scope.actions[1];
       left.play();
     }
@@ -439,31 +654,35 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   {
     let self: BgComponent = this;
     self.mouse = 0;
+
+    /*
+    *** Config Renderer
+    */
     this.renderer = new THREE.WebGLRenderer({
         canvas: this.canvas,
         antialias: true,
-        alpha: true
+        alpha: true,
     });
-
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
     this.renderer.setPixelRatio( window.devicePixelRatio );
+    this.renderer.autoClear = true;
     this.renderer.setSize( self.width, self.height );
+    /*
+    *** Fin Config Renderer
+    */
+
 
     (function render(){
         requestAnimationFrame(render);
 
         if(self.clock) {
-
           var time = Number(self.mouse);
           var delta        = time - self.lastTime;
           self.lastTime    = time;  
-
           for ( var i = 0; i < mixers.length; i++ ) {
             mixers[i].update(delta);        
           }
-
-         // self.camera.position.x -= Math.max(Math.min((self.clientX - self.mouseLook.x) * 0.0002, self.cameraMoves.speed), - self.cameraMoves.speed);
-         // self.mouseLook.x = self.clientX;
-          
           self.renderer.render(self.scene, self.camera);
         }
     }());
@@ -531,6 +750,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     }    
   }
 
+
   /**
   ** Events Mouse Move
   **/  
@@ -545,9 +765,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
       let windowHalfX = scope.width / 2;
       scope.clientX = e.clientX;
-   }
-
-
+    }
   }
 
 
@@ -580,8 +798,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   }
 
   ngAfterViewInit(): void 
-  {
-  }
+  {}
+
   ngOnDestroy(): void 
   {}
 
