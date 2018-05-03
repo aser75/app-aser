@@ -15,10 +15,8 @@
 			Image Projet
 		-->
 		<img
-			src="{{projet.poster.path}}"
-			srcset="{{projet.poster.path}} 1.5x"
+			src="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:800}} "
 			alt="">
-	
 		<div class="padding">
 	
 			<div class="layout horizontal justified">

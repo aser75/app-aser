@@ -39,7 +39,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   private mesh: THREE.Mesh;
   @ViewChild('canvas')
   private canvasRef: ElementRef;  
-  public controls: THREE.OrbitControls;
   public clock;
   public lastTime;
   public mouse = 0;
@@ -124,10 +123,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
             document.getElementById("footer").classList.remove("bgWhite");
             // Add
             document.getElementById("footer").classList.add("bgBlack");
-            if (!scope.scene)
-            {
-              scope.init(false);
-            }
+
           },
           onStart: function() {
             // Remove
@@ -159,7 +155,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
             /*
             * Condition si scene existe deja
             */
-            if (!scope.scene)
+            if (!scope.scene && scope.width > 768)
             {
               scope.init(true);
             } 
@@ -194,19 +190,14 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
             /*
             * Condition si scene existe deja
             */
-            if (!scope.scene)
+            if (scope.scene && scope.width > 768)
             {
-              scope.init(true);
-            } 
-            else
-            {
-              scope.actionAll(true);
+              scope.actionLight();
             }
           }
         });
     }
   }
-
 
   /***
   ***
@@ -243,8 +234,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var light                           = new THREE.DirectionalLight(0xebf3ff,1);
     light.position.set(0, 1.2, 0.4);
     light.castShadow                    = true;
-    light.shadowMapWidth                = 4048;
-    light.shadowMapHeight               = 4048;
+
     light.shadow.camera.near            = 50;
     light.shadow.bias                   = 0.00009;
     var d                               = 390;
@@ -303,20 +293,14 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     var objectLoader = new THREE.JSONLoader(manager);
   
-    /*
-    *** Side Right 
-    */
-    objectLoader.load("assets/model/arbre-type1.json", this.onModelArbreA);
-    objectLoader.load("assets/model/Batiment-1.json", this.onModelSideRightBatimentA);
-    objectLoader.load("assets/model/Batiment-2.json", this.onModelSideRightBatimentB);
-    objectLoader.load("assets/model/lampadaire.json", this.onModelampadaireSideRight);
-    objectLoader.load("assets/model/arbre-type2.json", this.onModeArbreC);
 
-    /*
-    *** Side Left
-    */
+    objectLoader.load("assets/model/Batiment-1.json", this.onModelSideRightBatimentA);
     objectLoader.load("assets/model/Batiment-4.json", this.onModelSideLeftBatimentA);
+    objectLoader.load("assets/model/Batiment-2.json", this.onModelSideRightBatimentB);
     objectLoader.load("assets/model/Batiment-5.json", this.onModelSideLeftBatimentB);
+    objectLoader.load("assets/model/arbre-type1.json", this.onModelArbreA);
+    objectLoader.load("assets/model/arbre-type2.json", this.onModeArbreC);
+    objectLoader.load("assets/model/lampadaire.json", this.onModelampadaireSideRight);
     objectLoader.load("assets/model/lampadaire-1.json", this.onModelampadaireSideLeft);
     objectLoader.load("assets/model/arbre-type2.json", this.onModeArbreB);
     objectLoader.load("assets/model/arbre-type1.json", this.onModelArbreD);
@@ -735,20 +719,21 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   **/
   private actionAll(type)
   {
-    this.batiment4         = this.scene.getObjectByName('batiment4');
-    this.batiment3         = this.scene.getObjectByName('batiment3');
-    this.batiment2         = this.scene.getObjectByName('batiment2');
-    this.batiment1         = this.scene.getObjectByName('batiment1');
-    this.arbre1            = this.scene.getObjectByName('arbre1');
-    this.arbre2            = this.scene.getObjectByName('arbre2');
-    this.arbre3            = this.scene.getObjectByName('arbre3');
-    this.arbre4            = this.scene.getObjectByName('arbre4');
-    this.LampadaireLeft    = this.scene.getObjectByName('LampadaireLeft');
-    this.LampadaireRight   = this.scene.getObjectByName('LampadaireRight');
-    this.lightRight        = this.scene.getObjectByName('lightRight');
-    this.lightLeft        = this.scene.getObjectByName('lightLeft');
-
     if(this.scene) {
+
+      this.batiment4         = this.scene.getObjectByName('batiment4');
+      this.batiment3         = this.scene.getObjectByName('batiment3');
+      this.batiment2         = this.scene.getObjectByName('batiment2');
+      this.batiment1         = this.scene.getObjectByName('batiment1');
+      this.arbre1            = this.scene.getObjectByName('arbre1');
+      this.arbre2            = this.scene.getObjectByName('arbre2');
+      this.arbre3            = this.scene.getObjectByName('arbre3');
+      this.arbre4            = this.scene.getObjectByName('arbre4');
+      this.LampadaireLeft    = this.scene.getObjectByName('LampadaireLeft');
+      this.LampadaireRight   = this.scene.getObjectByName('LampadaireRight');
+      this.lightRight        = this.scene.getObjectByName('lightRight');
+      this.lightLeft        = this.scene.getObjectByName('lightLeft');
+
       if ( this.batiment4 ) {
         this.batiment4.visible = type;
       }
@@ -789,6 +774,64 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   }
 
   /**
+  ** Invisible all objects
+  **/
+  private actionLight()
+  {
+    this.batiment4         = this.scene.getObjectByName('batiment4');
+    this.batiment3         = this.scene.getObjectByName('batiment3');
+    this.batiment2         = this.scene.getObjectByName('batiment2');
+    this.batiment1         = this.scene.getObjectByName('batiment1');
+    this.arbre1            = this.scene.getObjectByName('arbre1');
+    this.arbre2            = this.scene.getObjectByName('arbre2');
+    this.arbre3            = this.scene.getObjectByName('arbre3');
+    this.arbre4            = this.scene.getObjectByName('arbre4');
+    this.LampadaireLeft    = this.scene.getObjectByName('LampadaireLeft');
+    this.LampadaireRight   = this.scene.getObjectByName('LampadaireRight');
+    this.lightRight        = this.scene.getObjectByName('lightRight');
+    this.lightLeft        = this.scene.getObjectByName('lightLeft');
+
+    if(this.scene) {
+      if ( this.batiment4 ) {
+        this.batiment4.visible = false;
+      }
+      if ( this.batiment3 ) {
+        this.batiment3.visible = true;
+      }
+      if ( this.batiment2 ) {
+        this.batiment2.visible = false;
+      }
+      if ( this.batiment1 ) {
+        this.batiment1.visible = true;
+      }
+      if ( this.arbre4 ) {
+        this.arbre4.visible = false;
+      }
+      if ( this.arbre3 ) {
+        this.arbre3.visible = false;
+      }
+      if ( this.arbre2 ) {
+        this.arbre2.visible = false;
+      }
+      if ( this.arbre1 ) {
+        this.arbre1.visible = false;
+      }
+      if ( this.LampadaireLeft ) {
+        this.LampadaireLeft.visible = true;
+      }
+      if ( this.LampadaireRight ) {
+        this.LampadaireRight.visible = true;
+      }
+      if ( this.lightRight ) {
+        this.lightRight.visible = false;
+      }
+      if ( this.lightLeft ) {
+        this.lightLeft.visible = false;
+      }
+    }
+  }
+
+  /**
   ** Events Mouse Move
   **/  
   @HostListener('document:mousemove', ['$event'])
@@ -804,7 +847,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       scope.clientX = e.clientX;
     }
   }
-
 
   /**
   ** Events Resize windows

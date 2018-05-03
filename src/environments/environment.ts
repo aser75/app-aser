@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/apiproject/api/v1/projets',
+  apiCat: 'http://localhost/apiproject/api/v1/categories',
   url:'http://localhost/aser'
 };

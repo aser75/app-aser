@@ -18,7 +18,7 @@
 		</div>
 		
 		<div *ngIf="projets; else loading"></div>
-		<div class="items layout vertical" [@listAnimation]="projets?.length" >
+		<div class="items layout vertical" >
 			
 			<ng-template #loading>
 				<div class="loading_message"><loader></loader></div>
