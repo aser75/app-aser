@@ -63,7 +63,6 @@ export class ProjetDetailComponent implements OnInit, OnDestroy {
         });
       }
 
-
     // Add Projet Ressource
     this.getProjets();    
 	}

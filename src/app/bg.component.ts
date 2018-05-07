@@ -4,15 +4,8 @@ import { Subscription }                                                         
 import { FondService }                                                                                from './service/fond.service';
 import { NgForm }                                                                                       from '@angular/forms';
 
-/**
- ** Import three
-**/
 import * as THREE from 'three';
 import "./js/EnableThreeExamples";
-/**
- ** Fin Import three
-**/
-
 import "gsap";
 declare var TweenMax: any;
 
@@ -153,7 +146,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
             document.getElementById("viewProjet").classList.add("completeProjet");
 
             /*
-            * Condition si scene existe deja
+            * Si la scene Three existe deja
             */
             if (!scope.scene && scope.width > 768)
             {
@@ -188,7 +181,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
             document.getElementById("bg__svg").classList.add("shadow__svg");
             document.getElementById("viewContact").classList.add("completeContact");
             /*
-            * Condition si scene existe deja
+            * Si la scene Three existe deja
             */
             if (scope.scene && scope.width > 768)
             {
@@ -234,7 +227,6 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var light                           = new THREE.DirectionalLight(0xebf3ff,1);
     light.position.set(0, 1.2, 0.4);
     light.castShadow                    = true;
-
     light.shadow.camera.near            = 50;
     light.shadow.bias                   = 0.00009;
     var d                               = 390;
@@ -290,9 +282,7 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       scope.loader = true;
     };
 
-
     var objectLoader = new THREE.JSONLoader(manager);
-  
 
     objectLoader.load("assets/model/Batiment-1.json", this.onModelSideRightBatimentA);
     objectLoader.load("assets/model/Batiment-4.json", this.onModelSideLeftBatimentA);
@@ -310,8 +300,8 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     var scope = this;
     
     for ( var i = 0; i < materials.length; i ++ ) {
-          var m = materials[ i ];
-          m.skinning = true;
+      var m = materials[ i ];
+      m.skinning = true;
     }
 
     var material      = new THREE.MeshFaceMaterial(materials);
@@ -327,16 +317,16 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     if (scope.mesh.geometry['animations'])
     {
-      var mixer = new THREE.AnimationMixer(scope.mesh);
+      var mixer                       = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
-      let leftAnimation     = scope.mesh.geometry['animations'][ 0 ];
-      let pauseAnimation     = scope.mesh.geometry['animations'][ 1 ];  
-      let left = mixer.clipAction( leftAnimation );
-      let pause = mixer.clipAction( pauseAnimation );
+      let leftAnimation               = scope.mesh.geometry['animations'][ 0 ];
+      let pauseAnimation              = scope.mesh.geometry['animations'][ 1 ];  
+      let left                        = mixer.clipAction( leftAnimation );
+      let pause                       = mixer.clipAction( pauseAnimation );
       scope.actions.push (left );      
-      left.clampWhenFinished = true;
-      pause.clampWhenFinished = true;
-      scope.activeAction = scope.actions[1];
+      left.clampWhenFinished          = true;
+      pause.clampWhenFinished         = true;
+      scope.activeAction              = scope.actions[1];
       left.play();
     }
 
@@ -356,24 +346,24 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
 
     scope.mesh.position.set(-1.25, 0.3, -0.5);
     scope.mesh.scale.set(0.20,0.20, 0.20);
-    scope.mesh.name = "batiment3";  
+    scope.mesh.name                                      = "batiment3";  
     scope.scene.add(scope.mesh);
-    scope.scene.getObjectByName('batiment3').visible = scope.typeVisble; 
-    scope.mesh.castShadow = true;
-    scope.mesh.receiveShadow = true;
+    scope.scene.getObjectByName('batiment3').visible     = scope.typeVisble; 
+    scope.mesh.castShadow                                = true;
+    scope.mesh.receiveShadow                             = true;
 
     if (scope.mesh.geometry['animations'])
     {
-      var mixer = new THREE.AnimationMixer(scope.mesh);
+      var mixer                                          = new THREE.AnimationMixer(scope.mesh);
       scope.mixers.push(mixer);
-      let leftAnimation     = scope.mesh.geometry['animations'][ 1 ];
-      let pauseAnimation     = scope.mesh.geometry['animations'][ 2 ];  
-      let left = mixer.clipAction( leftAnimation );
-      let pause = mixer.clipAction( pauseAnimation );
+      let leftAnimation                                  = scope.mesh.geometry['animations'][ 1 ];
+      let pauseAnimation                                 = scope.mesh.geometry['animations'][ 2 ];  
+      let left                                           = mixer.clipAction( leftAnimation );
+      let pause                                          = mixer.clipAction( pauseAnimation );
       scope.actions.push (left );      
-      left.clampWhenFinished = true;
-      pause.clampWhenFinished = true;
-      scope.activeAction = scope.actions[1];
+      left.clampWhenFinished                             = true;
+      pause.clampWhenFinished                            = true;
+      scope.activeAction                                 = scope.actions[1];
       left.play();
     }
 
@@ -690,22 +680,26 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
     (function render(){
         requestAnimationFrame(render);
 
-        if(self.clock) {
-          var time = Number(self.mouse);
-          var delta        = time - self.lastTime;
-          self.lastTime    = time;  
+        if(self.clock)
+        {
+          let time         = Number(self.mouse);
+          let delta        = time - self.lastTime;
+          self.lastTime    = time; 
+
           for ( var i = 0; i < mixers.length; i++ ) {
             mixers[i].update(delta);        
           }
           self.renderer.render(self.scene, self.camera);
         }
+
     }());
   }
 
   /**
   ** Garder Ratio canvas
   **/
-  private getAspectRatio(): number {
+  private getAspectRatio(): number
+  {
     let height = this.canvas.clientHeight;
       if (height === 0) {
         return 0;
@@ -734,40 +728,52 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
       this.lightRight        = this.scene.getObjectByName('lightRight');
       this.lightLeft        = this.scene.getObjectByName('lightLeft');
 
-      if ( this.batiment4 ) {
+      if ( this.batiment4 )
+      {
         this.batiment4.visible = type;
       }
-      if ( this.batiment3 ) {
+      if ( this.batiment3 )
+      {
         this.batiment3.visible = type;
       }
-      if ( this.batiment2 ) {
+      if ( this.batiment2 )
+      {
         this.batiment2.visible = type;
       }
-      if ( this.batiment1 ) {
+      if ( this.batiment1 )
+      {
         this.batiment1.visible = type;
       }
-      if ( this.arbre4 ) {
+      if ( this.arbre4 )
+      {
         this.arbre4.visible = type;
       }
-      if ( this.arbre3 ) {
+      if ( this.arbre3 )
+      {
         this.arbre3.visible = type;
       }
-      if ( this.arbre2 ) {
+      if ( this.arbre2 )
+      {
         this.arbre2.visible = type;
       }
-      if ( this.arbre1 ) {
+      if ( this.arbre1 )
+      {
         this.arbre1.visible = type;
       }
-      if ( this.LampadaireLeft ) {
+      if ( this.LampadaireLeft )
+      {
         this.LampadaireLeft.visible = type;
       }
-      if ( this.LampadaireRight ) {
+      if ( this.LampadaireRight )
+      {
         this.LampadaireRight.visible = type;
       }
-      if ( this.lightRight ) {
+      if ( this.lightRight )
+      {
         this.lightRight.visible = type;
       }
-      if ( this.lightLeft ) {
+      if ( this.lightLeft )
+      {
         this.lightLeft.visible = type;
       }
     }
@@ -835,9 +841,12 @@ export class BgComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit 
   ** Events Mouse Move
   **/  
   @HostListener('document:mousemove', ['$event'])
-  public onMouseMove(e) {
+  public onMouseMove(e)
+  {
+
     var scope = this;
-    if(scope.loader) {
+    if( scope.loader &&  e.clientY < 560 )
+    {
       let mouse =  e.clientX;
       let mousePour = (mouse * 100)/scope.width;  
       let timerPour = (9.95833 * mousePour)/100;

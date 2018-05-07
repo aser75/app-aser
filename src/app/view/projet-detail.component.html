@@ -14,20 +14,22 @@
 		<!--
 			Image Projet
 		-->
-		<img
-			src="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:800}} "
-			alt="">
+
+			<img
+				src="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:800}} "
+				srcset="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:1600}} 2x"
+				alt="{{projet.nom}}"
+				class="shadow_type1">
+	
 		<div class="padding">
 	
 			<div class="layout horizontal justified">
 				<h2 class="self-center no-margin">Descriptif</h2>
-				<a *ngIf="projet.link" href="{{projet.link}}" class="lien">Voir le résultat</a>
+				<a *ngIf="projet.link" href="{{projet.link}}" class="lien" target="_blank">Voir le résultat</a>
 			</div>
 	
 			<div class="margin-bottom">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
-				</p>
+				<div class="apercu__description" [innerHTML]="projet.descriptif "></div>
 			</div>
 	
 			<h2>Outils</h2>
