@@ -26,7 +26,7 @@
 			
 
 			<div
-				*ngFor="let projet of projets | order | category:productcategory; 
+				*ngFor="let projet of projets | visible | order | category:productcategory; 
 						let i = index;
 						let odd = odd;
 						let even=even" 

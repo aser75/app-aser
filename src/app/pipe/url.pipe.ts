@@ -7,7 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class UrlPipe {
 	
 	transform(value: string, args: string, disk: string,format: number) {    
-		console.log(format);
 		
 		if ( format == 200 )
 		{

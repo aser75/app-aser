@@ -31,11 +31,13 @@ import { CategoryPipe }                          from './pipe/category.pipe';
 import { UrlPipe }                               from './pipe/url.pipe';
 import { OtherPipe }                             from './pipe/other.pipe';
 import { OrderPipe }                             from './pipe/order.pipe';
+import { VisiblePipe }                           from './pipe/visible.pipe';
 
 // Module
 import { AppRoutingModule }                    from './app-routing.modules';
 import { HttpClientModule }                    from '@angular/common/http';
 import { HttpModule }                          from '@angular/http';
+
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { HttpModule }                          from '@angular/http';
     UrlPipe,
     LoaderComponent,
     OtherPipe,
-    OrderPipe
+    OrderPipe,
+    VisiblePipe
   ],
   providers: [ProjetService, FondService, CategorieService],
   bootstrap: [AppComponent],

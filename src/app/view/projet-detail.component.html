@@ -25,7 +25,12 @@
 	
 			<div class="layout horizontal justified">
 				<h2 class="self-center no-margin">Descriptif</h2>
-				<a *ngIf="projet.link" href="{{projet.link}}" class="lien" target="_blank">Voir le résultat</a>
+				
+				<a *ngIf="projet.link" href="{{projet.link}}" class="lien" target="_blank">
+					<span *ngIf="projet.type_projet == 0"> Voir le résultat </span>
+					<span *ngIf="projet.type_projet == 1">{{projet.nom_agence}}</span>
+				</a>
+
 			</div>
 	
 			<div class="margin-bottom">

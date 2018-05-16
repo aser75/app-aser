@@ -28,10 +28,8 @@ export class FormComponent implements OnInit {
 	email:string		 = '';
 	entreprise:string 	 = '';
 	message: string 	 = '';
-    // Var confirmation ou non d'envoie d'email
     succes: boolean      = false;
     probleme: boolean    = false;
-    // Divers
 	http : Http;
 	endpoint : string;
 
@@ -53,8 +51,7 @@ export class FormComponent implements OnInit {
 
 	ngOnInit(): void {
     	// Url du fichier php
-    	this.endpoint = environment.url+"sendEmail.php";
-
+    	this.endpoint = "https://aserweb.fr/sendEmail.php";
 
         // anime succes message
         this.svg = document.getElementById("Layer_1");
