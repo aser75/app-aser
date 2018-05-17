@@ -8,6 +8,7 @@ import { Projet } from './service/projet';
 import { ProjetService } from './service/projet.service';
 import { Categorie } from './service/categorie';
 import { CategorieService } from './service/categorie.service';
+import { FondService } from './service/fond.service';
 
 /*
 ** Animation
@@ -25,19 +26,6 @@ declare var KUTE: any;
   templateUrl        : './view/projet.component.html',
   styleUrls          : ['../assets/styl/view/projet.component.styl'],
   providers          : [ProjetService, CategorieService],
-  animations         : [
-    trigger('listAnimation', [
-      transition('* => *', [
-        query(':enter', style({ opacity: 0 }), { optional: true }),
-        query(':enter', [
-          stagger(-200, [
-            animate('0.4s', style({ opacity: 1 }))
-          ])
-        ], {optional: true} )
-
-      ])
-    ])
-  ]
 })
 
 
@@ -62,7 +50,8 @@ export class ProjetComponent implements OnInit, OnDestroy {
   constructor (
     private projetService: ProjetService,
     private categorieService: CategorieService,
-    private router: Router) {}
+    private router: Router,
+    private fondService: FondService) {}
 
   /*
   **  Service Projets
@@ -85,6 +74,11 @@ export class ProjetComponent implements OnInit, OnDestroy {
   */
   ngOnInit(): void 
   {
+      /*
+      ** J'emet le type de fond à mon servive
+      */
+      this.fondService.typeA("poly-1");
+
       // Scroll Top 
       if (typeof window !== 'undefined') {
         this.router.events.subscribe((evt) => {
@@ -130,7 +124,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
   */
   hoverSvg(event: any)
   {
-
     this.target       = event.target.id;
     this.targetPair   = event.target.className;
     this.typeItem     = event.target.classList
@@ -161,7 +154,6 @@ export class ProjetComponent implements OnInit, OnDestroy {
 
   outSvg(event: any) 
   {
-
     this.target = event.target.id;
     if( this.typeItem.contains('even') ) {
         // Svg Position Nul

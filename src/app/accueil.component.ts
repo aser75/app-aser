@@ -97,7 +97,10 @@ export class AccueilComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void
   {
-
+    /*
+    ** J'emet le type de fond à mon servive
+    */
+    this.fondService.typeA("bas");
     /*
     ** Add Class Body
     */

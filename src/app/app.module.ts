@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { BrowserAnimationsModule }             from '@angular/platform-browser/animations';
 import { MatSelectModule }                     from '@angular/material';
 
-
 // Component
 import { AppComponent }                        from './app.component';
 import { AccueilComponent }                    from './accueil.component';
@@ -31,11 +30,14 @@ import { TruncatePipe }                          from './pipe/truncate.pipe';
 import { CategoryPipe }                          from './pipe/category.pipe';
 import { UrlPipe }                               from './pipe/url.pipe';
 import { OtherPipe }                             from './pipe/other.pipe';
+import { OrderPipe }                             from './pipe/order.pipe';
+import { VisiblePipe }                           from './pipe/visible.pipe';
 
 // Module
 import { AppRoutingModule }                    from './app-routing.modules';
 import { HttpClientModule }                    from '@angular/common/http';
 import { HttpModule }                          from '@angular/http';
+
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { HttpModule }                          from '@angular/http';
     CategoryPipe,
     UrlPipe,
     LoaderComponent,
-    OtherPipe
+    OtherPipe,
+    OrderPipe,
+    VisiblePipe
   ],
   providers: [ProjetService, FondService, CategorieService],
   bootstrap: [AppComponent],

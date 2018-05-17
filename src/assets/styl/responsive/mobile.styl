@@ -114,6 +114,7 @@
 
 
 
+
 @media (max-height: 610px)
 	.hackBg
 		height 80%
@@ -123,6 +124,10 @@
 	* Accueil
 	*/
 	.accueil
+		header
+			.burger
+				margin-top 13px
+
 		.outside_wrapper
 			overflow hidden
 
@@ -135,7 +140,12 @@
 				font-size 5rem !important
 
 		.shape_img
-			width 100% !important
+			width 80% !important
+
+			.perso
+				margin-top -25px
+				width 200px
+				height 280px
 
 		.container
 			> div
@@ -160,5 +170,36 @@
 		left 50%
 		transform translateX(-50%)
 
+	.details
+		> .padding
+			padding 40px 20px !important
+
+			> .layout.horizontal
+				-ms-flex-wrap wrap
+				flex-wrap wrap
+
+			h2
+				font-size 1.6rem
+				line-height 1.6rem
+				margin-bottom 15px !important
 
 
+			.lien
+				font-size 1.4rem
+				line-height 1.4rem				
+
+	.items
+		.item
+			.descriptif
+				margin-top 20px
+
+				.layout.horizontal
+					-ms-flex-align center
+					-webkit-box-align center
+					align-items center
+					-ms-flex-wrap wrap
+					flex-wrap wrap
+					margin-bottom 10px
+
+					h2
+						margin 0 0 5px 0 !important

@@ -14,22 +14,27 @@
 		<!--
 			Image Projet
 		-->
-		<img
-			src="{{projet.poster.path}}"
-			srcset="{{projet.poster.path}} 1.5x"
-			alt="">
+
+			<img
+				src="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:800}} "
+				srcset="{{projet.poster.path | url:projet.poster.disk_name:projet.poster.id:1600}} 2x"
+				alt="{{projet.nom}}"
+				class="shadow_type1">
 	
 		<div class="padding">
 	
 			<div class="layout horizontal justified">
 				<h2 class="self-center no-margin">Descriptif</h2>
-				<a *ngIf="projet.link" href="{{projet.link}}" class="lien">Voir le résultat</a>
+				
+				<a *ngIf="projet.link" href="{{projet.link}}" class="lien" target="_blank">
+					<span *ngIf="projet.type_projet == 0"> Voir le résultat </span>
+					<span *ngIf="projet.type_projet == 1">{{projet.nom_agence}}</span>
+				</a>
+
 			</div>
 	
 			<div class="margin-bottom">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere lacus enim, vitae venenatis nulla sollicitudin sed. Donec tincidunt enim enim, non pharetra mauris consequat at. Donec id lectus mollis, fringilla tellus convallis, placerat eros.
-				</p>
+				<div class="apercu__description" [innerHTML]="projet.descriptif "></div>
 			</div>
 	
 			<h2>Outils</h2>
@@ -47,13 +52,14 @@
 		
 			<div class="layout horizontal justified">
 
-				<a  *ngFor="let projetOther of projets | other:projet.id | slice:0:3"
+				<a  *ngFor="let projetOther of projets | other:projet.id | slice:0:4"
 					[routerLink]="['/projet', projetOther.id]" 
 					class="item layout horizontal justified center-center"
 					id="item-{{i}}">
-					<img src="{{projetOther.poster.path | url:projetOther.poster.disk_name:projetOther.poster.id:200}}"
-						srcset="{{projetOther.poster.path | url:projetOther.poster.disk_name:projetOther.poster.id:200}} 1.5x"
-				 		alt="" >
+				<img 
+					src="{{projetOther.miniature.path}}"
+				 	srcset="{{projetOther.miniature.path}} 1.5x"
+				 	alt="">
 				</a>
 	
 			</div>

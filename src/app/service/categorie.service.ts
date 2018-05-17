@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 import { Categorie } from './categorie';
@@ -7,7 +8,7 @@ import { Categorie } from './categorie';
 @Injectable()
 export class CategorieService {
 
-	private categorieUrl = 'http://localhost/apiproject/api/v1/categories';
+	private categorieUrl = environment.apiCat;
 	
 	constructor (private http: Http) {}
 
