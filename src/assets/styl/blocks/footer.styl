@@ -17,10 +17,24 @@ footer
 	a
 		text-decoration underline
 
+	.git
+		display inline-block
+		height 15px
+		width 15px
+
+		&:after
+			height 15px
+			width 15px
+
 footer.bgBlack
 	background-color rgba(0,0,0,0.15)
 
-body:not(.accueil) footer 
+	.git
+		&:after
+			content url('../images/icone-git_white.svg')
+
+
+body:not(.accueil) footer
 	color default-gris
 	background white url('../images/bg-footer.png')repeat left top
 	background-size contain !important
