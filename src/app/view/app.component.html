@@ -8,10 +8,10 @@
 	Header
 	-->
 	<header class="layout horizontal justified">
-	
+
     	<nav-primary></nav-primary>
 		<logo></logo>
-		
+
 	</header>
 
 	<!--
@@ -22,16 +22,19 @@
 		<div [@routeAnimation]="prepRouteState(routerOutlet)">
 			<router-outlet #routerOutlet="outlet"></router-outlet>
 		</div>
-		
+
 		<nav-call></nav-call>
-			
+
 	</div>
 
 	<!--
 	Footer
 	-->
-	<footer id="footer" class="bgBlack">
-		@2018 - <a href="https://angular.io/" target="_blank">Angular5</a> - Tous droits réservés : Maxence PUPPETTO - Aser Web Développeur Front-end - <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Mentions Légales</a> - Bretagne / Lanester
+	<footer id="footer" class="bgBlack layout horizontal center-center wrap">
+		@2018 - Tous droits réservés : Maxence PUPPETTO - Développeur Front-end -&nbsp;
+		<a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Mentions Légales</a> &nbsp;-&nbsp;
+		<a href="https://angular.io/" target="_blank" title="Angular">Angular</a> &nbsp;- &nbsp;
+		<a href="https://github.com/aser75" class="git" target="_blank" title="GitHub - voir le code source"></a> &nbsp; - &nbsp;Bretagne / Lanester
 	</footer>
 
 </div>

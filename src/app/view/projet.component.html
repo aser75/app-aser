@@ -14,24 +14,23 @@
     				<mat-option value="" (click)="updateProductCategory()">Toute les catégories</mat-option>
     				<mat-option *ngFor="let categorie of categories" value="{{categorie.categorie_titre}}" (click)="updateProductCategory(categorie.categorie_titre)">{{categorie.categorie_titre}}</mat-option>
 	  			</mat-select>
-			</mat-form-field>	
+			</mat-form-field>
 		</div>
-		
+
 		<div *ngIf="projets; else loading"></div>
-		<div class="items layout vertical" >
-			
+		<div class="items layout vertical">
+
 			<ng-template #loading>
 				<div class="loading_message"><loader></loader></div>
 			</ng-template>
-			
 
 			<div
-				*ngFor="let projet of projets | visible | order | category:productcategory; 
+				*ngFor="let projet of projets | visible | order | category:productcategory;
 						let i = index;
 						let odd = odd;
-						let even=even" 
+						let even=even"
 
-						[routerLink]="['/projet', projet.id]" 
+						[routerLink]="['/projet', projet.id]"
 						[class.odd]="odd"
 						[class.even]="even"
 						(mouseenter)="hoverSvg($event)"
@@ -39,10 +38,10 @@
 
 						class="item layout horizontal justified center-center"
 						id="item-{{i}}">
-				
+
 				<div class="media">
 
-					<img 
+					<img
 						src="{{projet.miniature.path}}"
 				 		srcset="{{projet.miniature.path}} 1.5x"
 				 		alt=""
@@ -61,12 +60,12 @@
 					</div>
 
 				</div>
-				
+
 				<div class="descriptif flex-1">
-	
-					<div class="layout horizontal justified">			
+
+					<div class="layout horizontal justified">
 						<h2>{{projet.nom}}</h2>
-	
+
 						<div class="type" *ngIf="projet.categories.length > 0">
 							<span *ngFor="let cat of projet.categories; let last=last;">
 								{{cat.categorie_titre}} <span *ngIf="projet.categories.length > 1 && !last"> / </span>
@@ -74,9 +73,9 @@
 
 						</div>
 					</div>
-				
+
 					<p class="apercu__description" [innerHTML]="projet.descriptif | truncate:200 ">
-						
+
 					</p>
 				</div>
 
@@ -84,8 +83,5 @@
 			</div>
 
 		</div>
-
 	</div>
-
-
 </div>
